@@ -19,6 +19,51 @@ import {
   EMAIL,
   SOCIAL_LINKS,
 } from './data'
+import { TextEffect } from '@/components/ui/text-effect'
+import { MAINTENANCE_MODE } from './config'
+
+// Componente de página en construcción
+function MaintenancePage() {
+  return (
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="flex flex-1 items-center justify-center"
+    >
+      <div className="text-center mt-20">
+        <motion.h1 
+          initial={{ y: -20 }}
+          animate={{ y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-4 text-4xl font-bold text-zinc-900 dark:text-zinc-100"
+        >
+          🚧 Página en construcción 🚧
+        </motion.h1>
+        <motion.p 
+          initial={{ y: -20 }}
+          animate={{ y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="text-lg text-zinc-600 dark:text-zinc-400"
+        >
+          Estoy ajustando cosillas. Vuelve pronto.
+        </motion.p>
+        <motion.div
+          initial={{ y: -20 }}
+          animate={{ y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-6"
+        >
+          <img 
+            src="/images/mapache.jpg" 
+            alt="Mapache trabajando" 
+            className="mx-auto rounded-lg shadow-lg max-w-xs"
+          />
+        </motion.div>
+      </div>
+    </motion.main>
+  )
+}
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -124,6 +169,10 @@ function MagneticSocialLink({
 }
 
 export default function Personal() {
+  if (MAINTENANCE_MODE) {
+    return <MaintenancePage />
+  }
+
   return (
     <motion.main
       className="space-y-24"
@@ -137,8 +186,9 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Focused on creating intuitive and performant web experiences.
-            Bridging the gap between design and development.
+          I transform messy data into real products and meaningful digital strategies.
+          From chaotic inputs to clear, useful, and actionable design.
+          Working at the crossroads of business, technology, and design — focused on what truly makes a difference.
           </p>
         </div>
       </motion.section>
@@ -196,9 +246,18 @@ export default function Personal() {
                     <h4 className="font-normal dark:text-zinc-100">
                       {job.title}
                     </h4>
-                    <p className="text-zinc-500 dark:text-zinc-400">
-                      {job.company}
-                    </p>
+                    <div className="flex items-center space-x-2">
+                      {job.logo && (
+                        <img 
+                          src={job.logo} 
+                          alt={`${job.company} logo`}
+                          className="h-4 w-4 object-contain rounded-sm"
+                        />
+                      )}
+                      <p className="text-zinc-500 dark:text-zinc-400">
+                        {job.company}
+                      </p>
+                    </div>
                   </div>
                   <p className="text-zinc-600 dark:text-zinc-400">
                     {job.start} - {job.end}

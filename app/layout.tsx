@@ -12,15 +12,15 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nim-fawn.vercel.app/'),
+  metadataBase: new URL('https://thinkmaketest.ai/'),
   alternates: {
     canonical: '/'
   },
   title: {
-    default: 'Nim - Personal website template',
-    template: '%s | Nim'
+    default: 'Yago López Losada',
+    template: '%s | Yago'
   },
-  description:  'Nim is a free and open-source personal website template built with Next.js 15, React 19 and Motion-Primitives.',
+  description:  'Design strategist & UX researcher. I turn complex data into clear, actionable digital products — at the intersection of tech, design & business.',
 };
 
 const geist = Geist({
@@ -50,9 +50,11 @@ export default function RootLayout({
           defaultTheme="system"
         >
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20">
+            <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20 flex flex-col">
               <Header />
-              {children}
+              <main className="flex-1">
+                {children}
+              </main>
               <Footer />
             </div>
           </div>

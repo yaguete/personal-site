@@ -12,6 +12,7 @@ type WorkExperience = {
   start: string
   end: string
   link: string
+  logo?: string
   id: string
 }
 
@@ -49,29 +50,60 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'Reglazed Studio',
-    title: 'CEO',
+    company: 'HP Inc.',
+    title: 'Advanced Desing Team Lead',
     start: '2024',
     end: 'Present',
     link: 'https://ibelick.com',
+    logo: '/logos/LogoHP.png',
     id: 'work1',
   },
   {
-    company: 'Freelance',
-    title: 'Design Engineer',
+    company: 'Banc Sabadell',
+    title: 'Director of Operational Efficiency',
     start: '2022',
     end: '2024',
     link: 'https://ibelick.com',
+    logo: '/logos/LogoBancSabadell.png',
     id: 'work2',
   },
   {
-    company: 'Freelance',
-    title: 'Front-end Developer',
-    start: '2017',
-    end: 'Present',
+    company: "Innocells (Banc Sabadell's venture builder unit)",
+    title: 'Business Designer / Digital Mortgate Product Lead',
+    start: '2019',
+    end: '2022',
     link: 'https://ibelick.com',
+    logo: '/logos/LogoInnocells.png',
     id: 'work3',
   },
+  {
+    company: 'The Cocktail',
+    title: 'Service Designer / Project Lead',
+    start: '2015',
+    end: '2019',
+    link: 'https://ibelick.com',
+    logo: '/logos/LogoTheCocktail.jpg',
+    id: 'work4',
+  },
+  {
+    company: 'Rey Juan Carlos University',
+    title: 'PDI - Associate Professor',
+    start: '2014',
+    end: '2015',
+    link: 'https://ibelick.com',
+    logo: '/logos/LogoURJC.svg',
+    id: 'work5',
+  },
+  {
+    company: 'Análisis e Investigación',
+    title: 'Consultant / Senior Research Executive',
+    start: '2012',
+    end: '2014',
+    link: 'https://ibelick.com',
+    logo: '/logos/LogoAEI.png',
+    id: 'work6',
+  },
+
 ]
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -105,20 +137,12 @@ export const BLOG_POSTS: BlogPost[] = [
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    label: 'Github',
-    link: 'https://github.com/ibelick',
-  },
-  {
-    label: 'Twitter',
-    link: 'https://twitter.com/ibelick',
+    label: 'X / Twitter',
+    link: 'https://x.com/y_losada',
   },
   {
     label: 'LinkedIn',
-    link: 'https://www.linkedin.com/in/ibelick',
-  },
-  {
-    label: 'Instagram',
-    link: 'https://www.instagram.com/ibelick',
+    link: 'https://www.linkedin.com/in/yagolopezlosada',
   },
 ]
 
