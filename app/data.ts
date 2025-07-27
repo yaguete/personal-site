@@ -13,7 +13,12 @@ type WorkExperience = {
   end: string
   link: string
   logo?: string
+  logoDark?: string
   id: string
+  description: string
+  responsibilities: string[]
+  achievements?: string[]
+  technologies?: string[]
 }
 
 type BlogPost = {
@@ -56,7 +61,23 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     end: 'Present',
     link: 'https://ibelick.com',
     logo: '/logos/LogoHP.png',
+    logoDark: '/logos/LogoHP-White.png',
     id: 'work1',
+    description: 'I lead a multidisciplinary team focused on identifying weak signals, prototyping new use cases, and testing design-led solutions across HP’s large format printing ecosystem. We translate early-stage ideas into validated prototypes—combining user research, design strategy, and cross-team collaboration. \n\nOur goal: to shape what’s next in printing before the market demands it.',
+          responsibilities: [
+        'Leading cross-functional design and research initiatives', 
+        'Scoping and validating early-stage product concepts',
+        'Facilitating workshops and aligning stakeholders',
+        'Managing team capacity and project roadmaps',
+        'Building and testing AI-powered tools and early-stage prototypes',
+        'Translating research insights into design opportunities',],
+      achievements: [
+        'Launched 3 AI-powered design tools that improved team efficiency by 40%',
+        'Led the development of HP\'s first design system for large format printing',
+        'Successfully validated 5 new product concepts through user research',
+        'Reduced design iteration time by 60% through process optimization'
+      ],
+      technologies: ['Figma', 'React', 'TypeScript'],
   },
   {
     company: 'Banc Sabadell',
@@ -65,7 +86,11 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     end: '2024',
     link: 'https://ibelick.com',
     logo: '/logos/LogoBancSabadell.png',
+    logoDark: '/logos/LogoBancSabadell-White.png',
     id: 'work2',
+    description: 'Optimize processes and improve efficiency across the organization.',
+    responsibilities: ['Process optimization', 'Team development', 'Technology adoption'],
+    technologies: ['Jira', 'Confluence', 'Python'],
   },
   {
     company: "Innocells",
@@ -75,6 +100,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://ibelick.com',
     logo: '/logos/LogoInnocells.png',
     id: 'work3',
+    description: 'Design and develop innovative solutions for clients across various industries.',
+    responsibilities: ['User research', 'Design thinking', 'Prototyping'],
+    technologies: ['Figma', 'Miro', 'Sketch'],
   },
   {
     company: 'The Cocktail',
@@ -84,6 +112,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://ibelick.com',
     logo: '/logos/LogoTheCocktail.jpg',
     id: 'work4',
+    description: 'Lead cross-functional teams to deliver exceptional digital experiences.',
+    responsibilities: ['Project management', 'Stakeholder communication', 'Team collaboration'],
+    technologies: ['Figma', 'Sketch', 'Adobe XD'],
   },
   {
     company: 'Rey Juan Carlos University',
@@ -92,7 +123,11 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     end: '2015',
     link: 'https://ibelick.com',
     logo: '/logos/LogoURJC.svg',
+    logoDark: '/logos/LogoURJC-White.png',
     id: 'work5',
+    description: 'Teach and mentor students in design thinking and user-centered design.',
+    responsibilities: ['Teaching', 'Mentoring', 'Research'],
+    technologies: ['Figma', 'Miro', 'Sketch'],
   },
   {
     company: 'Análisis e Investigación',
@@ -102,6 +137,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://ibelick.com',
     logo: '/logos/LogoAEI.png',
     id: 'work6',
+    description: 'Conduct market research and analyze data to inform business strategies.',
+    responsibilities: ['Research', 'Data analysis', 'Report writing'],
+    technologies: ['Excel', 'Google Sheets', 'Jupyter Notebook'],
   },
 
 ]

@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { XIcon } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
+
 import {
   MorphingDialog,
   MorphingDialogTrigger,
@@ -12,6 +13,7 @@ import {
 } from '@/components/ui/morphing-dialog'
 import Link from 'next/link'
 import { AnimatedBackground } from '@/components/ui/animated-background'
+import { useState, useEffect } from 'react'
 import {
   PROJECTS,
   WORK_EXPERIENCE,
@@ -134,6 +136,227 @@ function ProjectVideo({ src }: ProjectVideoProps) {
   )
 }
 
+type WorkExperienceCardProps = {
+  job: typeof WORK_EXPERIENCE[0]
+}
+
+function WorkExperienceCard({ job }: WorkExperienceCardProps) {
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  useEffect(() => {
+    const checkTheme = () => {
+      const isDark = document.documentElement.classList.contains('dark')
+      setIsDarkMode(isDark)
+    }
+
+    checkTheme()
+    
+    const observer = new MutationObserver(checkTheme)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    // Reset scroll to top when modal opens
+    const resetScroll = () => {
+      const modalContent = document.querySelector('[data-modal-content]')
+      if (modalContent) {
+        modalContent.scrollTop = 0
+      }
+    }
+
+    // Check for modal opening by observing DOM changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              const element = node as Element
+              if (element.classList.contains('fixed') && element.classList.contains('inset-0')) {
+                // Modal opened, reset scroll after a short delay
+                setTimeout(resetScroll, 100)
+              }
+            }
+          })
+        }
+      })
+    })
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const getLogo = () => {
+    if (isDarkMode && job.logoDark) {
+      return job.logoDark
+    }
+    return job.logo
+  }
+  return (
+    <MorphingDialog
+      transition={{
+        type: 'spring',
+        bounce: 0,
+        duration: 0.3,
+      }}
+    >
+      <MorphingDialogTrigger>
+        <div className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30 cursor-pointer">
+          <Spotlight
+            className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+            size={64}
+          />
+          <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
+            <div className="relative flex w-full flex-row justify-between">
+              <div>
+                <h4 className="font-normal dark:text-zinc-100">
+                  {job.title}
+                </h4>
+                <div className="flex items-center space-x-2">
+                  {getLogo() && (
+                    <img 
+                      src={getLogo()} 
+                      alt={`${job.company} logo`}
+                      className="h-4 w-4 object-contain rounded-sm"
+                    />
+                  )}
+                  <p className="text-zinc-500 dark:text-zinc-400">
+                    {job.company}
+                  </p>
+                </div>
+              </div>
+              <p className="text-zinc-600 dark:text-zinc-400">
+                {job.start} - {job.end}
+              </p>
+            </div>
+          </div>
+        </div>
+      </MorphingDialogTrigger>
+      <MorphingDialogContainer>
+        <MorphingDialogContent className="relative w-[600px] max-h-[90vh] overflow-hidden rounded-2xl bg-white dark:bg-zinc-950 border-0 md:border md:border-zinc-200 md:dark:border-zinc-800">
+          {/* Header */}
+          <div className="flex items-center justify-between p-6 border-b border-zinc-200 dark:border-zinc-800">
+            <div>
+              <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+                {job.title}
+              </h2>
+              <p className="text-zinc-600 dark:text-zinc-400 mt-1">
+                {job.company} • {job.start} - {job.end}
+              </p>
+            </div>
+            {getLogo() && (
+              <img 
+                src={getLogo()} 
+                alt={`${job.company} logo`}
+                className="h-10 w-10 object-contain rounded-lg"
+              />
+            )}
+          </div>
+          
+          {/* Content */}
+          <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]" data-modal-content>
+            <div className="space-y-6">
+                             {/* Descripción */}
+               <div>
+                 <p className="text-zinc-600 dark:text-zinc-400 whitespace-pre-line">
+                   {job.description}
+                 </p>
+               </div>
+
+              {/* Responsabilidades */}
+              <div>
+                <h4 className="text-md font-medium text-zinc-900 dark:text-zinc-100 mb-3">
+                  Main responsibilities
+                </h4>
+                <ul className="space-y-2">
+                  {job.responsibilities.map((responsibility, index) => (
+                    <li key={index} className="flex items-start space-x-2">
+                      <span className="text-zinc-400 dark:text-zinc-500 mt-1">•</span>
+                      <span className="text-zinc-600 dark:text-zinc-400">{responsibility}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Logros y proyectos destacados */}
+              {job.achievements && job.achievements.length > 0 && (
+                <div>
+                  <h4 className="text-md font-medium text-zinc-900 dark:text-zinc-100 mb-3">
+                    Achievements and main projects
+                  </h4>
+                  <ul className="space-y-2">
+                    {job.achievements.map((achievement, index) => (
+                      <li key={index} className="flex items-start space-x-2">
+                        <span className="text-zinc-400 dark:text-zinc-500 mt-1">•</span>
+                        <span className="text-zinc-600 dark:text-zinc-400">{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Tecnologías */}
+              {job.technologies && job.technologies.length > 0 && (
+                <div>
+                  <h4 className="text-md font-medium text-zinc-900 dark:text-zinc-100 mb-3">
+                    Methodology and tools
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {job.technologies.map((tech, index) => (
+                      <span 
+                        key={index}
+                        className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Enlace externo */}
+              <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                <a
+                  href={job.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
+                  <span>Ver más detalles</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </MorphingDialogContent>
+        <MorphingDialogClose
+          className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1"
+          variants={{
+            initial: { opacity: 0 },
+            animate: {
+              opacity: 1,
+              transition: { delay: 0.3, duration: 0.1 },
+            },
+            exit: { opacity: 0, transition: { duration: 0 } },
+          }}
+        >
+          <XIcon className="h-5 w-5 text-zinc-500" />
+        </MorphingDialogClose>
+      </MorphingDialogContainer>
+    </MorphingDialog>
+  )
+}
+
 function MagneticSocialLink({
   children,
   link,
@@ -169,6 +392,7 @@ function MagneticSocialLink({
 }
 
 export default function Personal() {
+
   if (MAINTENANCE_MODE) {
     return <MaintenancePage />
   }
@@ -229,42 +453,7 @@ export default function Personal() {
         <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
         <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => (
-            <a
-              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-              href={job.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={job.id}
-            >
-              <Spotlight
-                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
-                size={64}
-              />
-              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
-                <div className="relative flex w-full flex-row justify-between">
-                  <div>
-                    <h4 className="font-normal dark:text-zinc-100">
-                      {job.title}
-                    </h4>
-                    <div className="flex items-center space-x-2">
-                      {job.logo && (
-                        <img 
-                          src={job.logo} 
-                          alt={`${job.company} logo`}
-                          className="h-4 w-4 object-contain rounded-sm"
-                        />
-                      )}
-                      <p className="text-zinc-500 dark:text-zinc-400">
-                        {job.company}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-zinc-600 dark:text-zinc-400">
-                    {job.start} - {job.end}
-                  </p>
-                </div>
-              </div>
-            </a>
+            <WorkExperienceCard key={job.id} job={job} />
           ))}
         </div>
       </motion.section>
@@ -324,6 +513,8 @@ export default function Personal() {
           ))}
         </div>
       </motion.section>
+
+
     </motion.main>
   )
 }
