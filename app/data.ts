@@ -68,8 +68,8 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     id: 'work2',
   },
   {
-    company: "Innocells (Banc Sabadell's venture builder unit)",
-    title: 'Business Designer / Digital Mortgate Product Lead',
+    company: "Innocells",
+    title: 'Business Designer',
     start: '2019',
     end: '2022',
     link: 'https://ibelick.com',
@@ -96,7 +96,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     company: 'Análisis e Investigación',
-    title: 'Consultant / Senior Research Executive',
+    title: 'Sr. Research Executive',
     start: '2012',
     end: '2014',
     link: 'https://ibelick.com',
