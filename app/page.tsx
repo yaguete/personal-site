@@ -290,13 +290,16 @@ function WorkExperienceCard({ job }: WorkExperienceCardProps) {
               {job.achievements && job.achievements.length > 0 && (
                 <div>
                   <h4 className="text-md font-medium text-zinc-900 dark:text-zinc-100 mb-3">
-                    Achievements and main projects
+                    Achievements
                   </h4>
                   <ul className="space-y-2">
                     {job.achievements.map((achievement, index) => (
                       <li key={index} className="flex items-start space-x-2">
                         <span className="text-zinc-400 dark:text-zinc-500 mt-1">•</span>
-                        <span className="text-zinc-600 dark:text-zinc-400">{achievement}</span>
+                        <span 
+                          className="text-zinc-600 dark:text-zinc-400"
+                          dangerouslySetInnerHTML={{ __html: achievement }}
+                        />
                       </li>
                     ))}
                   </ul>
@@ -307,7 +310,7 @@ function WorkExperienceCard({ job }: WorkExperienceCardProps) {
               {job.technologies && job.technologies.length > 0 && (
                 <div>
                   <h4 className="text-md font-medium text-zinc-900 dark:text-zinc-100 mb-3">
-                    Methodology and tools
+                    Tools
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {job.technologies.map((tech, index) => (
@@ -323,19 +326,21 @@ function WorkExperienceCard({ job }: WorkExperienceCardProps) {
               )}
 
               {/* Enlace externo */}
-              <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                <a
-                  href={job.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                >
-                  <span>Ver más detalles</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-              </div>
+              {job.showDetailsLink && (
+                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                  <a
+                    href={job.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                  >
+                    <span>Ver más detalles</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </MorphingDialogContent>
