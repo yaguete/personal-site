@@ -40,6 +40,187 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Yago López Losada",
+              "url": "https://thinkmaketest.ai",
+              "jobTitle": "Advanced Design Team Lead",
+              "description": "Design strategist & UX researcher specializing in AI-driven product design and transforming complex data into clear, actionable digital products. Expert in design thinking, user research, and product strategy at the intersection of technology, design, and business.",
+              
+              "worksFor": {
+                "@type": "Organization",
+                "name": "HP Inc.",
+                "url": "https://www.hp.com"
+              },
+              
+              "knowsAbout": [
+                "Design Thinking",
+                "User Experience Design", 
+                "Product Strategy",
+                "User Research",
+                "Data Visualization",
+                "Digital Product Design",
+                "Design Systems",
+                "Product Management",
+                "Design Engineering",
+                "AI/ML Product Design",
+                "Design Operations",
+                "Team Leadership",
+                "Agile Methodology",
+                "Lean UX",
+                "Strategic Design",
+                "Operational Efficiency",
+                "AI-Driven Product Design",
+                "Figma",
+                "Miro", 
+                "Atlas.ti",
+                "SPSS",
+                "React",
+                "JavaScript",
+                "Python",
+                "Java"
+              ],
+              
+              "knowsLanguage": ["Spanish", "English"],
+              
+              "alumniOf": {
+                "@type": "Organization", 
+                "name": "Universidad Rey Juan Carlos"
+              },
+              
+              "hasCredential": [
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "Sociology Degree",
+                  "recognizedBy": {
+                    "@type": "Organization",
+                    "name": "Universidad Rey Juan Carlos"
+                  }
+                },
+                {
+                  "@type": "EducationalOccupationalCredential", 
+                  "credentialCategory": "Digital Humanities Master",
+                  "recognizedBy": {
+                    "@type": "Organization",
+                    "name": "Universidad Rey Juan Carlos"
+                  }
+                },
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "Digital Product Management Master",
+                  "recognizedBy": {
+                    "@type": "Organization", 
+                    "name": "Digital Product Management"
+                  }
+                }
+              ],
+              
+              "workExample": [
+                {
+                  "@type": "CreativeWork",
+                  "name": "LinkedIn Recommendation Generator",
+                  "description": "AI-powered tool for generating personalized LinkedIn recommendations",
+                  "url": "https://thinkmaketest.ai/playground/linkedin-recommendation"
+                },
+                {
+                  "@type": "CreativeWork", 
+                  "name": "Archimind",
+                  "description": "AI platform for architects",
+                  "url": "https://thinkmaketest.ai"
+                },
+                {
+                  "@type": "CreativeWork",
+                  "name": "DrawingHub", 
+                  "description": "Sandbox platform for architects",
+                  "url": "https://thinkmaketest.ai"
+                },
+                {
+                  "@type": "CreativeWork",
+                  "name": "Digital Mortgage Platform",
+                  "description": "Banc Sabadell digital mortgage platform with 100% efficiency improvement",
+                  "url": "https://thinkmaketest.ai"
+                }
+              ],
+              
+              "hasOccupation": {
+                "@type": "Occupation",
+                "name": "Advanced Design Team Lead",
+                "occupationLocation": {
+                  "@type": "Place", 
+                  "name": "HP Inc."
+                }
+              },
+              
+              "jobTitle": [
+                "Advanced Design Team Lead",
+                "Director of Operational Efficiency", 
+                "Strategic Designer",
+                "Senior Executive Research"
+              ],
+              
+              "worksFor": [
+                {
+                  "@type": "Organization",
+                  "name": "HP Inc.",
+                  "url": "https://www.hp.com"
+                },
+                {
+                  "@type": "Organization", 
+                  "name": "Banc Sabadell",
+                  "url": "https://www.bancsabadell.com"
+                },
+                {
+                  "@type": "Organization",
+                  "name": "Innocells", 
+                  "url": "https://innocells.com"
+                },
+                {
+                  "@type": "Organization",
+                  "name": "The Cocktail",
+                  "url": "https://the-cocktail.com"
+                }
+              ],
+              
+              "makesOffer": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Design Strategy Consulting",
+                    "description": "Expert consultation in design thinking, UX research, and product strategy"
+                  }
+                },
+                {
+                  "@type": "Offer", 
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Workshops and Talks",
+                    "description": "Professional workshops and speaking engagements on design and AI"
+                  }
+                }
+              ],
+              
+              "award": [
+                "Advanced Design Team Lead at HP Inc.",
+                "Design Engineering Expertise", 
+                "Product Strategy Leadership",
+                "Degree Completion Award",
+                "100% Efficiency Improvement in Digital Mortgage Platform"
+              ],
+              
+              "sameAs": [
+                "https://x.com/y_losada",
+                "https://www.linkedin.com/in/yagolopezlosada"
+              ]
+            })
+          }}
+        />
+      </head>
       <body
         className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >
