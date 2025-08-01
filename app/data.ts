@@ -34,6 +34,15 @@ type SocialLink = {
   link: string
 }
 
+type SideProject = {
+  id: string
+  name: string
+  subtitle: string
+  description: string
+  detailUrl: string
+  detailedDescription: string
+}
+
 export const PROJECTS: Project[] = [
   {
     name: 'Motion Primitives Pro',
@@ -242,6 +251,25 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'LinkedIn',
     link: 'https://www.linkedin.com/in/yagolopezlosada',
+  },
+]
+
+export const SIDE_PROJECTS: SideProject[] = [
+  {
+    id: 'proj-1',
+    name: 'Generador de recomendaciones LinkedIn',
+    subtitle: 'AI-powered LinkedIn Endorsement Generator',
+    description: 'Herramienta para generar recomendaciones personalizadas de LinkedIn en segundos utilizando IA. Diseñada para ahorrar tiempo y mejorar tu perfil profesional, permitiendo crear textos de alta calidad con tan solo unos clics. Permite edición y exportación sencilla.',
+    detailUrl: '/playground/linkedin-recommendation',
+    detailedDescription: 'Esta herramienta utiliza inteligencia artificial para analizar el perfil profesional de LinkedIn y generar recomendaciones personalizadas y relevantes. El sistema procesa la información del perfil, incluyendo experiencia laboral, habilidades y logros, para crear textos de alta calidad que destacan las fortalezas profesionales de manera auténtica y persuasiva. La herramienta permite edición manual de las recomendaciones generadas y exportación en múltiples formatos para facilitar su uso en diferentes contextos profesionales.'
+  },
+  {
+    id: 'proj-2',
+    name: 'Order Intake',
+    subtitle: 'Análisis de PDF',
+    description: 'Herramienta para analizar si los PDF están listos para imprimir',
+    detailUrl: '/playground/order-intake',
+    detailedDescription: 'Sistema automatizado de análisis de documentos PDF para verificar su preparación para impresión. La herramienta examina múltiples aspectos del documento incluyendo resolución de imágenes, configuración de color, márgenes, sangrado y calidad de fuentes. Proporciona un reporte detallado con recomendaciones específicas para optimizar cada documento antes de su envío a impresión, ayudando a prevenir errores costosos y asegurar la calidad del resultado final.'
   },
 ]
 

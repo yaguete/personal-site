@@ -1,8 +1,9 @@
 'use client'
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import { XIcon } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
+import useClickOutside from '@/hooks/useClickOutside'
 
 import {
   MorphingDialog,
@@ -13,10 +14,12 @@ import {
 } from '@/components/ui/morphing-dialog'
 import Link from 'next/link'
 import { AnimatedBackground } from '@/components/ui/animated-background'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { Modal } from './components/ui/modal'
 import {
   PROJECTS,
   WORK_EXPERIENCE,
+  SIDE_PROJECTS,
   BLOG_POSTS,
   EMAIL,
   SOCIAL_LINKS,
@@ -33,7 +36,7 @@ function MaintenancePage() {
       transition={{ duration: 0.5 }}
       className="flex flex-1 items-center justify-center"
     >
-      <div className="text-center mt-20">
+      <div className="text-center mt-8">
         <motion.h1 
           initial={{ y: -20 }}
           animate={{ y: 0 }}
@@ -397,6 +400,14 @@ function MagneticSocialLink({
 }
 
 export default function Personal() {
+  const [openProject, setOpenProject] = useState<typeof SIDE_PROJECTS[0] | null>(null)
+  const modalRef = useRef<HTMLDivElement>(null!)
+
+  useClickOutside(modalRef, () => {
+    if (openProject) {
+      setOpenProject(null)
+    }
+  })
 
   if (MAINTENANCE_MODE) {
     return <MaintenancePage />
@@ -455,6 +466,132 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
+        <h3 className="mb-3 text-lg font-medium">Playground</h3>
+        <div className="flex flex-col space-y-0">
+          <AnimatedBackground
+            enableHover
+            className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
+            transition={{
+              type: 'spring',
+              bounce: 0,
+              duration: 0.2,
+            }}
+          >
+            {SIDE_PROJECTS.map((project) => (
+              <div
+                key={project.id}
+                className="-mx-3 rounded-xl px-3 py-3 cursor-pointer"
+                data-id={project.id}
+                onClick={() => setOpenProject(project)}
+              >
+                <div className="flex flex-col space-y-1">
+                  <h4 className="font-normal dark:text-zinc-100">
+                    {project.name}
+                  </h4>
+                  <p className="text-zinc-500 dark:text-zinc-400">
+                    {project.subtitle}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </AnimatedBackground>
+        </div>
+      </motion.section>
+
+      {openProject && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            className="fixed inset-0 h-full w-full bg-white/40 backdrop-blur-sm dark:bg-black/40 z-40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+          
+          {/* Modal */}
+          <AnimatePresence initial={false} mode="sync">
+            <div className="fixed inset-0 z-50 flex items-center justify-center">
+              <motion.div
+                ref={modalRef}
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
+                className="relative w-[600px] max-h-[90vh] overflow-hidden rounded-2xl bg-white dark:bg-zinc-950 border-0 md:border md:border-zinc-200 md:dark:border-zinc-800"
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between p-6 border-b border-zinc-200 dark:border-zinc-800">
+                  <div>
+                    <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+                      {openProject.name}
+                    </h2>
+                    <p className="text-zinc-600 dark:text-zinc-400 mt-1">
+                      {openProject.subtitle}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]" data-modal-content>
+                  <div className="space-y-6">
+                    {/* Descripción */}
+                    <div>
+                      <p className="text-zinc-600 dark:text-zinc-400 whitespace-pre-line">
+                        {openProject.detailedDescription}
+                      </p>
+                    </div>
+
+                    {/* Botón Play */}
+                    <div className="pt-4">
+                      <a
+                        href={openProject.detailUrl}
+                        rel="noopener noreferrer"
+                        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-2.5 py-1 text-sm text-black transition-all duration-200 hover:bg-zinc-950 hover:text-zinc-50 hover:translate-x-1 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+                      >
+                        Play
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 15 15"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-3 w-3"
+                        >
+                          <path
+                            d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z"
+                            fill="currentColor"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </AnimatePresence>
+          
+          {/* Close button */}
+          <motion.button
+            onClick={() => setOpenProject(null)}
+            className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1 z-50"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { delay: 0.3, duration: 0.1 },
+            }}
+            exit={{ opacity: 0, transition: { duration: 0 } }}
+          >
+            <XIcon className="h-5 w-5 text-zinc-500" />
+          </motion.button>
+        </>
+      )}
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
         <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
         <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => (
@@ -467,7 +604,7 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-3 text-lg font-medium">Blog</h3>
+        <h3 className="mb-3 text-lg font-medium">Thoughts</h3>
         <div className="flex flex-col space-y-0">
           <AnimatedBackground
             enableHover
