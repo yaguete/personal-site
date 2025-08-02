@@ -15,7 +15,7 @@ load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
 modeloGPT = os.getenv('OPENAI_MODEL', 'gpt-4')
 minCaracteres = 350
-maxCaracteres = 450
+maxCaracteres = 800
 
 def cargar_instrucciones(archivo):
     try:
@@ -136,7 +136,9 @@ def generate_recommendation():
                 messages=[
                     {"role": "system", "content": tone_instructions},
                     {"role": "user", "content": user_message}
-                ]
+                ],
+                max_tokens=800,
+                temperature=0.8
             )
             
             recommendation = response.choices[0].message.content.strip()
