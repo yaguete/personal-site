@@ -49,14 +49,9 @@ export default function RootLayout({
               "@type": "Person",
               "name": "Yago López Losada",
               "url": "https://thinkmaketest.ai",
-              "jobTitle": "Advanced Design Team Lead",
               "description": "Design strategist & UX researcher specializing in AI-driven product design and transforming complex data into clear, actionable digital products. Expert in design thinking, user research, and product strategy at the intersection of technology, design, and business.",
               
-              "worksFor": {
-                "@type": "Organization",
-                "name": "HP Inc.",
-                "url": "https://www.hp.com"
-              },
+
               
               "knowsAbout": [
                 "Design Thinking",
