@@ -257,11 +257,18 @@ export const SOCIAL_LINKS: SocialLink[] = [
 export const SIDE_PROJECTS: SideProject[] = [
   {
     id: 'proj-1',
-    name: 'Generador de recomendaciones LinkedIn',
-    subtitle: 'AI-powered LinkedIn Endorsement Generator',
-    description: 'Herramienta para generar recomendaciones personalizadas de LinkedIn en segundos utilizando IA. Diseñada para ahorrar tiempo y mejorar tu perfil profesional, permitiendo crear textos de alta calidad con tan solo unos clics. Permite edición y exportación sencilla.',
+    name: 'LinkedIn Recommendation Generator (for me)',
+    subtitle: 'AI-powered LinkedIn Recommendation Generator',
+    description:
+      'Herramienta para generar recomendaciones personalizadas de LinkedIn en segundos utilizando IA. Diseñada para ahorrar tiempo y mejorar tu perfil profesional, permitiendo crear textos de alta calidad con tan solo unos clics. Permite edición y exportación sencilla.',
     detailUrl: '/playground/linkedin-recommendation',
-    detailedDescription: 'Esta herramienta utiliza inteligencia artificial para analizar el perfil profesional de LinkedIn y generar recomendaciones personalizadas y relevantes. El sistema procesa la información del perfil, incluyendo experiencia laboral, habilidades y logros, para crear textos de alta calidad que destacan las fortalezas profesionales de manera auténtica y persuasiva. La herramienta permite edición manual de las recomendaciones generadas y exportación en múltiples formatos para facilitar su uso en diferentes contextos profesionales.'
+    detailedDescription: `Bite-sized, AI-powered recommendation generator that ends the classic “I don’t know what to write.”
+
+1. Choose how you worked with me (boss, teammate, client, etc.).
+2. Pick the vibe—from full-on praise to a spicy “chili” roast with affection.
+3. Hit Generate and, within seconds, get a polished text in the perfect length, plus room to add your personal touch.
+
+Result: zero writer’s block, zero excuses, and a fresh recommendation every time. Perfect for filling my profile with kudos—no sweat, no tears. 🚀`,
   },
   {
     id: 'proj-2',

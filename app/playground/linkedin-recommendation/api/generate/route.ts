@@ -4,10 +4,12 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     
-    // URL de tu backend Flask (ajusta según tu configuración)
-    const flaskUrl = process.env.FLASK_API_URL || 'http://localhost:5000'
+    // URL del backend Flask según el entorno
+    const backendUrl = process.env.NODE_ENV === 'development' 
+      ? 'http://127.0.0.1:5001'  // Para desarrollo local
+      : 'https://linkedinrecommendations-9915dcfe56d6.herokuapp.com/';  // Para producción
     
-    const response = await fetch(`${flaskUrl}/generate`, {
+    const response = await fetch(`${backendUrl}/generate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
