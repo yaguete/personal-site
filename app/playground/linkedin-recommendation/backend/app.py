@@ -15,7 +15,7 @@ load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
 modeloGPT = os.getenv('OPENAI_MODEL', 'gpt-4')
 minCaracteres = 350
-maxCaracteres = 800
+maxCaracteres = 650
 
 def cargar_instrucciones(archivo):
     try:
@@ -121,13 +121,13 @@ def generate_recommendation():
                 user_message = f"Escribe una recomendación en español para un {relacion} de Yago."
                 if aspectos_destacados:
                     user_message += f" Destaca lo siguiente: {aspectos_destacados}."
-                user_message += f" En un mínimo de {minCaracteres} caracteres y un máximo de {maxCaracteres}."
+                user_message += f" En un mínimo de {minCaracteres} caracteres y un máximo de {maxCaracteres} caracteres exactamente. No excedas este límite."
             
             elif idioma == 'en':
                 user_message = f"Write a recommendation in English for a {relacion} with Yago."
                 if aspectos_destacados:
                     user_message += f" Highlight the following: {aspectos_destacados}."
-                user_message += f" In a minimum of {minCaracteres} characters and a maximum of {maxCaracteres}."
+                user_message += f" In a minimum of {minCaracteres} characters and a maximum of {maxCaracteres} characters exactly. Do not exceed this limit."
             
             # Llamada a OpenAI para generar el texto
             client = openai.OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
@@ -137,7 +137,7 @@ def generate_recommendation():
                     {"role": "system", "content": tone_instructions},
                     {"role": "user", "content": user_message}
                 ],
-                max_tokens=800,
+                max_tokens=600,
                 temperature=0.8
             )
             
