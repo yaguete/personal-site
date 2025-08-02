@@ -130,7 +130,8 @@ def generate_recommendation():
                 user_message += f" In a minimum of {minCaracteres} characters and a maximum of {maxCaracteres}."
             
             # Llamada a OpenAI para generar el texto
-            response = openai.chat.completions.create(
+            client = openai.OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+            response = client.chat.completions.create(
                 model=modeloGPT,
                 messages=[
                     {"role": "system", "content": tone_instructions},
