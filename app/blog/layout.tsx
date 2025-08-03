@@ -19,7 +19,7 @@ function CopyButton() {
         setText('Copied')
         navigator.clipboard.writeText(currentUrl)
       }}
-      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400"
+      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer"
       type="button"
     >
       <TextMorph>{text}</TextMorph>
@@ -43,10 +43,12 @@ export default function LayoutBlogPost({
         }}
       />
 
-      <div className="absolute right-4 top-24">
-        <CopyButton />
+      <div className="flex mt-15 mb-1 pr-1">
+        <div className="ml-auto">
+          <CopyButton />
+        </div>
       </div>
-      <main className="prose prose-gray mt-24 pb-20 prose-h4:prose-base dark:prose-invert prose-h1:text-xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-lg prose-h2:font-medium prose-h3:text-base prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium">
+      <main className="prose prose-gray pb-20 prose-h4:prose-base dark:prose-invert prose-h1:text-xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-lg prose-h2:font-medium prose-h3:text-base prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium">
         {children}
       </main>
     </>

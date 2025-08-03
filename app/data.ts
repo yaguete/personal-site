@@ -220,26 +220,7 @@ export const BLOG_POSTS: BlogPost[] = [
     link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
     uid: 'blog-1',
   },
-  {
-    title: 'Why I left my job to start my own company',
-    description:
-      'A deep dive into my decision to leave my job and start my own company',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
-    uid: 'blog-2',
-  },
-  {
-    title: 'What I learned from my first year of freelancing',
-    description:
-      'A look back at my first year of freelancing and what I learned',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
-    uid: 'blog-3',
-  },
-  {
-    title: 'How to Export Metadata from MDX for Next.js SEO',
-    description: 'A guide on exporting metadata from MDX files to leverage Next.js SEO features.',
-    link: '/blog/example-mdx-metadata',
-    uid: 'blog-4',
-  },
+  
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
@@ -304,14 +285,14 @@ export const EDUCATION: Education[] = [
   {
     id: 'edu-3',
     category: 'Specialization',
-    title: 'Backend programming in java',
+    title: 'Backend programming in Java',
     year: 'In progress',
     institution: 'Tokio School',
   },
   {
     id: 'edu-4',
     category: 'Specialization',
-    title: 'Python Programming for AI',
+    title: 'Python programming for AI',
     year: '2022',
     institution: 'Tokio School',
   },
@@ -328,5 +309,13 @@ export const EDUCATION: Education[] = [
     title: 'Master in digital product management',
     year: '2023',
     institution: 'Nuclio School',
+  },
+
+  {
+    id: 'edu-7',
+    category: 'Specialization',
+    title: 'Mgmt. & Promotion of R&D and Innovation Projects',
+    year: '2010',
+    institution: 'La Laguna University',
   },
 ]

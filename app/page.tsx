@@ -1,6 +1,6 @@
 'use client'
 import { motion, AnimatePresence } from 'motion/react'
-import { XIcon, Award, Construction } from 'lucide-react'
+import { XIcon, Award, Construction, Info } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
 import useClickOutside from '@/hooks/useClickOutside'
@@ -404,6 +404,7 @@ export default function Personal() {
   const [openProject, setOpenProject] = useState<typeof SIDE_PROJECTS[0] | null>(null)
   const [isEducationOpen, setIsEducationOpen] = useState(false)
   const [showTooltip, setShowTooltip] = useState(false)
+  const [activeTab, setActiveTab] = useState<'work' | 'education'>('work')
   const modalRef = useRef<HTMLDivElement>(null!)
 
   // Función para ordenar las credenciales educativas
@@ -513,7 +514,27 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-3 text-lg font-medium">Playground</h3>
+        <div className="flex items-center gap-2 mb-3">
+          <h3 className="text-lg font-medium">Playground</h3>
+          <div className="relative group mt-2">
+            <button 
+              className="p-1 -m-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onClick={() => {
+                const tooltip = document.querySelector('.playground-tooltip') as HTMLElement;
+                if (tooltip) {
+                  tooltip.classList.toggle('opacity-100');
+                  setTimeout(() => tooltip.classList.remove('opacity-100'), 3000);
+                }
+              }}
+            >
+              <Info className="h-4 w-4 text-zinc-400 cursor-help" />
+            </button>
+            <div className="playground-tooltip absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-3 py-2 text-sm text-white bg-zinc-900 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+              Personal projects and experiments
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-zinc-900"></div>
+            </div>
+          </div>
+        </div>
         <div className="flex flex-col space-y-0">
           <AnimatedBackground
             enableHover
@@ -639,101 +660,105 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
-        <div className="flex flex-col space-y-2">
-          {WORK_EXPERIENCE.map((job) => (
-            <WorkExperienceCard key={job.id} job={job} />
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-        className="-mt-15"
-      >
-        <button
-          onClick={() => setIsEducationOpen(!isEducationOpen)}
-          className="flex w-full items-center justify-start gap-2 mb-3 text-lg font-normal hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors cursor-pointer"
-        >
-          <span className="text-zinc-600 dark:text-zinc-100">Education</span>
-          <motion.svg
-            className="h-5 w-5 text-zinc-500"
-            animate={{ rotate: isEducationOpen ? 180 : 0 }}
-            transition={{ duration: 0.2 }}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+        {/* Tabs */}
+        <div className="flex gap-6 mb-5">
+          <button
+            onClick={() => setActiveTab('work')}
+            className={`transition-colors ${
+              activeTab === 'work'
+                ? 'text-lg font-medium text-zinc-900 dark:text-zinc-100'
+                : 'text-zinc-500 dark:text-zinc-400 font-normal cursor-pointer'
+            }`}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </motion.svg>
-        </button>
-          
-          <AnimatePresence>
-            {isEducationOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
-              >
-                <div className="space-y-0 pt-2">
-                  {sortedEducation.map((education) => (
-                    <div
-                      key={education.id}
-                      className="p-4"
-                    >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className={`text-xs font-medium px-2 py-1 rounded-full ${
-                              education.category === 'Master' || education.category === 'Bachelor'
-                                ? 'text-zinc-500 dark:text-zinc-400 bg-zinc-200 dark:bg-zinc-800'
-                                : 'text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-600'
-                            }`}>
-                              {education.category}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <h4 className="font-medium text-zinc-900 dark:text-zinc-100">
-                              {education.title}
-                            </h4>
-                            {education.id === 'edu-2' && (
-                              <div className="relative">
-                                <button
-                                  onMouseEnter={() => setShowTooltip(true)}
-                                  onMouseLeave={() => setShowTooltip(false)}
-                                  onTouchStart={() => setShowTooltip(!showTooltip)}
-                                  className="focus:outline-none"
-                                >
-                                  <Award className="h-4 w-4 text-amber-500 cursor-help" />
-                                </button>
-                                {(showTooltip || false) && (
-                                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-white bg-zinc-900 dark:bg-zinc-100 dark:text-zinc-900 rounded-lg transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
-                                    Award for Academic Excellence
-                                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-zinc-900 dark:border-t-zinc-100"></div>
-                                  </div>
-                                )}
+            Work Experience
+          </button>
+          <button
+            onClick={() => setActiveTab('education')}
+            className={`transition-colors ${
+              activeTab === 'education'
+                ? 'text-lg font-medium text-zinc-900 dark:text-zinc-100'
+                : 'text-zinc-500 dark:text-zinc-400 font-normal cursor-pointer'
+            }`}
+          >
+            Education
+          </button>
+        </div>
+
+        {/* Content */}
+        <AnimatePresence mode="wait">
+          {activeTab === 'work' && (
+            <motion.div
+              key="work"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="flex flex-col space-y-2"
+            >
+              {WORK_EXPERIENCE.map((job) => (
+                <WorkExperienceCard key={job.id} job={job} />
+              ))}
+            </motion.div>
+          )}
+
+          {activeTab === 'education' && (
+            <motion.div
+              key="education"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="space-y-0"
+            >
+              {sortedEducation.map((education) => (
+                <div
+                  key={education.id}
+                  className="p-4 border-b border-zinc-200 dark:border-zinc-800 last:border-b-0"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="font-medium text-zinc-900 dark:text-zinc-100">
+                          {education.title}
+                        </h4>
+                        {education.id === 'edu-2' && (
+                          <div className="relative">
+                            <button
+                              onMouseEnter={() => setShowTooltip(true)}
+                              onMouseLeave={() => setShowTooltip(false)}
+                              onTouchStart={() => setShowTooltip(!showTooltip)}
+                              className="focus:outline-none"
+                            >
+                              <Award className="h-4 w-4 text-amber-500 cursor-help" />
+                            </button>
+                            {(showTooltip || false) && (
+                              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-white bg-zinc-900 dark:bg-zinc-100 dark:text-zinc-900 rounded-lg transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                                Award for Academic Excellence
+                                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-zinc-900 dark:border-t-zinc-100"></div>
                               </div>
                             )}
                           </div>
-                          <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                            {education.institution} · {education.year}
-                          </p>
-                        </div>
+                        )}
                       </div>
+                      <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                        {education.institution} · {education.year}
+                      </p>
                     </div>
-                  ))}
+                    <div className="ml-4">
+                      <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                        education.category === 'Master' || education.category === 'Bachelor'
+                          ? 'text-zinc-500 dark:text-zinc-400 bg-zinc-200 dark:bg-zinc-800'
+                          : 'text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-600'
+                      }`}>
+                        {education.category}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.section>
 
       <motion.section
