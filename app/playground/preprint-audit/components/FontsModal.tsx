@@ -7,7 +7,8 @@ import { X } from 'lucide-react'
 interface FontInfo {
   name: string
   type: string
-  is_embedded: boolean
+  embedded?: boolean
+  is_embedded?: boolean
   page_number?: number
 }
 
@@ -21,10 +22,12 @@ interface FontsModalProps {
 
 export default function FontsModal({ isOpen, onClose, fonts, category, title }: FontsModalProps) {
   const filteredFonts = fonts.filter(font => {
+    // El backend envía 'embedded', no 'is_embedded'
+    const isEmbedded = font.embedded || font.is_embedded
     if (category === 'embedded') {
-      return font.is_embedded
+      return isEmbedded
     } else {
-      return !font.is_embedded
+      return !isEmbedded
     }
   })
 
@@ -94,7 +97,7 @@ export default function FontsModal({ isOpen, onClose, fonts, category, title }: 
                         )}
                       </div>
                       <div className="ml-4">
-                        {font.is_embedded ? (
+                        {(font.embedded || font.is_embedded) ? (
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
                             Embedded
                           </span>

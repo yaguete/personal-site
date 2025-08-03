@@ -243,7 +243,7 @@ export default function Results({ data, onSizeChange }: ResultsProps) {
   
   if (statsToUse.very_low > 0) {
     dpiCategories.push({ 
-      label: isProjected ? 'in very low quality' : 'in very low quality', 
+      label: isProjected ? 'en calidad muy baja' : 'en calidad muy baja', 
       count: statsToUse.very_low, 
       dpi: '< 70',
       color: 'text-red-600 dark:text-red-400',
@@ -252,7 +252,7 @@ export default function Results({ data, onSizeChange }: ResultsProps) {
   }
   if (statsToUse.low > 0) {
     dpiCategories.push({ 
-      label: isProjected ? 'in low quality' : 'in low quality', 
+      label: isProjected ? 'en calidad baja' : 'en calidad baja', 
       count: statsToUse.low, 
       dpi: '< 150',
       color: 'text-orange-600 dark:text-orange-400',
@@ -261,7 +261,7 @@ export default function Results({ data, onSizeChange }: ResultsProps) {
   }
   if (statsToUse.medium > 0) {
     dpiCategories.push({ 
-      label: isProjected ? 'in acceptable quality' : 'in acceptable quality', 
+      label: isProjected ? 'en calidad aceptable' : 'en calidad aceptable', 
       count: statsToUse.medium, 
       dpi: '150-300',
       color: 'text-green-600 dark:text-green-400',
@@ -270,7 +270,7 @@ export default function Results({ data, onSizeChange }: ResultsProps) {
   }
   if (statsToUse.high > 0) {
     dpiCategories.push({ 
-      label: isProjected ? 'in high quality' : 'in high quality', 
+      label: isProjected ? 'en alta calidad' : 'en alta calidad', 
       count: statsToUse.high, 
       dpi: '> 300',
       color: 'text-green-600 dark:text-green-400',
