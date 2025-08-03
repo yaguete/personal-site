@@ -60,7 +60,9 @@ export default function PreprintAuditPage() {
       })
 
       if (!response.ok) {
-        throw new Error('Error analyzing the PDF')
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+        console.error('Backend error:', errorData)
+        throw new Error(errorData.error || 'Error analyzing the PDF')
       }
 
       const data = await response.json()
