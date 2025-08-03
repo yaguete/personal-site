@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     
     console.log('Enviando análisis experto al backend:', backendUrl)
     
-    const response = await fetch(`${backendUrl}/expert-analysis`, {
+    const response = await fetch(`${backendUrl}/preprint-audit/expert-analysis`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
