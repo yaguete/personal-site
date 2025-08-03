@@ -33,10 +33,10 @@ export const getCategoryColor = (category: string): string => {
 
 export const getCategoryLabel = (category: string): string => {
   switch (category) {
-    case 'very_low': return 'Muy baja (< 70 DPI)'
-    case 'low': return 'Baja (< 150 DPI)'
-    case 'medium': return 'Media (< 300 DPI)'
-    case 'high': return 'Alta (≥ 300 DPI)'
-    default: return 'Desconocida'
+    case 'very_low': return 'Very Low (< 70 DPI)'
+    case 'low': return 'Low (< 150 DPI)'
+    case 'medium': return 'Medium (< 300 DPI)'
+    case 'high': return 'High (≥ 300 DPI)'
+    default: return 'Unknown'
   }
 } 
