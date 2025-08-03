@@ -13,7 +13,7 @@ CORS(app)  # Permitir solicitudes desde cualquier origen
 load_dotenv()
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
-modeloGPT = os.getenv('OPENAI_MODEL', 'gpt-4')
+modeloGPT = os.getenv('OPENAI_MODEL', 'gpt-4o-mini')
 minCaracteres = 350
 maxCaracteres = 650
 

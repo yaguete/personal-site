@@ -38,9 +38,8 @@ type SideProject = {
   id: string
   name: string
   subtitle: string
-  description: string
   detailUrl: string
-  detailedDescription: string
+  description: string
 }
 
 export const PROJECTS: Project[] = [
@@ -82,8 +81,8 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
         'Building and testing AI-powered tools and early-stage prototypes',
         'Translating research insights into design opportunities',],
     achievements: [
-        'Co-conceptualized and prototyped <a href="https://thearchimind.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">The Archimind</a> (with <a href="https://www.liquidlab.io/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Liquid Lab</a>), an assistant for architects. Defined use cases, built a functional prototype, and validated product-market fit in one country (UK) within 8 weeks',
-        'Created <a href="https://thedrawinghub.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">The Drawing Hub</a> — a live testing sandbox for validating conceptual features across HP services in near-real usage conditions',
+        'Co-conceptualized and prototyped (with <a href="https://www.liquidlab.io/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Liquid Lab</a>), an AI ToolBox for architects and contractors. Defined use cases, built a functional prototype, and validated product-market fit in UK, within 8 weeks',
+        'Co-Created a live testing sandbox for validating conceptual features across HP services in near-real usage conditions',
         'Designed and deployed multiple real-world landing pages and MVPs using smoke tests and Wizard of Oz techniques to validate interest before development',      ],
     technologies: ['Cursor', 'Replit', 'Figma', 'React', 'TypeScript'],
       
@@ -259,25 +258,75 @@ export const SIDE_PROJECTS: SideProject[] = [
     id: 'proj-1',
     name: 'LinkedIn Recommendation Generator (for me)',
     subtitle: 'AI-powered LinkedIn Recommendation Generator',
-    description:
-      'Herramienta para generar recomendaciones personalizadas de LinkedIn en segundos utilizando IA. Diseñada para ahorrar tiempo y mejorar tu perfil profesional, permitiendo crear textos de alta calidad con tan solo unos clics. Permite edición y exportación sencilla.',
     detailUrl: '/playground/linkedin-recommendation',
-    detailedDescription: `Bite-sized, AI-powered recommendation generator that ends the classic “I don’t know what to write.”
+    description: `Bite-sized, AI-powered recommendation generator that ends the classic "I don't know what to write."
 
 1. Choose how you worked with me (boss, teammate, client, etc.).
-2. Pick the vibe—from full-on praise to a spicy “chili” roast with affection.
+2. Pick the vibe—from full-on praise to a spicy "chili" roast with affection.
 3. Hit Generate and, within seconds, get a polished text in the perfect length, plus room to add your personal touch.
 
-Result: zero writer’s block, zero excuses, and a fresh recommendation every time. Perfect for filling my profile with kudos—no sweat, no tears. 🚀`,
+Result: zero writer's block, zero excuses, and a fresh recommendation every time. Perfect for filling my profile with kudos—no sweat, no tears. 🚀`,
   },
   {
     id: 'proj-2',
-    name: 'Order Intake',
-    subtitle: 'Análisis de PDF',
-    description: 'Herramienta para analizar si los PDF están listos para imprimir',
-    detailUrl: '/playground/order-intake',
-    detailedDescription: 'Sistema automatizado de análisis de documentos PDF para verificar su preparación para impresión. La herramienta examina múltiples aspectos del documento incluyendo resolución de imágenes, configuración de color, márgenes, sangrado y calidad de fuentes. Proporciona un reporte detallado con recomendaciones específicas para optimizar cada documento antes de su envío a impresión, ayudando a prevenir errores costosos y asegurar la calidad del resultado final.'
+    name: 'Preprint Audit',
+    subtitle: 'Smart PDF auditing before print, in any format',
+    detailUrl: '/playground/preprint-audit',
+    description: 'Automated system for analyzing PDF documents to verify their professional readiness for printing. The tool examines key aspects such as image resolution and color mode, margin and bleed settings, and font quality. It generates a detailed report with specific recommendations to optimize each file before sending it to print, helping prevent costly errors and ensuring high-quality results in any format.'
   },
 ]
 
 export const EMAIL = 'your@email.com'
+
+type Education = {
+  id: string
+  category: string
+  title: string
+  year: string
+  institution: string
+}
+
+export const EDUCATION: Education[] = [
+  {
+    id: 'edu-1',
+    category: 'Master',
+    title: 'Digital Communication and Cultural Studies',
+    year: '2013',
+    institution: 'King Juan Carlos University',
+  },
+  {
+    id: 'edu-2',
+    category: 'Bachelor',
+    title: 'Sociology',
+    year: '2012',
+    institution: 'La Laguna University',
+  },
+  {
+    id: 'edu-3',
+    category: 'Specialization',
+    title: 'Backend programming in java',
+    year: 'In progress',
+    institution: 'Tokio School',
+  },
+  {
+    id: 'edu-4',
+    category: 'Specialization',
+    title: 'Python Programming for AI',
+    year: '2022',
+    institution: 'Tokio School',
+  },
+  {
+    id: 'edu-5',
+    category: 'Specialization',
+    title: 'Front-end programming and web development',
+    year: '2024',
+    institution: 'Tokio School',
+  },
+  {
+    id: 'edu-6',
+    category: 'Specialization',
+    title: 'Master in digital product management',
+    year: '2023',
+    institution: 'Nuclio School',
+  },
+]

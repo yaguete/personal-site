@@ -83,35 +83,76 @@ export default function RootLayout({
               
               "knowsLanguage": ["Spanish", "English"],
               
-              "alumniOf": {
-                "@type": "Organization", 
-                "name": "Universidad Rey Juan Carlos"
-              },
+              "alumniOf": [
+                {
+                  "@type": "Organization", 
+                  "name": "King Juan Carlos University"
+                },
+                {
+                  "@type": "Organization",
+                  "name": "La Laguna University"
+                }
+              ],
               
               "hasCredential": [
                 {
                   "@type": "EducationalOccupationalCredential",
-                  "credentialCategory": "Sociology Degree",
+                  "credentialCategory": "Master",
+                  "name": "Digital Communication and Cultural Studies",
                   "recognizedBy": {
                     "@type": "Organization",
-                    "name": "Universidad Rey Juan Carlos"
-                  }
-                },
-                {
-                  "@type": "EducationalOccupationalCredential", 
-                  "credentialCategory": "Digital Humanities Master",
-                  "recognizedBy": {
-                    "@type": "Organization",
-                    "name": "Universidad Rey Juan Carlos"
-                  }
+                    "name": "King Juan Carlos University"
+                  },
+                  "validIn": {
+                    "@type": "Country",
+                    "name": "European Union"
+                  },
+                  "dateIssued": "2013"
                 },
                 {
                   "@type": "EducationalOccupationalCredential",
-                  "credentialCategory": "Digital Product Management Master",
+                  "credentialCategory": "Bachelor",
+                  "name": "Sociology",
                   "recognizedBy": {
-                    "@type": "Organization", 
-                    "name": "Digital Product Management"
-                  }
+                    "@type": "Organization",
+                    "name": "La Laguna University"
+                  },
+                  "validIn": {
+                    "@type": "Country",
+                    "name": "European Union"
+                  },
+                  "dateIssued": "2012",
+                  "award": "Award for Academic Excellence"
+                },
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "Specialization",
+                  "name": "Python Programming for AI",
+                  "recognizedBy": {
+                    "@type": "Organization",
+                    "name": "Tokio School"
+                  },
+                  "dateIssued": "2022"
+                },
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "Specialization",
+                  "name": "Front-end programming and web development",
+                  "recognizedBy": {
+                    "@type": "Organization",
+                    "name": "Tokio School"
+                  },
+                  "dateIssued": "2024"
+                },
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "Specialization",
+                  "name": "Master in digital product management",
+                  "recognizedBy": {
+                    "@type": "Organization",
+                    "name": "Nuclio School"
+                  },
+                  "dateIssued": "2023"
                 }
               ],
               

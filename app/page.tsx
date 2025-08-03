@@ -1,6 +1,6 @@
 'use client'
 import { motion, AnimatePresence } from 'motion/react'
-import { XIcon } from 'lucide-react'
+import { XIcon, Award, Construction } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
 import useClickOutside from '@/hooks/useClickOutside'
@@ -21,6 +21,7 @@ import {
   WORK_EXPERIENCE,
   SIDE_PROJECTS,
   BLOG_POSTS,
+  EDUCATION,
   EMAIL,
   SOCIAL_LINKS,
 } from './data'
@@ -401,7 +402,31 @@ function MagneticSocialLink({
 
 export default function Personal() {
   const [openProject, setOpenProject] = useState<typeof SIDE_PROJECTS[0] | null>(null)
+  const [isEducationOpen, setIsEducationOpen] = useState(false)
+  const [showTooltip, setShowTooltip] = useState(false)
   const modalRef = useRef<HTMLDivElement>(null!)
+
+  // Función para ordenar las credenciales educativas
+  const sortedEducation = EDUCATION.sort((a, b) => {
+    // Primero ordenar por categoría (master > bachelor > resto)
+    const categoryOrder = { 'Master': 1, 'Bachelor': 2 }
+    const aOrder = categoryOrder[a.category as keyof typeof categoryOrder] || 3
+    const bOrder = categoryOrder[b.category as keyof typeof categoryOrder] || 3
+    
+    if (aOrder !== bOrder) {
+      return aOrder - bOrder
+    }
+    
+    // Si tienen la misma categoría, ordenar por año (más reciente primero)
+    // Manejar "In progress" como el año más reciente
+    const getYearValue = (year: string) => {
+      if (year.toLowerCase().includes('progress')) return 9999 // Año futuro para "In progress"
+      const parsed = parseInt(year)
+      return isNaN(parsed) ? 0 : parsed
+    }
+    
+    return getYearValue(b.year) - getYearValue(a.year)
+  })
 
   useClickOutside(modalRef, () => {
     if (openProject) {
@@ -437,7 +462,28 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-medium">Selected Projects</h3>
+        <h3 className="mb-0 text-lg font-medium">Selected Projects</h3>
+        <div className="flex flex-col space-y-0">
+          <AnimatedBackground
+            enableHover
+            className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
+            transition={{
+              type: 'spring',
+              bounce: 0,
+              duration: 0.2,
+            }}
+          >
+            <div className="-mx-3 rounded-xl px-3 py-3">
+              <div className="flex items-center gap-2">
+                <Construction className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
+                <span className="font-normal dark:text-zinc-100">Coming soon</span>
+              </div>
+            </div>
+          </AnimatedBackground>
+        </div>
+        
+        {/* Código original de proyectos - comentado para recuperar después */}
+        {/*
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {PROJECTS.map((project) => (
             <div key={project.name} className="space-y-2">
@@ -460,6 +506,7 @@ export default function Personal() {
             </div>
           ))}
         </div>
+        */}
       </motion.section>
 
       <motion.section
@@ -537,7 +584,7 @@ export default function Personal() {
                     {/* Descripción */}
                     <div>
                       <p className="text-zinc-600 dark:text-zinc-400 whitespace-pre-line">
-                        {openProject.detailedDescription}
+                        {openProject.description}
                       </p>
                     </div>
 
@@ -598,6 +645,95 @@ export default function Personal() {
             <WorkExperienceCard key={job.id} job={job} />
           ))}
         </div>
+      </motion.section>
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+        className="-mt-15"
+      >
+        <button
+          onClick={() => setIsEducationOpen(!isEducationOpen)}
+          className="flex w-full items-center justify-start gap-2 mb-3 text-lg font-normal hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors cursor-pointer"
+        >
+          <span className="text-zinc-600 dark:text-zinc-100">Education</span>
+          <motion.svg
+            className="h-5 w-5 text-zinc-500"
+            animate={{ rotate: isEducationOpen ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </motion.svg>
+        </button>
+          
+          <AnimatePresence>
+            {isEducationOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="space-y-0 pt-2">
+                  {sortedEducation.map((education) => (
+                    <div
+                      key={education.id}
+                      className="p-4"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                              education.category === 'Master' || education.category === 'Bachelor'
+                                ? 'text-zinc-500 dark:text-zinc-400 bg-zinc-200 dark:bg-zinc-800'
+                                : 'text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-600'
+                            }`}>
+                              {education.category}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h4 className="font-medium text-zinc-900 dark:text-zinc-100">
+                              {education.title}
+                            </h4>
+                            {education.id === 'edu-2' && (
+                              <div className="relative">
+                                <button
+                                  onMouseEnter={() => setShowTooltip(true)}
+                                  onMouseLeave={() => setShowTooltip(false)}
+                                  onTouchStart={() => setShowTooltip(!showTooltip)}
+                                  className="focus:outline-none"
+                                >
+                                  <Award className="h-4 w-4 text-amber-500 cursor-help" />
+                                </button>
+                                {(showTooltip || false) && (
+                                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-white bg-zinc-900 dark:bg-zinc-100 dark:text-zinc-900 rounded-lg transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                                    Award for Academic Excellence
+                                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-zinc-900 dark:border-t-zinc-100"></div>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                          <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                            {education.institution} · {education.year}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
       </motion.section>
 
       <motion.section
