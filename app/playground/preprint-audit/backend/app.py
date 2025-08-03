@@ -24,6 +24,7 @@ def hello_world():
     return {"message": "Hello World"}
 
 @app.route("/analyze-pdf", methods=['POST'])
+@app.route("/preprint-audit/analyze-pdf", methods=['POST'])
 def analyze_pdf():
     if 'file' not in request.files:
         return jsonify({"error": "No se ha enviado ningún archivo"}), 400
@@ -304,6 +305,7 @@ def analyze_pdf():
         return jsonify({"error": f"Error al procesar el PDF: {str(e)}"}), 500
 
 @app.route("/expert-analysis", methods=['POST'])
+@app.route("/preprint-audit/expert-analysis", methods=['POST'])
 def expert_analysis():
     """
     Genera un análisis experto del PDF usando OpenAI.
