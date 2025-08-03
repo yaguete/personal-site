@@ -55,7 +55,7 @@ export default function ExpertAnalysis({ onGenerateAnalysis, isGenerating, analy
             >
               {isGenerating ? (
                 <>
-                  <span>Generating...</span>
+                  <span>Analyzing...</span>
                   <div className="ml-1 h-3 w-3 animate-spin rounded-full border-2 border-zinc-300 border-t-zinc-600"></div>
                 </>
               ) : (
