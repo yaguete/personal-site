@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     
     console.log('Enviando archivo al backend:', file.name, 'Tamaño:', file.size)
     
-    const response = await fetch(`${backendUrl}/analyze-pdf`, {
+    const response = await fetch(`${backendUrl}/preprint-audit/analyze-pdf`, {
       method: 'POST',
       body: backendFormData,
       headers: {
