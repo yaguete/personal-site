@@ -337,6 +337,14 @@ def expert_analysis():
         pages = analysis_data.get('pages', [])
         first_page_dimensions = pages[0].get('dimensions', {}) if pages else {}
         
+        # Si el tamaño es "Original", usar las dimensiones reales del PDF
+        if target_size.get('label') == 'Original' or not target_size.get('width'):
+            display_width = first_page_dimensions.get('width', 'N/A')
+            display_height = first_page_dimensions.get('height', 'N/A')
+        else:
+            display_width = target_size.get('width', 'N/A')
+            display_height = target_size.get('height', 'N/A')
+        
         prompt = f"""
 
 IMPORTANT: You must respond in {selected_language_name.upper()}.
@@ -344,7 +352,7 @@ IMPORTANT: You must respond in {selected_language_name.upper()}.
 PDF INFORMATION:
 - Total pages: {analysis_data.get('summary', {}).get('total_pages', 'N/A')}
 - Selected size: {target_size.get('label', 'Original')}
-- Dimensions: {target_size.get('width', first_page_dimensions.get('width', 'N/A'))} x {target_size.get('height', first_page_dimensions.get('height', 'N/A'))} mm
+- Dimensions: {display_width} x {display_height} mm
 
 TECHNICAL ANALYSIS:
 - Images: {analysis_data.get('summary', {}).get('total_images', 0)} images
