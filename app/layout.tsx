@@ -55,9 +55,21 @@ export default function RootLayout({
                 "identifier": "yago-lopez-losada",
                 "url": "https://thinkmaketest.ai",
                 "image": [
-                  "https://thinkmaketest.ai/images/yago_1x1.webp",
-                  "https://thinkmaketest.ai/images/yago_4x3.webp", 
-                  "https://thinkmaketest.ai/images/yago_16x9.webp"
+                  {
+                    "@id": "#portrait1x1",
+                    "@type": "ImageObject",
+                    "url": "https://thinkmaketest.ai/images/yago_1x1.webp"
+                  },
+                  {
+                    "@id": "#portrait4x3", 
+                    "@type": "ImageObject",
+                    "url": "https://thinkmaketest.ai/images/yago_4x3.webp"
+                  },
+                  {
+                    "@id": "#portrait16x9",
+                    "@type": "ImageObject", 
+                    "url": "https://thinkmaketest.ai/images/yago_16x9.webp"
+                  }
                 ],
                 "description": "Design strategist & UX researcher specializing in AI-driven product design and transforming complex data into clear, actionable digital products. Expert in design thinking, user research, and product strategy at the intersection of technology, design, and business.",
                 
@@ -156,7 +168,10 @@ export default function RootLayout({
                     "@type": "Occupation",
                     "name": "Advanced Design Team Lead",
                     "description": "Leading design strategy and UX research for AI-driven product design at HP Inc.",
-                    "occupationLocation": "HP Inc.",
+                    "occupationLocation": {
+                      "@type": "Place",
+                      "name": "HP Inc."
+                    },
                     "employer": {
                       "@type": "Organization",
                       "name": "HP Inc.",
@@ -168,7 +183,10 @@ export default function RootLayout({
                     "@type": "Occupation",
                     "name": "Director of Operational Efficiency",
                     "description": "Led digital transformation and operational efficiency initiatives at Banc Sabadell.",
-                    "occupationLocation": "Banc Sabadell",
+                    "occupationLocation": {
+                      "@type": "Place",
+                      "name": "Banc Sabadell"
+                    },
                     "employer": {
                       "@type": "Organization",
                       "name": "Banc Sabadell",
@@ -181,7 +199,10 @@ export default function RootLayout({
                     "@type": "Occupation",
                     "name": "Strategic Designer",
                     "description": "Strategic design and product strategy consulting at Innocells.",
-                    "occupationLocation": "Innocells",
+                    "occupationLocation": {
+                      "@type": "Place",
+                      "name": "Innocells"
+                    },
                     "employer": {
                       "@type": "Organization",
                       "name": "Innocells",
@@ -194,7 +215,10 @@ export default function RootLayout({
                     "@type": "Occupation",
                     "name": "Senior Executive Research",
                     "description": "User research and design strategy at The Cocktail.",
-                    "occupationLocation": "The Cocktail",
+                    "occupationLocation": {
+                      "@type": "Place",
+                      "name": "The Cocktail"
+                    },
                     "employer": {
                       "@type": "Organization",
                       "name": "The Cocktail",
@@ -205,12 +229,7 @@ export default function RootLayout({
                   }
                 ],
                 
-                "jobTitle": [
-                  "Advanced Design Team Lead",
-                  "Director of Operational Efficiency", 
-                  "Strategic Designer",
-                  "Senior Executive Research"
-                ],
+
                 
                 "worksFor": [
                   {
@@ -263,7 +282,9 @@ export default function RootLayout({
                   "https://x.com/y_losada",
                   "https://www.linkedin.com/in/yagolopezlosada",
                   "https://github.com/yaguete",
-                  "https://medium.com/@y_losada"
+                  "https://medium.com/@y_losada",
+                  "https://bsky.app/profile/yaguete.bsky.social",
+                  "https://www.threads.net/@yaguete.ll"
                 ]
               },
               
