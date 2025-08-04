@@ -156,10 +156,7 @@ export default function RootLayout({
                     "@type": "Occupation",
                     "name": "Advanced Design Team Lead",
                     "description": "Leading design strategy and UX research for AI-driven product design at HP Inc.",
-                    "occupationLocation": {
-                      "@type": "Place", 
-                      "name": "HP Inc."
-                    },
+                    "occupationLocation": "HP Inc.",
                     "employer": {
                       "@type": "Organization",
                       "name": "HP Inc.",
@@ -171,10 +168,7 @@ export default function RootLayout({
                     "@type": "Occupation",
                     "name": "Director of Operational Efficiency",
                     "description": "Led digital transformation and operational efficiency initiatives at Banc Sabadell.",
-                    "occupationLocation": {
-                      "@type": "Place",
-                      "name": "Banc Sabadell"
-                    },
+                    "occupationLocation": "Banc Sabadell",
                     "employer": {
                       "@type": "Organization",
                       "name": "Banc Sabadell",
@@ -187,14 +181,11 @@ export default function RootLayout({
                     "@type": "Occupation",
                     "name": "Strategic Designer",
                     "description": "Strategic design and product strategy consulting at Innocells.",
-                    "occupationLocation": {
-                      "@type": "Place",
-                      "name": "Innocells"
-                    },
+                    "occupationLocation": "Innocells",
                     "employer": {
                       "@type": "Organization",
                       "name": "Innocells",
-                      "url": "https://innocells.com"
+                      "url": "https://www.sabadelldigital.com/"
                     },
                     "startDate": "2019-12-12",
                     "endDate": "2023-04-30"
@@ -203,10 +194,7 @@ export default function RootLayout({
                     "@type": "Occupation",
                     "name": "Senior Executive Research",
                     "description": "User research and design strategy at The Cocktail.",
-                    "occupationLocation": {
-                      "@type": "Place",
-                      "name": "The Cocktail"
-                    },
+                    "occupationLocation": "The Cocktail",
                     "employer": {
                       "@type": "Organization",
                       "name": "The Cocktail",
@@ -238,7 +226,7 @@ export default function RootLayout({
                   {
                     "@type": "Organization",
                     "name": "Innocells", 
-                    "url": "https://innocells.com"
+                    "url": "https://www.sabadelldigital.com/"
                   },
                   {
                     "@type": "Organization",
@@ -281,6 +269,11 @@ export default function RootLayout({
               
               "creator": {
                 "@id": "#yago"
+              },
+              
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://thinkmaketest.ai"
               },
               
               "dateModified": "2025-08-03T00:00:00Z"
