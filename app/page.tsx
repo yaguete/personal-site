@@ -643,7 +643,7 @@ export default function Personal() {
           {/* Close button */}
           <motion.button
             onClick={() => setOpenProject(null)}
-            className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1 z-50"
+            className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1 z-50 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
