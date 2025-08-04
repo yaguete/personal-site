@@ -155,61 +155,101 @@ export default function RootLayout({
                   {
                     "@type": "Occupation",
                     "name": "Advanced Design Team Lead",
+                    "description": "Leading design strategy and UX research for AI-driven product design at HP Inc.",
                     "occupationLocation": {
                       "@type": "Place", 
-                      "name": "HP Inc."
+                      "name": "HP Inc.",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "addressCountry": "Spain"
+                      }
                     },
                     "employer": {
                       "@type": "Organization",
                       "name": "HP Inc.",
                       "url": "https://www.hp.com"
                     },
-                    "startDate": "2023"
+                    "startDate": "2023-01-01",
+                    "estimatedSalary": {
+                      "@type": "MonetaryAmount",
+                      "currency": "EUR",
+                      "value": "65000"
+                    }
                   },
                   {
                     "@type": "Occupation",
                     "name": "Director of Operational Efficiency",
+                    "description": "Led digital transformation and operational efficiency initiatives at Banc Sabadell.",
                     "occupationLocation": {
                       "@type": "Place",
-                      "name": "Banc Sabadell"
+                      "name": "Banc Sabadell",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "addressCountry": "Spain"
+                      }
                     },
                     "employer": {
                       "@type": "Organization",
                       "name": "Banc Sabadell",
                       "url": "https://www.bancsabadell.com"
                     },
-                    "startDate": "2020",
-                    "endDate": "2023"
+                    "startDate": "2020-01-01",
+                    "endDate": "2023-01-01",
+                    "estimatedSalary": {
+                      "@type": "MonetaryAmount",
+                      "currency": "EUR",
+                      "value": "60000"
+                    }
                   },
                   {
                     "@type": "Occupation",
                     "name": "Strategic Designer",
+                    "description": "Strategic design and product strategy consulting at Innocells.",
                     "occupationLocation": {
                       "@type": "Place",
-                      "name": "Innocells"
+                      "name": "Innocells",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "addressCountry": "Spain"
+                      }
                     },
                     "employer": {
                       "@type": "Organization",
                       "name": "Innocells",
                       "url": "https://innocells.com"
                     },
-                    "startDate": "2018",
-                    "endDate": "2020"
+                    "startDate": "2018-01-01",
+                    "endDate": "2020-01-01",
+                    "estimatedSalary": {
+                      "@type": "MonetaryAmount",
+                      "currency": "EUR",
+                      "value": "50000"
+                    }
                   },
                   {
                     "@type": "Occupation",
                     "name": "Senior Executive Research",
+                    "description": "User research and design strategy at The Cocktail.",
                     "occupationLocation": {
                       "@type": "Place",
-                      "name": "The Cocktail"
+                      "name": "The Cocktail",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "addressCountry": "Spain"
+                      }
                     },
                     "employer": {
                       "@type": "Organization",
                       "name": "The Cocktail",
                       "url": "https://the-cocktail.com"
                     },
-                    "startDate": "2015",
-                    "endDate": "2018"
+                    "startDate": "2015-01-01",
+                    "endDate": "2018-01-01",
+                    "estimatedSalary": {
+                      "@type": "MonetaryAmount",
+                      "currency": "EUR",
+                      "value": "30000"
+                    }
                   }
                 ],
                 
@@ -278,7 +318,7 @@ export default function RootLayout({
                 "@id": "#yago"
               },
               
-              "dateModified": "2024-12-19"
+              "dateModified": "2025-08-03T00:00:00Z"
             })
           }}
         />
