@@ -349,7 +349,7 @@ function WorkExperienceCard({ job }: WorkExperienceCardProps) {
           </div>
         </MorphingDialogContent>
         <MorphingDialogClose
-          className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1"
+          className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1 cursor-pointer"
           variants={{
             initial: { opacity: 0 },
             animate: {
