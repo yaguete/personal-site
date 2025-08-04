@@ -51,7 +51,13 @@ export default function RootLayout({
                 "@id": "#yago",
                 "@type": "Person",
                 "name": "Yago López Losada",
-                "alternateName": "y_losada",
+                "alternateName": [
+                  "y_losada",
+                  "yaguete",
+                  "Yago",
+                  "Yago Lopez",
+                  "Yago L. Losada"
+                ],
                 "identifier": "yago-lopez-losada",
                 "url": "https://thinkmaketest.ai",
                 "image": [
