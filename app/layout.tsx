@@ -86,6 +86,20 @@ export default function RootLayout({
                 
                 "knowsLanguage": ["Spanish", "English"],
                 
+                "nationality": {
+                  "@type": "Country",
+                  "name": "Spain"
+                },
+                
+                "homeLocation": {
+                  "@type": "Place",
+                  "name": "Spain",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "ES"
+                  }
+                },
+                
                 "alumniOf": [
                   {
                     "@type": "Organization", 
