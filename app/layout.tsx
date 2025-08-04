@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     canonical: '/'
   },
   title: {
-    default: 'Yago López Losada',
-    template: '%s | Yago'
+    default: 'Think Make Test',
+    template: '%s | Think Make Test'
   },
   description:  'Design strategist & UX researcher. I turn complex data into clear, actionable digital products — at the intersection of tech, design & business.',
 };
@@ -50,8 +50,6 @@ export default function RootLayout({
               "name": "Yago López Losada",
               "url": "https://thinkmaketest.ai",
               "description": "Design strategist & UX researcher specializing in AI-driven product design and transforming complex data into clear, actionable digital products. Expert in design thinking, user research, and product strategy at the intersection of technology, design, and business.",
-              
-
               
               "knowsAbout": [
                 "Design Thinking",
