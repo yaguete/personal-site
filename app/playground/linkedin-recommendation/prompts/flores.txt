@@ -1,22 +1,11 @@
-Eres una aplicación que genera recomendaciones de Linkedin para Yago.
-Intenta explicar:
-	1.	Menciona 1 o 2 habilidades principales, o proyectos.
-	2.	Describe cómo esas habilidades han tenido un impacto positivo.
-	3.	Cierra con un comentario conciso y auténtico, manteniendo un tono sincero, sin exagerar.
+Genera una recomendación de LinkedIn auténtica y profesional para Yago. Hazlo así:
+1. Menciona una o dos habilidades clave o proyectos.
+2. Explica el impacto positivo de esas habilidades.
+3. Cierra con un comentario sincero y personal, sin exagerar.
 
-Recuerda
-	•	Evita el uso de frases comunes o clichés, como "Recomiendo encarecidamente" o "Yago es un verdadero genio creativo".
-	•	Mantén un tono profesional y auténtico, asegurándote de que la recomendación suene creíble y genuina.
-	•	Utiliza expresiones originales y perspectivas personales para que la recomendación destaque.
+Evita clichés tipo “Recomiendo encarecidamente” o “genio creativo”. Usa un lenguaje original, profesional y personal, que suene creíble.
 
-Ejemplos para guiarte:
-
-Aquí tienes ejemplos de recomendaciones que te ayudarán a entender el estilo que busco:
-EJEMPLO 1
-Yago es un gran Diseñador estratégico. Es capaz de entender la estrategia del negocio y la complejidad de la organización para proponer y aterrizar soluciones óptimas, cuando toca innovadoras o prácticas si se necesita. Todo siempre desde su background de researcher que genera un conocimiento de las necesidades del cliente profundo. Añadido a una capacidad de producir muy por encima de la mia le convierte en la persona que querría me acompañara en cualquier reto de diseño
-
-EJEMPLO 2
-A lo largo de estos años con Yago he podido identificar cuatro rasgos que hacen de él alguien con quién ir seguro y convencido a abordar cualquier reto: 1- una curiosidad que le permite aprender de cualquier ámbito, dispuesto además a compartir esos aprendizajes 2- una gran capacidad analítica 3- Una enorme capacidad de trabajo 4- una actitud valiente y dispuesta sea cual sea la complejidad del proyecto.
-
-EJEMPLO 3
-Sin duda Yago es uno de los profesionales más dedicados y completos que he conocido en mi vida profesional. Es una persona altamente inspiradora, que está siempre dispuesta a ayudar, siempre con ganas de aprender de todo que pueda aportar a su trabajo, así como es una fuente de aprendizaje, ejemplo y liderazgo a todos sus compañeros. 
+Ejemplos:
+- Yago es un gran Diseñador estratégico. Entiende el negocio y la complejidad de las organizaciones, proponiendo soluciones innovadoras o prácticas según lo que se necesita. Su background de researcher le permite conocer al cliente en profundidad. Produce mucho más que yo; siempre querría tenerlo en mi equipo.
+- A lo largo de los años con Yago he visto cuatro cosas: 1. Curiosidad insaciable y generosa, 2. Capacidad analítica, 3. Enorme capacidad de trabajo, 4. Actitud valiente ante cualquier reto.
+- Yago es de los profesionales más dedicados y completos que he conocido. Siempre dispuesto a ayudar y aprender, y ejemplo de liderazgo.

@@ -2,6 +2,8 @@
 import { TextMorph } from '@/components/ui/text-morph'
 import { ScrollProgress } from '@/components/ui/scroll-progress'
 import { useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { ContactSection } from '@/app/components/ContactSection'
 
 function CopyButton() {
   const [text, setText] = useState('Copy')
@@ -28,6 +30,44 @@ function CopyButton() {
   )
 }
 
+function LanguageToggle() {
+  const pathname = usePathname()
+  const router = useRouter()
+  const isEnglish = pathname?.includes('/eng')
+  const isSpanish = pathname?.includes('/es')
+  
+  // Solo mostrar en el artículo específico
+  if (!pathname?.includes('ai-end-of-work')) {
+    return null
+  }
+
+  if (isEnglish) {
+    return (
+      <button
+        onClick={() => router.push('/blog/ai-end-of-work/es')}
+        className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 p-0"
+        type="button"
+      >
+        Leer en Español 
+      </button>
+    )
+  }
+
+  if (isSpanish) {
+    return (
+      <button
+        onClick={() => router.push('/blog/ai-end-of-work/eng')}
+        className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 p-0"
+        type="button"
+      >
+        Read in English
+      </button>
+    )
+  }
+
+  return null
+}
+
 export default function LayoutBlogPost({
   children,
 }: {
@@ -43,14 +83,15 @@ export default function LayoutBlogPost({
         }}
       />
 
-      <div className="flex mt-15 mb-1 pr-1">
-        <div className="ml-auto">
-          <CopyButton />
-        </div>
+      <div className="flex mt-15 mb-1 pr-1 justify-end items-center">
+        <LanguageToggle />
+        <div className="w-px h-4 bg-zinc-300 dark:bg-zinc-600 mx-3"></div>
+        <CopyButton />
       </div>
-      <main className="prose prose-gray pb-20 prose-h4:prose-base dark:prose-invert prose-h1:text-xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-lg prose-h2:font-medium prose-h3:text-base prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium">
+      <main className="prose prose-gray pb-10 prose-h4:prose-base dark:prose-invert prose-h1:text-xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-lg prose-h2:font-medium prose-h3:text-base prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium [&>p]:text-justify [&>ul]:text-left [&>ol]:text-left">
         {children}
       </main>
+      <ContactSection />
     </>
   )
 }

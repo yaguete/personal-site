@@ -69,7 +69,8 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Advanced Desing Team Lead',
     start: '2024',
     end: 'Present',
-    showDetailsLink: false, link: 'https://',
+    showDetailsLink: false, 
+    link: 'https://www.hp.com/us-en/hp-information.html',
     logo: '/logos/LogoHP.png',
     logoDark: '/logos/LogoHP-White.png',
     description: 'I lead a multidisciplinary team focused on identifying weak signals, prototyping new use cases, and testing design-led solutions across HP’s large format printing ecosystem. We translate early-stage ideas into validated prototypes—combining user research, design strategy, and cross-team collaboration. \n\nOur goal: to shape what’s next in printing before the market demands it.',
@@ -93,7 +94,8 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Director of Operational Efficiency',
     start: '2022',
     end: '2024',
-    showDetailsLink: false, link: 'https://',
+    showDetailsLink: false, 
+    link: 'https://www.grupbancsabadell.com',
     logo: '/logos/LogoBancSabadell.png',
     logoDark: '/logos/LogoBancSabadell-White.png',
     description: 'Led the mapping, analysis, and redesign of critical banking processes and tools — from product onboarding to internal service flows — with the goal of increasing operational efficiency, ensuring regulatory compliance, and enhancing customer experience. Applied data analysis and systems thinking to identify friction points, unlock commercial time, and deliver measurable improvements in the time that salesforce spend on administrative tasks.',
@@ -119,7 +121,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Business Designer',
     start: '2019',
     end: '2022',
-    link: 'https://ibelick.com',
+    link: 'https://www.sabadelldigital.com/',
     logo: '/logos/LogoInnocells.png',
     description: 'At Innocells (Banc Sabadell\'s venture builder) I led the design strategy for the bank’s mortgage business transformation, focusing on end-to-end customer journeys, operational efficiency, and service innovation. Defined and prototyped digital products, integrated on/offline touchpoints, and coordinated cross-functional teams to deliver scalable improvements across both customer experience and internal operations. Also contributed to new service propositions such as home insurance offerings in partnership with Zurich..',
     responsibilities: [
@@ -143,7 +145,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Service Designer / Project Lead',
     start: '2015',
     end: '2019',
-    link: 'https://ibelick.com',
+    link: 'https://vml-thecocktail.com/',
     logo: '/logos/LogoTheCocktail.jpg',
     description: 'Worked as a strategic design consultant leading service design projects for major clients such as BBVA, Endesa, Repsol, and Mutua Madrileña. Led both qualitative and quantitative research with users and stakeholders, facilitated co-creation workshops, and translated insights into new services, value propositions, and business opportunities. Projects included the design of consumption-based energy tariffs, digital experiences for Guía Repsol, and new financial services aligned with PSD2 opportunities.',
     responsibilities: [
@@ -167,7 +169,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'PDI - Associate Professor',
     start: '2014',
     end: '2015',
-    link: 'https://ibelick.com',
+    link: 'https://www.urjc.es/',
     logo: '/logos/LogoURJC.svg',
     logoDark: '/logos/LogoURJC-White.png',
     description: 'Associate professor and researcher in the European project "Technopolitical practices and emerging notions of citizenship" (ciberdemocracia.es), focused on the transformation of digital social movements into political actors. Coordinated the Master’s program in Communication, Culture and Digital Citizenship, and taught in the Master’s in Communication and Sociocultural Problems. Responsibilities included conducting expert interviews, organizing focus groups with stakeholders, and publishing academic work on digital activism and technopolitics.',
@@ -191,7 +193,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Sr. Research Executive',
     start: '2012',
     end: '2014',
-    link: 'https://ibelick.com',
+    link: 'https://www.analisiseinvestigacion.com/',
     logo: '/logos/LogoAEI.png',
     logoDark: '/logos/LogoAEI-White.png',
     description: 'Senior Research Executive specialized in both qualitative and quantitative methodologies. Led end-to-end research projects for clients such as Renfe, Repsol, Vodafone, the Spanish Medical Association, and the Spanish eSports Observatory. Work included in-depth interviews, focus groups, online community management, survey design, statistical analysis (SPSS), eye-tracking studies, and delivering strategic insights through final reports and presentations.',
@@ -215,9 +217,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: 'Exploring the Intersection of Design, AI, and Design Engineering',
-    description: 'How AI is changing the way we design',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
+    title: 'The AI Jobpocalypse: What My Roomba Taught Me',
+    description: 'Still nudging my Roomba while Silicon Valley declares the end of work',
+    link: '/blog/ai-end-of-work',
     uid: 'blog-1',
   },
   
@@ -227,6 +229,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'X / Twitter',
     link: 'https://x.com/y_losada',
+  },
+  {
+    label: 'Medium',
+    link: 'https://medium.com/@y_losada',
   },
   {
     label: 'LinkedIn',
@@ -257,7 +263,7 @@ Result: zero writer's block, zero excuses, and a fresh recommendation every time
   },
 ]
 
-export const EMAIL = 'your@email.com'
+export const EMAIL = 'yago@thinkmaketest.ai'
 
 type Education = {
   id: string

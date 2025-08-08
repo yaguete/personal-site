@@ -22,8 +22,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
     code: ({ children, ...props }: ComponentPropsWithoutRef<'code'>) => {
-      const codeHTML = highlight(children as string)
-      return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
+      return <code {...props}>{children}</code>
     },
   }
 }
