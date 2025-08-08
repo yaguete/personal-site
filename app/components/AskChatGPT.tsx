@@ -79,13 +79,13 @@ export default function FloatingAskChatGPT({
               }
             }}
             placeholder={placeholder}
-            className="flex-1 bg-transparent h-9 outline-none text-[15px] md:text-sm placeholder:text-gray-600 dark:placeholder:text-gray-400 pr-10 sm:pr-12 group-focus-within:pr-14 sm:group-focus-within:pr-8 truncate overflow-hidden"
+            className="flex-1 bg-transparent h-9 outline-none text-[15px] md:text-sm placeholder:text-gray-600 dark:placeholder:text-gray-400 pr-8 sm:pr-10 group-focus-within:pr-8 sm:group-focus-within:pr-10 truncate overflow-hidden"
             aria-label="Message ChatGPT"
           />
           <button
             type="submit"
             disabled={!inputValue.trim()}
-            className="absolute right-2 p-1.5 sm:p-2 rounded-full bg-gray-600/80 text-white hover:opacity-70 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0 enabled:cursor-pointer"
+            className="absolute right-2 p-1 sm:p-2 rounded-full bg-gray-600/80 text-white hover:opacity-70 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0 enabled:cursor-pointer"
             aria-label="Send prompt to ChatGPT"
           >
             <svg
