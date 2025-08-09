@@ -1,6 +1,8 @@
 import type { MDXComponents } from 'mdx/types'
 import { ComponentPropsWithoutRef } from 'react'
 import { highlight } from 'sugar-high'
+import AudioPlayer from '@/app/components/AudioPlayer'
+import { StructuredData } from '@/app/components/StructuredData'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -21,6 +23,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </figure>
       )
     },
+    AudioPlayer: (props: ComponentPropsWithoutRef<typeof AudioPlayer>) => (
+      <AudioPlayer {...props} />
+    ),
+    StructuredData: (props: ComponentPropsWithoutRef<typeof StructuredData>) => (
+      <StructuredData {...props} />
+    ),
     code: ({ children, ...props }: ComponentPropsWithoutRef<'code'>) => {
       return <code {...props}>{children}</code>
     },
