@@ -1,7 +1,7 @@
 'use client'
 import { AnimatedBackground } from '@/components/ui/animated-background'
 import { TextLoop } from '@/components/ui/text-loop'
-import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
+import { MonitorIcon, MoonIcon, SunIcon, SmartphoneIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 
@@ -19,7 +19,12 @@ const THEMES_OPTIONS = [
   {
     label: 'System',
     id: 'system',
-    icon: <MonitorIcon className="h-4 w-4" />,
+    icon: (
+      <span className="inline-flex items-center">
+        <SmartphoneIcon className="h-4 w-4 sm:hidden" />
+        <MonitorIcon className="hidden h-4 w-4 sm:inline" />
+      </span>
+    ),
   },
 ]
 
@@ -53,7 +58,7 @@ function ThemeSwitch() {
         return (
           <button
             key={theme.id}
-            className="inline-flex h-7 w-7 items-center justify-center text-zinc-500 transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950 dark:text-zinc-400 dark:data-[checked=true]:text-zinc-50"
+            className="inline-flex h-7 w-7 items-center justify-center text-zinc-500 transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950 dark:text-zinc-400 dark:data-[checked=true]:text-zinc-50 cursor-pointer"
             type="button"
             aria-label={`Switch to ${theme.label} theme`}
             data-id={theme.id}
@@ -70,14 +75,30 @@ export function Footer() {
   return (
     <footer className="mt-15 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
       <div className="flex items-center justify-between">
-        <a href="https://thinkmaketest.ai/" target="_blank">
-          <TextLoop className="text-xs text-zinc-500">
-            <span>© {new Date().getFullYear()} yaguete.</span>
-            <span>Crafted with dad jokes included</span>
-          </TextLoop>
-        </a>
-        <div className="text-xs text-zinc-400">
-          <ThemeSwitch />
+        <div className="flex flex-col">
+          <a
+            href="/privacy"
+            className="mb-1 text-xs text-zinc-500 hover:underline dark:text-zinc-400 dark:hover:text-zinc-100 sm:hidden"
+          >
+            Privacy Policy
+          </a>
+          <a href="https://thinkmaketest.ai/" target="_blank">
+            <TextLoop className="text-xs text-zinc-500">
+              <span>© {new Date().getFullYear()} yaguete.</span>
+              <span>Worker, build your own machinery!</span>
+            </TextLoop>
+          </a>
+        </div>
+        <div className="flex flex-col items-end gap-2 text-xs text-zinc-400 sm:flex-row sm:items-center sm:gap-3">
+          <a
+            href="/privacy"
+            className="hidden hover:underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 sm:inline"
+          >
+            Privacy Policy
+          </a>
+          <div className="inline-flex items-center gap-1 whitespace-nowrap">
+            <ThemeSwitch />
+          </div>
         </div>
       </div>
     </footer>
