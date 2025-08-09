@@ -65,7 +65,7 @@ export default function FloatingAskChatGPT({
     >
       <form className="group relative" onSubmit={handleSubmit}>
         <label
-          className="relative flex items-center bg-gray-200/80 backdrop-blur-md shadow-none rounded-[24px] px-4 py-2 w-48 transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] group-focus-within:w-80 overflow-hidden cursor-text hover:shadow-none hover:scale-105 hover:-translate-y-0.5 dark:bg-gray-800/80 min-w-[200px]"
+          className="relative flex items-center bg-gray-200/80 backdrop-blur-md shadow-none rounded-[24px] px-4 py-1 w-52 transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] group-focus-within:w-80 overflow-hidden cursor-text hover:shadow-none hover:scale-105 hover:-translate-y-0.5 dark:bg-gray-800/80 min-w-[200px]"
         >
           <input
             ref={inputRef}
@@ -79,13 +79,13 @@ export default function FloatingAskChatGPT({
               }
             }}
             placeholder={placeholder}
-            className="flex-1 bg-transparent h-9 outline-none text-[15px] md:text-sm placeholder:text-gray-600 dark:placeholder:text-gray-400 pr-8 sm:pr-10 group-focus-within:pr-8 sm:group-focus-within:pr-10 truncate overflow-hidden"
+            className="flex-1 bg-transparent h-9 outline-none text-base sm:text-sm placeholder:text-gray-600 dark:placeholder:text-gray-400 pr-8 sm:pr-10 group-focus-within:pr-8 sm:group-focus-within:pr-10 truncate overflow-hidden"
             aria-label="Message ChatGPT"
           />
           <button
             type="submit"
             disabled={!inputValue.trim()}
-            className="absolute right-2 p-1 sm:p-2 rounded-full bg-gray-600/80 text-white hover:opacity-70 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0 enabled:cursor-pointer"
+            className="absolute right-1.5 p-2 sm:p-2 rounded-full bg-gray-600/80 text-white hover:opacity-70 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0 enabled:cursor-pointer"
             aria-label="Send prompt to ChatGPT"
           >
             <svg
@@ -93,7 +93,7 @@ export default function FloatingAskChatGPT({
               height="18"
               viewBox="0 0 20 20"
               fill="none"
-              className="transition-transform duration-200 hover:-translate-y-0.5 sm:w-[25px] sm:h-[25px]"
+              className="transition-transform duration-200 hover:-translate-y-0.5 sm:w-[20px] sm:h-[20px]"
             >
               <path
                 d="M10 14L10 6M10 6L7 9M10 6L13 9"
