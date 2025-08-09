@@ -26,7 +26,7 @@ import {
   SOCIAL_LINKS,
 } from './data'
 import { TextEffect } from '@/components/ui/text-effect'
-import { MAINTENANCE_MODE } from './config'
+import { MAINTENANCE_MODE, SHOW_SELECTED_PROJECTS } from './config'
 
 // Componente de página en construcción
 function MaintenancePage() {
@@ -89,6 +89,8 @@ const VARIANTS_SECTION = {
 const TRANSITION_SECTION = {
   duration: 0.3,
 }
+
+// Config ahora en app/config.ts → SHOW_SELECTED_PROJECTS
 
 type ProjectVideoProps = {
   src: string
@@ -459,56 +461,58 @@ export default function Personal() {
         </div>
       </motion.section>
 
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-0 text-lg font-medium">Selected Projects</h3>
-        <div className="flex flex-col space-y-0">
-          <AnimatedBackground
-            enableHover
-            className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
-            transition={{
-              type: 'spring',
-              bounce: 0,
-              duration: 0.2,
-            }}
-          >
-            <div className="-mx-3 rounded-xl px-3 py-3">
-              <div className="flex items-center gap-2">
-                <Construction className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
-                <span className="font-normal dark:text-zinc-100">Coming soon</span>
+      {SHOW_SELECTED_PROJECTS && (
+        <motion.section
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <h3 className="mb-0 text-lg font-medium">Selected Projects</h3>
+          <div className="flex flex-col space-y-0">
+            <AnimatedBackground
+              enableHover
+              className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
+              transition={{
+                type: 'spring',
+                bounce: 0,
+                duration: 0.2,
+              }}
+            >
+              <div className="-mx-3 rounded-xl px-3 py-3">
+                <div className="flex items-center gap-2">
+                  <Construction className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
+                  <span className="font-normal dark:text-zinc-100">Coming soon</span>
+                </div>
               </div>
-            </div>
-          </AnimatedBackground>
-        </div>
-        
-        {/* Código original de proyectos - comentado para recuperar después */}
-        {/*
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {PROJECTS.map((project) => (
-            <div key={project.name} className="space-y-2">
-              <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
-                <ProjectVideo src={project.video} />
+            </AnimatedBackground>
+          </div>
+          
+          {/* Código original de proyectos - comentado para recuperar después */}
+          {/*
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {PROJECTS.map((project) => (
+              <div key={project.name} className="space-y-2">
+                <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
+                  <ProjectVideo src={project.video} />
+                </div>
+                <div className="px-1">
+                  <a
+                    className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
+                    href={project.link}
+                    target="_blank"
+                  >
+                    {project.name}
+                    <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 dark:bg-zinc-50 transition-all duration-200 group-hover:max-w-full"></span>
+                  </a>
+                  <p className="text-base text-zinc-600 dark:text-zinc-400">
+                    {project.description}
+                  </p>
+                </div>
               </div>
-              <div className="px-1">
-                <a
-                  className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
-                  href={project.link}
-                  target="_blank"
-                >
-                  {project.name}
-                  <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 dark:bg-zinc-50 transition-all duration-200 group-hover:max-w-full"></span>
-                </a>
-                <p className="text-base text-zinc-600 dark:text-zinc-400">
-                  {project.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-        */}
-      </motion.section>
+            ))}
+          </div>
+          */}
+        </motion.section>
+      )}
 
       <motion.section
         variants={VARIANTS_SECTION}
