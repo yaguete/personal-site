@@ -248,7 +248,7 @@ export const SIDE_PROJECTS: SideProject[] = [
     detailUrl: '/playground/linkedin-recommendation',
     description: `Bite-sized, AI-powered recommendation generator that ends the classic "I don't know what to write."
 
-1. Choose how you worked with me (boss, teammate, client, etc.).
+1. Choose how you worked with me (boss, client, etc.).
 2. Pick the vibe—from full-on praise to a spicy "chili" roast with affection.
 3. Hit Generate and, within seconds, get a polished text in the perfect length, plus room to add your personal touch.
 
