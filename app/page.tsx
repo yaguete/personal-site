@@ -247,9 +247,16 @@ function WorkExperienceCard({ job }: WorkExperienceCardProps) {
         </div>
       </MorphingDialogTrigger>
       <MorphingDialogContainer>
-        <MorphingDialogContent className="relative w-[600px] max-h-[90vh] overflow-hidden rounded-2xl bg-white dark:bg-zinc-950 border-0 md:border md:border-zinc-200 md:dark:border-zinc-800">
+        <MorphingDialogContent className="relative w-full h-full md:w-[700px] md:h-auto md:max-h-[90vh] overflow-hidden bg-white dark:bg-zinc-950 border-0 md:border md:border-zinc-200 md:dark:border-zinc-800 md:rounded-2xl flex flex-col">
+          {/* Close button for mobile */}
+          <div className="flex justify-end p-8 pb-2 md:hidden">
+            <MorphingDialogClose className="rounded-full bg-zinc-100 dark:bg-zinc-800 p-2 cursor-pointer">
+              <XIcon className="h-4 w-4 text-zinc-500" />
+            </MorphingDialogClose>
+          </div>
+          
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-zinc-200 dark:border-zinc-800">
+          <div className="flex items-center justify-between p-6 pt-6 border-b border-zinc-200 dark:border-zinc-800">
             <div>
               <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
                 {job.title}
@@ -268,7 +275,7 @@ function WorkExperienceCard({ job }: WorkExperienceCardProps) {
           </div>
           
           {/* Content */}
-          <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]" data-modal-content>
+          <div className="p-6 overflow-y-auto flex-1 min-h-0" data-modal-content>
             <div className="space-y-6">
                              {/* Descripción */}
                <div>
@@ -351,7 +358,7 @@ function WorkExperienceCard({ job }: WorkExperienceCardProps) {
           </div>
         </MorphingDialogContent>
         <MorphingDialogClose
-          className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1 cursor-pointer"
+          className="fixed top-6 right-6 h-fit w-fit rounded-full bg-zinc-100 dark:bg-zinc-800 p-2 cursor-pointer hidden md:block"
           variants={{
             initial: { opacity: 0 },
             animate: {
@@ -408,6 +415,23 @@ export default function Personal() {
   const [showTooltip, setShowTooltip] = useState(false)
   const [activeTab, setActiveTab] = useState<'work' | 'education'>('work')
   const modalRef = useRef<HTMLDivElement>(null!)
+
+  // Bloquear scroll cuando hay una modal abierta
+  useEffect(() => {
+    if (openProject) {
+      document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = '0px' // Prevenir shift del contenido
+    } else {
+      document.body.style.overflow = 'unset'
+      document.body.style.paddingRight = '0px'
+    }
+
+    // Cleanup al desmontar el componente
+    return () => {
+      document.body.style.overflow = 'unset'
+      document.body.style.paddingRight = '0px'
+    }
+  }, [openProject])
 
   // Función para ordenar las credenciales educativas
   const sortedEducation = EDUCATION.sort((a, b) => {
@@ -574,25 +598,40 @@ export default function Personal() {
         <>
           {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 h-full w-full bg-white/40 backdrop-blur-sm dark:bg-black/40 z-40"
+            className="fixed inset-0 h-full w-full bg-white/40 backdrop-blur-sm dark:bg-black/40 z-45"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => setOpenProject(null)}
+            style={{ 
+              pointerEvents: 'auto',
+              cursor: 'pointer'
+            }}
           />
           
-          {/* Modal */}
+                    {/* Modal */}
           <AnimatePresence initial={false} mode="sync">
-            <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="fixed inset-0 z-50 flex items-stretch md:items-center md:justify-center">
               <motion.div
                 ref={modalRef}
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
-                className="relative w-[600px] max-h-[90vh] overflow-hidden rounded-2xl bg-white dark:bg-zinc-950 border-0 md:border md:border-zinc-200 md:dark:border-zinc-800"
+                className="relative w-full h-full md:w-[700px] md:h-auto md:max-h-[90vh] overflow-hidden bg-white dark:bg-zinc-950 border-0 md:border md:border-zinc-200 md:dark:border-zinc-800 md:rounded-2xl flex flex-col"
               >
+                {/* Close button for mobile */}
+                <div className="flex justify-end p-6 pb-2 md:hidden">
+                  <button
+                    onClick={() => setOpenProject(null)}
+                    className="rounded-full bg-zinc-100 dark:bg-zinc-800 p-2 cursor-pointer"
+                  >
+                    <XIcon className="h-4 w-4 text-zinc-500" />
+                  </button>
+                </div>
+                
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-zinc-200 dark:border-zinc-800">
+                <div className="flex items-center justify-between p-6 pt-2 border-b border-zinc-200 dark:border-zinc-800">
                   <div>
                     <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
                       {openProject.name}
@@ -604,7 +643,7 @@ export default function Personal() {
                 </div>
                 
                 {/* Content */}
-                <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]" data-modal-content>
+                <div className="p-6 overflow-y-auto flex-1 min-h-0" data-modal-content>
                   <div className="space-y-6">
                     {/* Descripción */}
                     <div>
@@ -615,11 +654,11 @@ export default function Personal() {
 
                     {/* Botón Play */}
                     <div className="pt-4">
-                      <a
-                        href={openProject.detailUrl}
-                        rel="noopener noreferrer"
-                        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-2.5 py-1 text-sm text-black transition-all duration-200 hover:bg-zinc-950 hover:text-zinc-50 hover:translate-x-1 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
-                      >
+                                              <a
+                          href={openProject.detailUrl}
+                          rel="noopener noreferrer"
+                          className="group relative inline-flex shrink-0 items-center gap-2 rounded-full bg-zinc-100 px-4 py-2 text-base text-black transition-all duration-200 hover:bg-zinc-950 hover:text-zinc-50 hover:translate-x-1 hover:scale-105 shadow-xl border-[0.5px] border-zinc-300 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700 dark:border-zinc-600"
+                        >
                         Play
                         <svg
                           width="15"
@@ -647,7 +686,7 @@ export default function Personal() {
           {/* Close button */}
           <motion.button
             onClick={() => setOpenProject(null)}
-            className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1 z-50 cursor-pointer"
+            className="fixed top-6 right-6 h-fit w-fit rounded-full bg-zinc-100 dark:bg-zinc-800 p-2 z-50 cursor-pointer hidden md:block"
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,

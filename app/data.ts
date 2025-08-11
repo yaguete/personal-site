@@ -257,7 +257,7 @@ Result: zero writer's block, zero excuses, and a fresh recommendation every time
   {
     id: 'proj-2',
     name: 'Preprint Audit',
-    subtitle: 'Smart PDF auditing before print, in any format',
+    subtitle: 'Smart PDF auditing before print, any page size',
     detailUrl: '/playground/preprint-audit',
     description: 'Automated system for analyzing PDF documents to verify their professional readiness for printing. The tool examines key aspects such as image resolution and color mode, margin and bleed settings, and font quality. It generates a detailed report with specific recommendations to optimize each file before sending it to print, helping prevent costly errors and ensuring high-quality results in any format.'
   },
