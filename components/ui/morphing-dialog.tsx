@@ -227,7 +227,7 @@ export type MorphingDialogContainerProps = {
 }
 
 function MorphingDialogContainer({ children }: MorphingDialogContainerProps) {
-  const { isOpen, uniqueId } = useMorphingDialog()
+  const { isOpen, uniqueId, setIsOpen } = useMorphingDialog()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
