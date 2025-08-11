@@ -246,13 +246,13 @@ export const SIDE_PROJECTS: SideProject[] = [
     name: 'LinkedIn Recommendation Generator (for me)',
     subtitle: 'AI-powered LinkedIn Recommendation Generator',
     detailUrl: '/playground/linkedin-recommendation',
-    description: `Bite-sized, AI-powered recommendation generator that ends the classic "I don't know what to write."
+    description: `Bite-sized, AI-powered recommendation generator that ends the classic “I don’t know what to write.
 
-1. Choose how you worked with me (boss, client, etc.).
-2. Pick the vibe—from full-on praise to a spicy "chili" roast with affection.
-3. Hit Generate and, within seconds, get a polished text in the perfect length, plus room to add your personal touch.
+1. Choose how we worked together (boss, client, teammate, etc.).
+2. Pick the vibe—from glowing praise to a cheeky roast.
+3. Hit Generate and get a ready-to-post text in seconds, plus space to tweak.
 
-Result: zero writer's block, zero excuses, and a fresh recommendation every time. Perfect for filling my profile with kudos—no sweat, no tears. 🚀`,
+No writer’s block, no sweat—just fresh kudos filling my profile. 🚀`,
   },
   {
     id: 'proj-2',
