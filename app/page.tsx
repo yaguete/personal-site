@@ -631,7 +631,7 @@ export default function Personal() {
                 </div>
                 
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 pt-2 border-b border-zinc-200 dark:border-zinc-800">
+                <div className="flex items-center justify-between p-6 pt-2 md:pt-6 border-b border-zinc-200 dark:border-zinc-800">
                   <div>
                     <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
                       {openProject.name}
