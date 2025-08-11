@@ -618,7 +618,7 @@ export default function Personal() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
-                className="relative w-full min-h-screen md:w-[700px] md:h-auto md:max-h-[90vh] overflow-hidden bg-white dark:bg-zinc-950 border-0 md:border md:border-zinc-200 md:dark:border-zinc-800 md:rounded-2xl flex flex-col"
+                className="relative w-full min-h-screen md:w-[700px] md:min-h-0 md:h-auto md:max-h-[90vh] overflow-hidden bg-white dark:bg-zinc-950 border-0 md:border md:border-zinc-200 md:dark:border-zinc-800 md:rounded-2xl flex flex-col"
               >
                 {/* Close button for mobile */}
                 <div className="flex justify-end p-6 pb-2 md:hidden">
