@@ -644,7 +644,7 @@ export default function Personal() {
                 
                 {/* Content */}
                 <div className="p-6 overflow-y-auto flex-1 min-h-0" data-modal-content>
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     {/* Descripción */}
                     <div>
                       <p className="text-zinc-600 dark:text-zinc-400 whitespace-pre-line">
