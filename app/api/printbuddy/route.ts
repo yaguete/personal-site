@@ -10,6 +10,10 @@ export async function POST(request: NextRequest) {
       : 'https://thinkmaketest-61751b04667e.herokuapp.com/printbuddy';  // Para producción
     
     console.log('Enviando consulta PrintBuddy al backend:', backendUrl)
+
+    function joinURL(base: string, path: string) {
+      return `${base.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`;
+    }
     
     const response = await fetch(`${backendUrl}/chat`, {
       method: 'POST',
