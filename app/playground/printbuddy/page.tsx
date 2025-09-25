@@ -62,6 +62,7 @@ export default function PrintBuddyPage() {
       })
       
       const data = await response.json()
+      console.log('Backend response:', data)
       
       if (!response.ok) {
         throw new Error(data.error || 'Chat failed')
@@ -74,6 +75,7 @@ export default function PrintBuddyPage() {
         timestamp: new Date(),
         sources: data.sources
       }
+      console.log('Assistant message:', assistantMessage)
       
       setMessages(prev => [...prev, assistantMessage])
     } catch (err) {
