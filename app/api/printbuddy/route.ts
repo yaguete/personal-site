@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     // URL del backend según el entorno
     const backendUrl = process.env.NODE_ENV === 'development' 
       ? 'http://127.0.0.1:5001/printbuddy'  // Para desarrollo local
-      : 'https://thinkmaketest-61751b04667e.herokuapp.com/printbuddy';  // Para producción
+      : 'https://thinkmaketest-61751b04667e.herokuapp.com/';  // Para producción
     
     console.log('Enviando consulta PrintBuddy al backend:', backendUrl)
     

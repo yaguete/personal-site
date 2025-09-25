@@ -49,7 +49,7 @@ export default function PrintBuddyPage() {
     setIsLoading(true)
     
     try {
-      const response = await fetch('https://thinkmaketest-61751b04667e.herokuapp.com/printbuddy/chat', {
+      const response = await fetch('/api/printbuddy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +62,6 @@ export default function PrintBuddyPage() {
       })
       
       const data = await response.json()
-      console.log('Backend response:', data)
       
       if (!response.ok) {
         throw new Error(data.error || 'Chat failed')
@@ -75,7 +74,6 @@ export default function PrintBuddyPage() {
         timestamp: new Date(),
         sources: data.sources
       }
-      console.log('Assistant message:', assistantMessage)
       
       setMessages(prev => [...prev, assistantMessage])
     } catch (err) {
@@ -190,4 +188,3 @@ export default function PrintBuddyPage() {
   )
 }
 // Force rebuild
-// Force rebuild 2
