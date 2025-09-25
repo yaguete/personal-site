@@ -49,7 +49,7 @@ export default function PrintBuddyPage() {
     setIsLoading(true)
     
     try {
-      const response = await fetch('/api/printbuddy', {
+      const response = await fetch('https://thinkmaketest-61751b04667e.herokuapp.com/printbuddy/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
