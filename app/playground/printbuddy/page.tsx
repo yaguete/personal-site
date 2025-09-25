@@ -49,7 +49,7 @@ export default function PrintBuddyPage() {
     setIsLoading(true)
     
     try {
-      const response = await fetch('/api/printbuddy/chat', {
+      const response = await fetch('/api/printbuddy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

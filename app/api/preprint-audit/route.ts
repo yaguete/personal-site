@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     // URL del backend Flask según el entorno
     const backendUrl = process.env.NODE_ENV === 'development' 
-      ? 'http://127.0.0.1:5002'  // Para desarrollo local
+      ? 'http://127.0.0.1:5001'  // Para desarrollo local
       : 'https://thinkmaketest-61751b04667e.herokuapp.com';  // Para producción
     
     // Crear un nuevo FormData para enviar al backend
