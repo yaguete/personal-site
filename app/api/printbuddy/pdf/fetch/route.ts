@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('PDF fetch error:', error)
     return NextResponse.json(
-      { error: 'fetch_failed', detail: String(error?.message || error) },
+      { error: 'fetch_failed', detail: String((error as Error)?.message || error) },
       { status: 500 }
     )
   }

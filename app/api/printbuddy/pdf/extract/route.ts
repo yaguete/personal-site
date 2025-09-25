@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     const chunks: Array<{ page: number, offset: number, text: string }> = []
     const chunkSize = 2000
     
-    rawText.forEach((pageText, index) => {
+    rawText.forEach((pageText: any, index: number) => {
       const text = (pageText || '').trim()
       for (let i = 0; i < text.length; i += chunkSize) {
         chunks.push({
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('PDF extract error:', error)
     return NextResponse.json(
-      { error: 'extract_failed', detail: String(error?.message || error) },
+      { error: 'extract_failed', detail: String((error as Error)?.message || error) },
       { status: 500 }
     )
   }
