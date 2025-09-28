@@ -333,10 +333,10 @@ export default function RootLayout({
           storageKey="theme"
           defaultTheme="system"
         >
-          <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20 flex flex-col">
+          <div className="flex w-full flex-col font-[family-name:var(--font-inter-tight)]">
+            <div className="relative mx-auto w-full max-w-screen-sm px-4 pt-20 flex flex-col">
               <Header />
-              <main className="flex-1">
+              <main className="flex-1" style={{ minHeight: 'calc(100vh - 250px)' }}>
                 {children}
               </main>
               <Footer />
