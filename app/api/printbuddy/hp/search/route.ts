@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('HP search error:', error)
     return NextResponse.json(
-      { error: 'search_failed', detail: String(error?.message || error) },
+      { error: 'search_failed', detail: String(error instanceof Error ? error.message : error) },
       { status: 500 }
     )
   }
