@@ -217,10 +217,16 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    title: 'Dead Internet and Hyperreality',
+    description: 'The Dead Internet Theory started as a minor conspiracy. Today, the data confirm it',
+    link: '/blog/dead-internet-theory/eng',
+    uid: 'blog-1',
+  },
+  {
     title: 'The AI Jobpocalypse: What My Roomba Taught Me',
     description: 'Still nudging my Roomba while Silicon Valley declares the end of work',
     link: '/blog/ai-end-of-work',
-    uid: 'blog-1',
+    uid: 'blog-2',
   },
   
 ]

@@ -37,15 +37,20 @@ function LanguageToggle() {
   const isEnglish = pathname?.includes('/eng')
   const isSpanish = pathname?.includes('/es')
   
-  // Solo mostrar en el artículo específico
-  if (!pathname?.includes('ai-end-of-work')) {
+  // Solo mostrar en artículos que tienen versión en ambos idiomas
+  const hasBothLanguages = pathname?.includes('ai-end-of-work') || pathname?.includes('dead-internet-theory')
+  if (!hasBothLanguages) {
     return null
   }
 
   const locale: 'en' | 'es' = isEnglish ? 'en' : 'es'
   const placeholder = locale === 'en' ? 'Ask ChatGPT' : 'Pregunta a ChatGPT'
 
-  if (isEnglish) {
+  // Determinar las rutas según el artículo
+  const isAiEndOfWork = pathname?.includes('ai-end-of-work')
+  const isDeadInternet = pathname?.includes('dead-internet-theory')
+
+  if (isEnglish && isAiEndOfWork) {
     return (
       <button
         onClick={() => router.push('/blog/ai-end-of-work/es')}
@@ -57,10 +62,34 @@ function LanguageToggle() {
     )
   }
 
-  if (isSpanish) {
+  if (isSpanish && isAiEndOfWork) {
     return (
       <button
         onClick={() => router.push('/blog/ai-end-of-work/eng')}
+        className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 p-0"
+        type="button"
+      >
+        Read in English
+      </button>
+    )
+  }
+
+  if (isEnglish && isDeadInternet) {
+    return (
+      <button
+        onClick={() => router.push('/blog/dead-internet-theory/es')}
+        className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 p-0"
+        type="button"
+      >
+        Leer en Español 
+      </button>
+    )
+  }
+
+  if (isSpanish && isDeadInternet) {
+    return (
+      <button
+        onClick={() => router.push('/blog/dead-internet-theory/eng')}
         className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 p-0"
         type="button"
       >
