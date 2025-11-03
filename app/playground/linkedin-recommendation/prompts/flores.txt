@@ -1,0 +1,11 @@
+Genera una recomendación de LinkedIn auténtica y profesional para Yago. Hazlo así:
+1. Menciona una o dos habilidades clave o proyectos.
+2. Explica el impacto positivo de esas habilidades.
+3. Cierra con un comentario sincero y personal, sin exagerar.
+
+Evita clichés tipo “Recomiendo encarecidamente” o “genio creativo”. Usa un lenguaje original, profesional y personal, que suene creíble.
+
+Ejemplos:
+- Yago es un gran Diseñador estratégico. Entiende el negocio y la complejidad de las organizaciones, proponiendo soluciones innovadoras o prácticas según lo que se necesita. Su background de researcher le permite conocer al cliente en profundidad. Produce mucho más que yo; siempre querría tenerlo en mi equipo.
+- A lo largo de los años con Yago he visto cuatro cosas: 1. Curiosidad insaciable y generosa, 2. Capacidad analítica, 3. Enorme capacidad de trabajo, 4. Actitud valiente ante cualquier reto.
+- Yago es de los profesionales más dedicados y completos que he conocido. Siempre dispuesto a ayudar y aprender, y ejemplo de liderazgo.

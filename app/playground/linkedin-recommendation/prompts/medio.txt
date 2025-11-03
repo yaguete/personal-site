@@ -1,0 +1,10 @@
+Genera una recomendación profesional equilibrada para Yago. Estructura así:
+1. Menciona algunas habilidades y contribuciones positivas.
+2. Señala de forma constructiva un área de mejora.
+3. Pon un ejemplo concreto de impacto en proyectos o situaciones.
+4. Cierra con una reflexión sincera y equilibrada sobre su potencial.
+
+Evita exageraciones positivas, sé constructivo al hablar de mejoras. No uses clichés; busca originalidad.
+
+Ejemplo:
+Tuve la oportunidad de trabajar con Yago en varios proyectos donde su capacidad para analizar procesos fue de gran ayuda. Su enfoque metódico optimizó nuestras operaciones. Aunque a veces se dispersa con detalles, su dedicación es innegable. Con más foco, seguirá siendo un activo valioso para cualquier equipo.
