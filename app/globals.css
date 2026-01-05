@@ -30,3 +30,21 @@
   --sh-property: #73daca;
   --sh-entity: #e0af68;
 }
+
+/* Estilos de impresión para Profile Analyzer */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-content, .print-content * {
+    visibility: visible;
+  }
+  .print-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white;
+    color: black;
+  }
+}

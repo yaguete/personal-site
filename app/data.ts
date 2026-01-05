@@ -267,6 +267,20 @@ No writer’s block, no sweat—just fresh kudos filling my profile. 🚀`,
     detailUrl: '/playground/preprint-audit',
     description: 'Automated system for analyzing PDF documents to verify their professional readiness for printing. The tool examines key aspects such as image resolution and color mode, margin and bleed settings, and font quality. It generates a detailed report with specific recommendations to optimize each file before sending it to print, helping prevent costly errors and ensuring high-quality results in any format.'
   },
+  {
+    id: 'proj-3',
+    name: 'Profile Analyzer',
+    subtitle: 'Multi-source candidate evaluation, stripped of noise',
+    detailUrl: '/playground/profile-analyzer',
+    description: `Structured AI system that consolidates fragmented candidate data into a single, auditable evaluation.
+	
+  1.	Ingest multiple sources: CV, LinkedIn, portfolio, interview notes, and public professional material.
+	2.	Analyze each source independently, with strict evidence rules and zero invention.
+	3.	Contrast sources to surface confirmations, contradictions, gaps, and real execution signals.
+
+Outputs a standardized candidate card: synthesis, competency assessment, green/red flags, cognitive profile, team fit, and critical open questions.
+Designed to penalize vague discourse, reward demonstrated impact, and preserve traceability back to original sources.`
+},
   /*{
     id: 'proj-3',
     name: 'PrintBuddy',
