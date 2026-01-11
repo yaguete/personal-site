@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     default: 'Think Make Test',
     template: '%s | Think Make Test'
   },
-  description:  'Design strategist & UX researcher. I turn complex data into clear, actionable digital products — at the intersection of tech, design & business.',
+  description:  'Design strategist specializing in AI-driven product development. I turn complex data into clear, actionable digital products at the intersection of tech, design & business.',
 };
 
 const geist = Geist({
@@ -79,7 +79,7 @@ export default function RootLayout({
                     "url": "https://thinkmaketest.ai/images/yago_16x9.webp"
                   }
                 ],
-                "description": "Design strategist & UX researcher specializing in AI-driven product design and transforming complex data into clear, actionable digital products. Expert in design thinking, user research, and product strategy at the intersection of technology, design, and business.",
+                "description": "Design strategist specializing in AI-driven product development. I turn complex data into clear, actionable digital products at the intersection of tech, design & business.",
                 
                 "knowsAbout": [
                   "Design Thinking",
@@ -189,7 +189,7 @@ export default function RootLayout({
                   {
                     "@type": "Occupation",
                     "name": "Advanced Design Team Lead",
-                    "description": "Leading design strategy and UX research for AI-driven product design at HP Inc.",
+                    "description": "Leading design strategy and AI-driven product development at HP Inc.",
                     "occupationLocation": {
                       "@type": "Place",
                       "name": "HP Inc."
@@ -282,7 +282,7 @@ export default function RootLayout({
                     "itemOffered": {
                       "@type": "Service",
                       "name": "Design Strategy Consulting",
-                      "description": "Expert consultation in design thinking, UX research, and product strategy"
+                      "description": "Expert consultation in design thinking, AI-driven product development, and product strategy"
                     }
                   },
                   {

@@ -47,7 +47,7 @@ export function StructuredData({ data }: StructuredDataProps) {
     "name": "Yago López Losada",
     "url": "https://thinkmaketest.ai",
     "jobTitle": currentJob?.title || "Advanced Design Team Lead",
-    "description": "Design strategist & UX researcher. I turn complex data into clear, actionable digital products — at the intersection of tech, design & business.",
+    "description": "Design strategist specializing in AI-driven product development. I turn complex data into clear, actionable digital products at the intersection of tech, design & business.",
     "image": "https://thinkmaketest.ai/images/mapache.jpg",
     "worksFor": {
       "@type": "Organization",
@@ -56,8 +56,7 @@ export function StructuredData({ data }: StructuredDataProps) {
     },
     "alumniOf": workHistory,
     "hasOccupation": [
-      { "@type": "Occupation", "name": "Design Strategist", "description": "Strategic design and user experience research" },
-      { "@type": "Occupation", "name": "UX Researcher", "description": "User research and design strategy" },
+      { "@type": "Occupation", "name": "Design Strategist", "description": "Strategic design and AI-driven product development" },
       { "@type": "Occupation", "name": "Business Designer", "description": "Service design and business transformation" }
     ],
     "sameAs": [
@@ -92,7 +91,7 @@ export function StructuredData({ data }: StructuredDataProps) {
     "homeLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressRegion": "Catalonia", "addressLocality": "Barcelona", "addressCountry": "ES" } },
     "additionalProperty": [
       { "@type": "PropertyValue", "name": "industry", "value": "Technology & Design" },
-      { "@type": "PropertyValue", "name": "specialization", "value": "Design Strategy & UX Research" }
+      { "@type": "PropertyValue", "name": "specialization", "value": "Design Strategy & AI-Driven Product Development" }
     ]
   }
 
