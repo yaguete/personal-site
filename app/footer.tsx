@@ -85,7 +85,7 @@ export function Footer() {
           <a href="https://thinkmaketest.ai/" target="_blank">
             <TextLoop className="text-xs text-zinc-500">
               <span>© {new Date().getFullYear()} yaguete.</span>
-              <span>Worker, build your own machinery!</span>
+              <span>Working systems, not slides.</span>
             </TextLoop>
           </a>
         </div>
