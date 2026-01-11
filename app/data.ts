@@ -332,7 +332,7 @@ export const EDUCATION: Education[] = [
   {
     id: 'edu-5',
     category: 'Specialization',
-    title: 'Front-end Development - React & TypeScript',
+    title: 'Front-end Development — React & TypeScript',
     year: '2024',
     institution: 'Tokio School',
   },
