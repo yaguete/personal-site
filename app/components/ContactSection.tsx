@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MagneticSocialLink } from '@/components/ui/magnetic-social-link'
+import { MagneticSocialLink } from '@/app/components/ui/magnetic-social-link'
 import { EMAIL, SOCIAL_LINKS } from '@/app/data'
 
 const VARIANTS_SECTION = {

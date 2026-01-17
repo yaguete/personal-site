@@ -1,5 +1,5 @@
 'use client'
-import { TextEffect } from '@/components/ui/text-effect'
+import { TextEffect } from '@/app/components/ui/text-effect'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 

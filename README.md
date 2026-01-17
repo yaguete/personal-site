@@ -28,6 +28,12 @@ npm run dev
 
 Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
+## Documentacion
+
+- Documentacion general: `docs/INDEX.md`
+- Estandares de estructura: `docs/PROJECT_STRUCTURE_STANDARDS.md`
+- Documentacion tecnica: `docs/TECHNICAL_DOCUMENTATION.md`
+
 ## Proyectos incluidos
 
 ### 🎯 LinkedIn Recommendation Generator
@@ -49,7 +55,7 @@ Portfolio profesional con blog integrado en MDX.
 
 ## Sobre mí
 
-Design strategist & UX researcher especializado en AI-driven product design. Experto en design thinking, user research y product strategy en la intersección de tecnología, diseño y negocio.
+Design strategist specializing in AI-driven product development. I turn complex data into clear, actionable digital products at the intersection of tech, design & business.
 
 ---
 

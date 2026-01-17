@@ -4,7 +4,7 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Linkedin, FileText, Globe, MessageSquare, Paperclip, Info } from 'lucide-react'
-import { Magnetic } from '@/components/ui/magnetic'
+import { Magnetic } from '@/app/components/ui/magnetic'
 
 export type SourceType = 'linkedin' | 'cv' | 'portfolio' | 'interview' | 'other'
 

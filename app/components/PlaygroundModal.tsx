@@ -1,13 +1,13 @@
 import { XIcon } from 'lucide-react'
-import { Magnetic } from '@/components/ui/magnetic'
+import { Magnetic } from '@/app/components/ui/magnetic'
 import {
   MorphingDialog,
   MorphingDialogTrigger,
   MorphingDialogContent,
   MorphingDialogClose,
   MorphingDialogContainer,
-} from '@/components/ui/morphing-dialog'
-import { AnimatedBackground } from '@/components/ui/animated-background'
+} from '@/app/components/ui/morphing-dialog'
+import { AnimatedBackground } from '@/app/components/ui/animated-background'
 
 type PlaygroundExperiment = {
   title: string

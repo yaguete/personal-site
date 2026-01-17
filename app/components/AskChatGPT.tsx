@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import useClickOutside from "@/hooks/useClickOutside"
+import useClickOutside from "@/app/hooks/useClickOutside"
 
 type FloatingAskChatGPTProps = {
   position?: "bottom-right" | "bottom-left" | "bottom-center"

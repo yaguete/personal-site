@@ -1,5 +1,11 @@
 # 🚀 Cómo arrancar el proyecto
 
+## Documentacion
+
+- Documentacion general: `docs/INDEX.md`
+- Estandares de estructura: `docs/PROJECT_STRUCTURE_STANDARDS.md`
+- Documentacion tecnica: `docs/TECHNICAL_DOCUMENTATION.md`
+
 ## Arrancar todo (Backend + Frontend)
 
 ```bash

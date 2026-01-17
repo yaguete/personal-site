@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Magnetic } from '@/components/ui/magnetic'
+import { Magnetic } from '@/app/components/ui/magnetic'
 import AnalysisIndicator from './AnalysisIndicator'
 
 interface Size {

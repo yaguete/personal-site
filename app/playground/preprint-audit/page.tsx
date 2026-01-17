@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Magnetic } from '@/components/ui/magnetic'
-import { Spotlight } from '@/components/ui/spotlight'
+import { Magnetic } from '@/app/components/ui/magnetic'
+import { Spotlight } from '@/app/components/ui/spotlight'
 import FileUploader from './components/FileUploader'
 import Results from './components/Results'
 import ExpertAnalysis from './components/AIAnalysis'

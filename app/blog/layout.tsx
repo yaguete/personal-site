@@ -1,6 +1,6 @@
 'use client'
-import { TextMorph } from '@/components/ui/text-morph'
-import { ScrollProgress } from '@/components/ui/scroll-progress'
+import { TextMorph } from '@/app/components/ui/text-morph'
+import { ScrollProgress } from '@/app/components/ui/scroll-progress'
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { ContactSection } from '@/app/components/ContactSection'

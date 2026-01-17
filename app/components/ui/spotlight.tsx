@@ -48,17 +48,14 @@ export function Spotlight({
   useEffect(() => {
     if (!parentElement) return
 
-    const handleMouseEnter = () => setIsHovered(true)
-    const handleMouseLeave = () => setIsHovered(false)
-
     parentElement.addEventListener('mousemove', handleMouseMove)
-    parentElement.addEventListener('mouseenter', handleMouseEnter)
-    parentElement.addEventListener('mouseleave', handleMouseLeave)
+    parentElement.addEventListener('mouseenter', () => setIsHovered(true))
+    parentElement.addEventListener('mouseleave', () => setIsHovered(false))
 
     return () => {
       parentElement.removeEventListener('mousemove', handleMouseMove)
-      parentElement.removeEventListener('mouseenter', handleMouseEnter)
-      parentElement.removeEventListener('mouseleave', handleMouseLeave)
+      parentElement.removeEventListener('mouseenter', () => setIsHovered(true))
+      parentElement.removeEventListener('mouseleave', () => setIsHovered(false))
     }
   }, [parentElement, handleMouseMove])
 
@@ -66,8 +63,7 @@ export function Spotlight({
     <motion.div
       ref={containerRef}
       className={cn(
-        'pointer-events-none absolute rounded-full bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops),transparent_80%)] blur-xl transition-opacity duration-200',
-        'from-zinc-50 via-zinc-100 to-zinc-200',
+        'pointer-events-none absolute rounded-full blur-xl transition-opacity duration-200',
         isHovered ? 'opacity-100' : 'opacity-0',
         className,
       )}
@@ -76,6 +72,7 @@ export function Spotlight({
         height: size,
         left: spotlightLeft,
         top: spotlightTop,
+        background: 'radial-gradient(circle at center, var(--tw-gradient-from, #18181b) 0%, var(--tw-gradient-via, #27272a) 50%, var(--tw-gradient-to, #3f3f46) 80%, transparent 100%)',
       }}
     />
   )

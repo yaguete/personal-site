@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Magnetic } from '@/components/ui/magnetic'
+import { Magnetic } from '@/app/components/ui/magnetic'
 import CategoryManager, { Category } from './components/CategoryManager'
 import DynamicSources, { Source } from './components/DynamicSources'
 import ResultsDisplay from './components/ResultsDisplay'

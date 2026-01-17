@@ -2,9 +2,9 @@
 
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Spotlight } from '@/components/ui/spotlight'
+import { Spotlight } from '@/app/components/ui/spotlight'
 import ReactMarkdown from 'react-markdown'
-import { Magnetic } from '@/components/ui/magnetic'
+import { Magnetic } from '@/app/components/ui/magnetic'
 import { Document, Page, Text, View, StyleSheet, pdf } from '@react-pdf/renderer'
 import { remark } from 'remark'
 
