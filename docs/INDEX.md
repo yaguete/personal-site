@@ -3,6 +3,7 @@
 Este directorio contiene la documentacion principal para humanos y agentes.
 
 Archivos clave:
+- `CLAUDE.md`: guia rapida para Claude Code (comandos, arquitectura, estilo).
 - `PROJECT_STRUCTURE_STANDARDS.md`: estructura, convenciones y limites.
 - `TECHNICAL_DOCUMENTATION.md`: descripcion tecnica de las funcionalidades.
 

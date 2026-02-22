@@ -3,6 +3,7 @@
 ## Documentacion
 
 - Documentacion general: `docs/INDEX.md`
+- Guia para Claude Code: `docs/CLAUDE.md`
 - Estandares de estructura: `docs/PROJECT_STRUCTURE_STANDARDS.md`
 - Documentacion tecnica: `docs/TECHNICAL_DOCUMENTATION.md`
 

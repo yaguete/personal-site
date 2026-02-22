@@ -31,6 +31,7 @@ Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el 
 ## Documentacion
 
 - Documentacion general: `docs/INDEX.md`
+- Guia para Claude Code: `docs/CLAUDE.md`
 - Estandares de estructura: `docs/PROJECT_STRUCTURE_STANDARDS.md`
 - Documentacion tecnica: `docs/TECHNICAL_DOCUMENTATION.md`
 
