@@ -478,7 +478,6 @@ export default function Personal() {
           <p className="text-zinc-600 dark:text-zinc-400">
           I build things. Fast.
           AI product builder. 12 years turning messy problems into shipped solutions at HP and beyond.
-          From chaotic inputs to clear, useful, and actionable design.
           </p>
         </div>
       </motion.section>

@@ -66,7 +66,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     id: 'work1',
     company: 'HP Inc.',
-    title: 'Advanced Desing Team Lead',
+    title: 'Advanced Design Team Lead',
     start: '2024',
     end: 'Present',
     showDetailsLink: false, 
