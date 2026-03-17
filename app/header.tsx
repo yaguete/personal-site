@@ -20,7 +20,7 @@ export function Header() {
           className="text-zinc-600 dark:text-zinc-500"
           delay={0.5}
         >
-          Design Thinker & Product Maker
+          AI Product Builder · 0→1
         </TextEffect>
       </div>
       {!isHome && (

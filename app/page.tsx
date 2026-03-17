@@ -476,9 +476,9 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-          I transform messy data into real products and meaningful digital strategies.
+          I build things. Fast.
+          AI product builder. 12 years turning messy problems into shipped solutions at HP and beyond.
           From chaotic inputs to clear, useful, and actionable design.
-          Working at the crossroads of business, technology, and design — focused on what truly makes a difference.
           </p>
         </div>
       </motion.section>
