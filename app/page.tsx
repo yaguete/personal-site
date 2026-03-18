@@ -476,8 +476,8 @@ export default function Personal() {
       >
         <div className="flex-1">
           <p className="text-zinc-600 dark:text-zinc-400">
-          I build things. Fast.
-          AI product builder. 12 years turning messy problems into shipped solutions at HP and beyond.
+          Working on the edge of AI, strategy, and execution.
+          Over 12 years turning messy problems into simple, useful solutions through prototyping, validation, and fast iteration.
           </p>
         </div>
       </motion.section>
