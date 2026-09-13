@@ -127,7 +127,6 @@ export default function AskYago() {
   const wrapperRef = useRef<HTMLDivElement>(null!)
   const suggestions = suggestionsForPath(locale, pathname)
   const emptyPill = pillValue.length === 0
-  const pillVisible = usePillVisibility(pathname, pillFocused)
 
   const transport = useMemo(
     () =>
@@ -150,6 +149,10 @@ export default function AskYago() {
   const hasConversation = messages.some(
     (message) => !isErrorDumpMessage(message),
   )
+  const pillVisible = usePillVisibility(
+    pathname,
+    pillFocused && !hasConversation,
+  )
 
   useEffect(() => {
     const stored = readStoredMessages()
@@ -168,7 +171,18 @@ export default function AskYago() {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(clean))
   }, [messages, hydrated])
 
-  const close = useCallback(() => setOpen(false), [])
+  const openPanel = useCallback(() => {
+    setPillFocused(false)
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
+    setOpen(true)
+  }, [])
+
+  const close = useCallback(() => {
+    setPillFocused(false)
+    setOpen(false)
+  }, [])
 
   useClickOutside(wrapperRef, () => {
     if (open && window.matchMedia('(min-width: 640px)').matches) close()
@@ -248,6 +262,7 @@ export default function AskYago() {
   function resetConversation() {
     setMessages([])
     clearError()
+    setPillFocused(false)
     sessionStorage.removeItem(STORAGE_KEY)
   }
 
@@ -255,7 +270,7 @@ export default function AskYago() {
     const trimmed = text.trim()
     if (!trimmed || busy) return
     if (error) clearError()
-    setOpen(true)
+    openPanel()
     setPillValue('')
     setComposerValue('')
     sendMessage({ text: trimmed })
@@ -325,7 +340,7 @@ export default function AskYago() {
             onSubmit={(event) => {
               event.preventDefault()
               if (hasConversation) {
-                setOpen(true)
+                openPanel()
                 return
               }
               if (!pillValue.trim()) return
@@ -401,7 +416,7 @@ export default function AskYago() {
                   type="button"
                   className="absolute inset-0 z-10 cursor-pointer rounded-[24px]"
                   aria-label={copy.title}
-                  onClick={() => setOpen(true)}
+                  onClick={() => openPanel()}
                 />
               ) : null}
             </div>
