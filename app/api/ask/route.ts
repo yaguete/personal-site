@@ -4,6 +4,7 @@ import {
   streamText,
   type UIMessage,
 } from 'ai'
+import { EMAIL } from '@/app/data'
 import { getSiteKnowledge } from '@/lib/ai/knowledge'
 import { buildSystemPrompt } from '@/lib/ai/persona'
 import {
@@ -49,8 +50,8 @@ export async function POST(request: Request) {
     ? 'Eso es demasiado largo. Acótalo un poco.'
     : 'That is a bit long. Try a shorter question.'
   const limited = spanish
-    ? 'Has preguntado bastante por ahora. Vuelve un poco más tarde.'
-    : 'That is enough questions for now. Try again a bit later.'
+    ? `Parece que tienes bastantes preguntas. Escríbeme a ${EMAIL} y continuemos la conversación.`
+    : `It seems you have a lot of questions. Email me at ${EMAIL} and we can continue the conversation.`
 
   const messages = trimToUserTurns(
     Array.isArray(body.messages) ? body.messages : [],
