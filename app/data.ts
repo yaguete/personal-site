@@ -217,6 +217,12 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    title: 'Cómo cobrar por cosas que tu cliente ya sabe hacer',
+    description: 'Qué venderán las consultoras cuando sus clientes también sepan hacerlo',
+    link: '/blog/how-to-get-paid-for-work/es',
+    uid: 'blog-3',
+  },
+  {
     title: 'Dead Internet and Hyperreality',
     description: 'The Dead Internet Theory started as a minor conspiracy. Today, the data confirm it',
     link: '/blog/dead-internet-theory/eng',
