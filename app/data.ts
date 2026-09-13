@@ -298,6 +298,12 @@ Designed to penalize vague discourse, reward demonstrated impact, and preserve t
 
 export const EMAIL = 'yago@thinkmaketest.ai'
 
+export const SITE_BIO = `Working on the edge of AI, strategy, and execution.
+Over 12 years turning messy problems into simple, useful solutions through prototyping, validation, and fast iteration.`
+
+export const SITE_ORIGIN =
+  'Nacido el 30 de junio de 1986 en Ourense (Galicia). Gallego. Creció en Canarias. La Universidad de La Laguna es donde estudió Sociología, no de dónde es.'
+
 type Education = {
   id: string
   category: string

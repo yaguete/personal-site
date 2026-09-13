@@ -4,7 +4,6 @@ import { ScrollProgress } from '@/app/components/ui/scroll-progress'
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { ContactSection } from '@/app/components/ContactSection'
-import FloatingAskChatGPT from '@/app/components/AskChatGPT'
 
 function CopyButton() {
   const [text, setText] = useState('Copy')
@@ -42,9 +41,6 @@ function LanguageToggle() {
   if (!hasBothLanguages) {
     return null
   }
-
-  const locale: 'en' | 'es' = isEnglish ? 'en' : 'es'
-  const placeholder = locale === 'en' ? 'Ask ChatGPT' : 'Pregunta a ChatGPT'
 
   // Determinar las rutas según el artículo
   const isAiEndOfWork = pathname?.includes('ai-end-of-work')
@@ -106,10 +102,6 @@ export default function LayoutBlogPost({
 }: {
   children: React.ReactNode
 }) {
-  const pathname = usePathname()
-  const isEnglish = pathname?.includes('/eng')
-  const locale: 'en' | 'es' = isEnglish ? 'en' : 'es'
-  const placeholder = locale === 'en' ? 'Ask ChatGPT' : 'Pregunta a ChatGPT'
   return (
     <>
       <div className="pointer-events-none fixed left-0 top-0 z-10 h-12 w-full bg-gray-100 to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)] dark:bg-zinc-950" />
@@ -129,7 +121,6 @@ export default function LayoutBlogPost({
         {children}
       </main>
       <ContactSection />
-      <FloatingAskChatGPT position="bottom-center" placeholder={placeholder} locale={locale} />
     </>
   )
 }

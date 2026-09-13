@@ -24,6 +24,7 @@ import {
   EDUCATION,
   EMAIL,
   SOCIAL_LINKS,
+  SITE_BIO,
 } from './data'
 import { TextEffect } from '@/app/components/ui/text-effect'
 import { MAINTENANCE_MODE, SHOW_SELECTED_PROJECTS } from './config'
@@ -475,9 +476,8 @@ export default function Personal() {
         transition={TRANSITION_SECTION}
       >
         <div className="flex-1">
-          <p className="text-zinc-600 dark:text-zinc-400">
-            Working on the edge of AI, strategy, and execution.<br />
-            Over 12 years turning messy problems into simple, useful solutions through prototyping, validation, and fast iteration.
+          <p className="whitespace-pre-line text-zinc-600 dark:text-zinc-400">
+            {SITE_BIO}
           </p>
         </div>
       </motion.section>

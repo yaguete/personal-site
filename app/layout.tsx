@@ -6,6 +6,7 @@ import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
+import AskYago from './components/AskYago'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -342,6 +343,7 @@ export default function RootLayout({
               <Footer />
             </div>
           </div>
+          <AskYago />
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
