@@ -66,6 +66,18 @@ export function countUserTurns(
   return messages.filter((message) => message.role === 'user').length
 }
 
+export function trimToUserTurns<T extends { role?: string }>(
+  messages: T[],
+  maxTurns: number = MAX_USER_TURNS,
+): T[] {
+  const userIndexes = messages
+    .map((message, index) => (message.role === 'user' ? index : -1))
+    .filter((index) => index >= 0)
+  if (userIndexes.length <= maxTurns) return messages
+  const start = userIndexes[userIndexes.length - maxTurns]
+  return messages.slice(start)
+}
+
 export function getLastUserText(
   messages: Array<{
     role?: string

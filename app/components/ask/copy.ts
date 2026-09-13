@@ -13,6 +13,7 @@ export const ASK_COPY = {
     empty:
       'Ask about the work, the writing, the tools — or whatever you landed here for.',
     error: 'Something got stuck. Try again in a moment.',
+    reset: 'New conversation',
     suggestions: [
       'What is your background?',
       'What tools do you actually use?',
@@ -29,6 +30,7 @@ export const ASK_COPY = {
     empty:
       'Pregunta por la trayectoria, los textos, las herramientas — o por lo que te haya traído hasta aquí.',
     error: 'Algo se ha atascado. Prueba otra vez en un momento.',
+    reset: 'Nueva conversación',
     suggestions: [
       '¿Cuál es tu trayectoria?',
       '¿Qué herramientas usas de verdad?',
@@ -68,14 +70,27 @@ export function suggestionsForPath(locale: AskLocale, pathname: string | null) {
   return ASK_COPY[locale].suggestions
 }
 
-export function emptyForPath(locale: AskLocale, pathname: string | null) {
+function quotedEmpty(locale: AskLocale, title: string) {
+  return locale === 'es'
+    ? `Estás en '${title}', ¿qué dudas tienes?`
+    : `You're on '${title}'. What do you want to ask?`
+}
+
+export function emptyForPath(
+  locale: AskLocale,
+  pathname: string | null,
+  pageTitle?: string,
+) {
   const path = pathname ?? '/'
+  const title = pageTitle?.trim()
   if (path.includes('/blog/')) {
+    if (title) return quotedEmpty(locale, title)
     return locale === 'es'
       ? 'Estás en este artículo. Pregunta por la tesis, un ejemplo, o si no estás de acuerdo.'
       : 'You are on this article. Ask about the thesis, an example, or where you disagree.'
   }
   if (path.includes('/playground/')) {
+    if (title) return quotedEmpty(locale, title)
     return locale === 'es'
       ? 'Estás en esta herramienta. Pregunta qué hace, por qué existe, o cómo usarla.'
       : 'You are on this tool. Ask what it does, why it exists, or how to use it.'
@@ -87,6 +102,38 @@ export function isToolPart(
   part: UIMessage['parts'][number],
 ): part is Extract<UIMessage['parts'][number], { type: string; state?: string }> {
   return part.type.startsWith('tool-') || part.type === 'dynamic-tool'
+}
+
+export function messageText(message: UIMessage) {
+  return message.parts
+    .filter((part) => part.type === 'text')
+    .map((part) => part.text)
+    .join('\n')
+    .trim()
+}
+
+export function isErrorDumpMessage(message: UIMessage) {
+  const text = messageText(message)
+  if (!text.startsWith('{')) return false
+  try {
+    const parsed = JSON.parse(text)
+    return typeof parsed?.error === 'string'
+  } catch {
+    return false
+  }
+}
+
+export function friendlyAskError(error: Error | undefined, fallback: string) {
+  if (!error?.message) return fallback
+  const raw = error.message.trim()
+  try {
+    const parsed = JSON.parse(raw)
+    if (typeof parsed?.error === 'string') return parsed.error
+  } catch {
+    // not JSON
+  }
+  if (raw.startsWith('{')) return fallback
+  return raw
 }
 
 export function isSearchPart(part: UIMessage['parts'][number]) {

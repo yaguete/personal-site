@@ -5,10 +5,17 @@ import { usePathname } from 'next/navigation'
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { AnimatePresence, motion } from 'motion/react'
+import { cn } from '@/lib/utils'
 import useClickOutside from '@/app/hooks/useClickOutside'
 import { ChatPanel } from './ask/ChatPanel'
 import { SendArrow } from './ask/SendArrow'
-import { ASK_COPY, type AskLocale, emptyForPath, suggestionsForPath } from './ask/copy'
+import {
+  ASK_COPY,
+  type AskLocale,
+  emptyForPath,
+  isErrorDumpMessage,
+  suggestionsForPath,
+} from './ask/copy'
 
 const STORAGE_KEY = 'ask-yago-messages'
 
@@ -18,13 +25,23 @@ function detectLocale(pathname: string | null): AskLocale {
   return 'en'
 }
 
+function readPageTitle() {
+  if (typeof document === 'undefined') return undefined
+  const heading = document.querySelector('h1')?.textContent?.trim()
+  if (heading) return heading
+  const fromDoc = document.title.replace(/\s*\|\s*Think Make Test\s*$/i, '').trim()
+  if (!fromDoc || fromDoc === 'Think Make Test') return undefined
+  return fromDoc
+}
+
 function readStoredMessages() {
   if (typeof window === 'undefined') return []
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY)
     if (!raw) return []
     const parsed = JSON.parse(raw)
-    return Array.isArray(parsed) ? parsed : []
+    if (!Array.isArray(parsed)) return []
+    return parsed.filter((message) => !isErrorDumpMessage(message))
   } catch {
     return []
   }
@@ -38,7 +55,10 @@ export default function AskYago() {
   const [hydrated, setHydrated] = useState(false)
   const [pillValue, setPillValue] = useState('')
   const [composerValue, setComposerValue] = useState('')
+  const [pageTitle, setPageTitle] = useState<string>()
   const wrapperRef = useRef<HTMLDivElement>(null!)
+  const suggestions = suggestionsForPath(locale, pathname)
+  const emptyPill = pillValue.length === 0
 
   const transport = useMemo(
     () =>
@@ -52,9 +72,10 @@ export default function AskYago() {
     [],
   )
 
-  const { messages, sendMessage, status, error, setMessages } = useChat({
-    transport,
-  })
+  const { messages, sendMessage, status, error, setMessages, clearError } =
+    useChat({
+      transport,
+    })
 
   const busy = status === 'submitted' || status === 'streaming'
 
@@ -65,8 +86,13 @@ export default function AskYago() {
   }, [setMessages])
 
   useEffect(() => {
+    setPageTitle(readPageTitle())
+  }, [pathname])
+
+  useEffect(() => {
     if (!hydrated) return
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+    const clean = messages.filter((message) => !isErrorDumpMessage(message))
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(clean))
   }, [messages, hydrated])
 
   const close = useCallback(() => setOpen(false), [])
@@ -95,9 +121,16 @@ export default function AskYago() {
     }
   }, [open])
 
+  function resetConversation() {
+    setMessages([])
+    clearError()
+    sessionStorage.removeItem(STORAGE_KEY)
+  }
+
   function submitText(text: string) {
     const trimmed = text.trim()
     if (!trimmed || busy) return
+    if (error) clearError()
     setOpen(true)
     setPillValue('')
     setComposerValue('')
@@ -122,12 +155,13 @@ export default function AskYago() {
               status={status}
               error={error}
               input={composerValue}
-              empty={emptyForPath(locale, pathname)}
+              empty={emptyForPath(locale, pathname, pageTitle)}
               suggestions={suggestionsForPath(locale, pathname)}
               onInputChange={setComposerValue}
               onSubmit={() => submitText(composerValue)}
               onClose={close}
               onSuggestion={submitText}
+              onReset={resetConversation}
             />
           </motion.div>
         ) : null}
@@ -143,7 +177,28 @@ export default function AskYago() {
               submitText(pillValue)
             }}
           >
-            <label className="relative flex min-w-[200px] w-52 cursor-text items-center overflow-hidden rounded-[24px] bg-gray-200/80 px-4 py-1 shadow-none backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] group-focus-within:w-80 hover:scale-105 hover:-translate-y-0.5 hover:shadow-none dark:bg-gray-800/80">
+            <div
+              className={cn(
+                'absolute bottom-full left-0 mb-2 flex flex-col items-start gap-1.5 transition-opacity duration-200 delay-0',
+                emptyPill
+                  ? 'pointer-events-none opacity-0 group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-focus-within:delay-500'
+                  : 'pointer-events-none opacity-0',
+              )}
+            >
+              {suggestions.map((suggestion) => (
+                <button
+                  key={suggestion}
+                  type="button"
+                  tabIndex={-1}
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => submitText(suggestion)}
+                  className="cursor-pointer rounded-full bg-zinc-100/90 px-3 py-1.5 text-left text-xs text-zinc-700 shadow-none backdrop-blur-md transition-colors hover:bg-zinc-200 dark:bg-zinc-800/90 dark:text-zinc-200 dark:hover:bg-zinc-700"
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+            <label className="relative flex min-w-[200px] w-52 cursor-text items-center overflow-hidden rounded-[24px] bg-gray-200/80 px-4 py-1 shadow-none backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] group-focus-within:w-80 hover:scale-105 hover:-translate-y-0.5 hover:shadow-none group-focus-within:hover:scale-100 group-focus-within:hover:translate-y-0 dark:bg-gray-800/80">
               <input
                 type="text"
                 value={pillValue}

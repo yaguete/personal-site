@@ -1,7 +1,13 @@
 import type { UIMessage } from 'ai'
 import Markdown from 'react-markdown'
 import { SearchIndicator } from './SearchIndicator'
-import { ASK_COPY, type AskLocale, isToolPart } from './copy'
+import {
+  ASK_COPY,
+  type AskLocale,
+  isErrorDumpMessage,
+  isToolPart,
+  messageText,
+} from './copy'
 
 export function ChatMessage({
   message,
@@ -12,11 +18,8 @@ export function ChatMessage({
 }) {
   const copy = ASK_COPY[locale]
   const isUser = message.role === 'user'
-  const text = message.parts
-    .filter((part) => part.type === 'text')
-    .map((part) => part.text)
-    .join('\n')
-    .trim()
+  const text = messageText(message)
+  if (isErrorDumpMessage(message)) return null
 
   if (isUser) {
     if (!text) return null

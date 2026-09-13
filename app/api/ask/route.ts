@@ -7,12 +7,11 @@ import {
 import { getSiteKnowledge } from '@/lib/ai/knowledge'
 import { buildSystemPrompt } from '@/lib/ai/persona'
 import {
-  countUserTurns,
   getClientIp,
   getLastUserText,
   limitAsk,
   MAX_MESSAGE_CHARS,
-  MAX_USER_TURNS,
+  trimToUserTurns,
 } from '@/lib/ai/rate-limit'
 
 export const maxDuration = 60
@@ -49,17 +48,13 @@ export async function POST(request: Request) {
   const tooLong = spanish
     ? 'Eso es demasiado largo. Acótalo un poco.'
     : 'That is a bit long. Try a shorter question.'
-  const tooMany = spanish
-    ? 'Mejor abrimos otra conversación. Recarga la página y seguimos.'
-    : 'Better to start a fresh conversation. Reload the page and we continue.'
   const limited = spanish
     ? 'Has preguntado bastante por ahora. Vuelve un poco más tarde.'
     : 'That is enough questions for now. Try again a bit later.'
 
-  const messages = Array.isArray(body.messages) ? body.messages : []
-  if (countUserTurns(messages) > MAX_USER_TURNS) {
-    return jsonError(tooMany, 429)
-  }
+  const messages = trimToUserTurns(
+    Array.isArray(body.messages) ? body.messages : [],
+  )
 
   const lastText = getLastUserText(messages)
   if (lastText.length > MAX_MESSAGE_CHARS) {

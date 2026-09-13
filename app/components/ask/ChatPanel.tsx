@@ -3,7 +3,7 @@ import { XIcon } from 'lucide-react'
 import type { UIMessage } from 'ai'
 import { ChatComposer } from './ChatComposer'
 import { ChatMessage } from './ChatMessage'
-import { ASK_COPY, type AskLocale } from './copy'
+import { ASK_COPY, type AskLocale, friendlyAskError } from './copy'
 
 type ChatPanelProps = {
   locale: AskLocale
@@ -17,6 +17,7 @@ type ChatPanelProps = {
   onSubmit: () => void
   onClose: () => void
   onSuggestion: (text: string) => void
+  onReset: () => void
 }
 
 export function ChatPanel({
@@ -31,6 +32,7 @@ export function ChatPanel({
   onSubmit,
   onClose,
   onSuggestion,
+  onReset,
 }: ChatPanelProps) {
   const copy = ASK_COPY[locale]
   const chips = suggestions ?? copy.suggestions
@@ -51,21 +53,41 @@ export function ChatPanel({
       aria-labelledby="ask-yago-title"
       className="flex h-full min-h-0 flex-col bg-white/90 pt-[env(safe-area-inset-top)] backdrop-blur-xl dark:bg-zinc-900/90 sm:rounded-3xl sm:bg-white/85 sm:pt-0 sm:ring-1 sm:ring-zinc-200/60 sm:dark:bg-zinc-900/85 sm:dark:ring-zinc-800/60"
     >
-      <header className="flex items-center justify-between px-4 py-3 sm:px-5">
-        <p
-          id="ask-yago-title"
-          className="text-sm font-medium text-zinc-800 dark:text-zinc-100"
-        >
-          {copy.title}
-        </p>
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-full p-1.5 text-zinc-500 transition-colors hover:bg-zinc-200/70 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
-          aria-label={copy.close}
-        >
-          <XIcon className="h-4 w-4" />
-        </button>
+      <header className="flex items-center justify-between gap-3 px-4 py-3 sm:px-5">
+        <div className="flex min-w-0 items-center gap-2">
+          <img
+            src="/favicon.ico"
+            alt=""
+            width={16}
+            height={16}
+            className="h-4 w-4 shrink-0 dark:invert"
+          />
+          <p
+            id="ask-yago-title"
+            className="text-sm font-medium text-zinc-800 dark:text-zinc-100"
+          >
+            {copy.title}
+          </p>
+        </div>
+        <div className="flex items-center gap-1">
+          {messages.length > 0 ? (
+            <button
+              type="button"
+              onClick={onReset}
+              className="rounded-full px-2.5 py-1 text-xs text-zinc-500 transition-colors hover:bg-zinc-200/70 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+            >
+              {copy.reset}
+            </button>
+          ) : null}
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-full p-1.5 text-zinc-500 transition-colors hover:bg-zinc-200/70 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+            aria-label={copy.close}
+          >
+            <XIcon className="h-4 w-4" />
+          </button>
+        </div>
       </header>
 
       <div
@@ -100,7 +122,7 @@ export function ChatPanel({
         ) : null}
         {error ? (
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            {error.message || copy.error}
+            {friendlyAskError(error, copy.error)}
           </p>
         ) : null}
       </div>
