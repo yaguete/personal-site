@@ -22,6 +22,8 @@ const PILL_MOTION = {
   hidden: { opacity: 0, x: '-50%', y: 16, scale: 0.96 },
   shown: { opacity: 1, x: '-50%', y: 0, scale: 1 },
 }
+const OPEN_EASE = [0.22, 1, 0.36, 1] as const
+const OPEN_TRANSITION = { duration: 0.42, ease: OPEN_EASE }
 const TOP_REVEAL = 64
 const TOP_HIDE = 20
 const FOOTER_HIDE = 12
@@ -283,11 +285,23 @@ export default function AskYago() {
           <motion.div
             key="backdrop"
             aria-hidden="true"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="pointer-events-auto fixed inset-0 z-40 cursor-pointer bg-white/15 backdrop-blur-sm dark:bg-zinc-950/25"
+            initial={{
+              opacity: 0,
+              backdropFilter: 'blur(0px)',
+              WebkitBackdropFilter: 'blur(0px)',
+            }}
+            animate={{
+              opacity: 1,
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+            }}
+            exit={{
+              opacity: 0,
+              backdropFilter: 'blur(0px)',
+              WebkitBackdropFilter: 'blur(0px)',
+            }}
+            transition={OPEN_TRANSITION}
+            className="pointer-events-auto fixed inset-0 z-40 cursor-pointer bg-white/15 dark:bg-zinc-950/25"
             onClick={close}
           />
         ) : null}
@@ -297,11 +311,11 @@ export default function AskYago() {
         {open ? (
           <motion.div
             key="panel"
-            initial={{ opacity: 0, y: 16, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: 12, filter: 'blur(8px)' }}
-            transition={{ duration: 0.3 }}
-            className="pointer-events-auto fixed inset-0 z-50 sm:inset-auto sm:bottom-16 sm:left-1/2 sm:h-[min(680px,82vh)] sm:w-[420px] sm:-translate-x-1/2"
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.98 }}
+            transition={OPEN_TRANSITION}
+            className="pointer-events-auto fixed inset-0 z-50 origin-bottom sm:inset-auto sm:bottom-16 sm:left-[calc(50%-210px)] sm:h-[min(680px,82vh)] sm:w-[420px] sm:origin-center"
             data-ask-panel
           >
             <ChatPanel
@@ -370,13 +384,19 @@ export default function AskYago() {
               ))}
             </div>
             ) : null}
-            <div className="relative">
+            <div
+              className={cn(
+                'relative origin-bottom transition-transform duration-500 ease-[cubic-bezier(.4,0,.2,1)] hover:scale-105 hover:-translate-y-0.5',
+                !hasConversation &&
+                  'group-focus-within:hover:scale-100 group-focus-within:hover:translate-y-0',
+              )}
+            >
             <label
               className={cn(
-                'relative flex min-w-[200px] w-52 items-center overflow-hidden rounded-[24px] bg-gray-200/80 px-4 py-1 shadow-none backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] hover:scale-105 hover:-translate-y-0.5 hover:shadow-none dark:bg-gray-800/80',
+                'relative flex min-w-[200px] w-52 items-center overflow-hidden rounded-[24px] bg-gray-200/80 px-4 py-1 shadow-none backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] dark:bg-gray-800/80',
                 hasConversation
                   ? 'cursor-pointer'
-                  : 'cursor-text group-focus-within:w-80 group-focus-within:hover:scale-100 group-focus-within:hover:translate-y-0',
+                  : 'cursor-text group-focus-within:w-80',
               )}
             >
               <input
