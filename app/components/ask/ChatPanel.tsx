@@ -51,7 +51,7 @@ export function ChatPanel({
       role="dialog"
       aria-modal="true"
       aria-labelledby="ask-yago-title"
-      className="flex h-full min-h-0 flex-col overscroll-contain bg-white/90 pt-[env(safe-area-inset-top)] backdrop-blur-xl dark:bg-zinc-900/90 sm:rounded-3xl sm:bg-white/85 sm:pt-0 sm:ring-1 sm:ring-zinc-200/60 sm:dark:bg-zinc-900/85 sm:dark:ring-zinc-800/60"
+      className="flex h-full min-h-0 flex-col overscroll-contain bg-white/90 pt-[env(safe-area-inset-top)] backdrop-blur-xl dark:bg-zinc-900/90 sm:rounded-3xl sm:bg-white/85 sm:pt-0 sm:shadow-[0_12px_40px_-8px_rgba(15,15,15,0.12)] sm:ring-1 sm:ring-zinc-200/60 sm:dark:bg-zinc-900/85 sm:dark:shadow-[0_12px_40px_-8px_rgba(0,0,0,0.45)] sm:dark:ring-zinc-800/60"
     >
       <header className="flex items-center justify-between gap-3 px-4 py-3 sm:px-5">
         <div className="flex min-w-0 items-center gap-2">
@@ -74,7 +74,7 @@ export function ChatPanel({
             <button
               type="button"
               onClick={onReset}
-              className="rounded-full px-2.5 py-1 text-xs text-zinc-500 transition-colors hover:bg-zinc-200/70 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+              className="cursor-pointer rounded-full px-2.5 py-1 text-xs text-zinc-500 transition-colors hover:bg-zinc-200/70 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
             >
               {copy.reset}
             </button>
@@ -82,10 +82,10 @@ export function ChatPanel({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full p-1.5 text-zinc-500 transition-colors hover:bg-zinc-200/70 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+            className="h-fit w-fit cursor-pointer rounded-full bg-zinc-100 p-2 dark:bg-zinc-800"
             aria-label={copy.close}
           >
-            <XIcon className="h-4 w-4" />
+            <XIcon className="h-5 w-5 text-zinc-500" />
           </button>
         </div>
       </header>
@@ -106,7 +106,7 @@ export function ChatPanel({
                   key={suggestion}
                   type="button"
                   onClick={() => onSuggestion(suggestion)}
-                  className="rounded-full bg-zinc-100 px-3 py-1.5 text-left text-xs text-zinc-700 transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
+                  className="cursor-pointer rounded-full bg-zinc-100 px-3 py-1.5 text-left text-xs text-zinc-700 transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
                 >
                   {suggestion}
                 </button>
@@ -128,7 +128,7 @@ export function ChatPanel({
         ) : null}
       </div>
 
-      <div className="border-t border-zinc-200/70 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-1 dark:border-zinc-800/70 sm:px-5">
+      <div className="border-t border-zinc-200/70 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] dark:border-zinc-800/70 sm:px-5 sm:pb-3">
         <ChatComposer
           locale={locale}
           value={input}

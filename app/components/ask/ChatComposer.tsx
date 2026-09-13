@@ -35,7 +35,7 @@ export function ChatComposer({
 
   return (
     <form
-      className="relative flex items-end gap-2"
+      className="flex items-end gap-2"
       onSubmit={(event) => {
         event.preventDefault()
         if (!value.trim() || disabled) return
@@ -56,16 +56,16 @@ export function ChatComposer({
             onSubmit()
           }
         }}
-        className="max-h-40 min-h-10 w-full resize-none bg-transparent py-2.5 pr-12 text-base outline-none placeholder:text-zinc-500 sm:text-sm dark:placeholder:text-zinc-400"
+        className="max-h-40 min-h-10 min-w-0 flex-1 resize-none bg-transparent py-2.5 text-base outline-none placeholder:text-zinc-500 sm:text-sm dark:placeholder:text-zinc-400"
         aria-label={copy.placeholder}
       />
       <button
         type="submit"
         disabled={disabled || !value.trim()}
-        className="absolute right-0.5 bottom-1 rounded-full bg-zinc-700 p-2 text-white transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40 enabled:cursor-pointer dark:bg-zinc-600"
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-700 text-white transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40 enabled:cursor-pointer dark:bg-zinc-600"
         aria-label={copy.send}
       >
-        <SendArrow className="transition-transform duration-200 hover:-translate-y-0.5 sm:h-5 sm:w-5" />
+        <SendArrow className="transition-transform duration-200 hover:-translate-y-0.5" />
       </button>
     </form>
   )

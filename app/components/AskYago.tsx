@@ -147,6 +147,9 @@ export default function AskYago() {
     })
 
   const busy = status === 'submitted' || status === 'streaming'
+  const hasConversation = messages.some(
+    (message) => !isErrorDumpMessage(message),
+  )
 
   useEffect(() => {
     const stored = readStoredMessages()
@@ -269,7 +272,7 @@ export default function AskYago() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="pointer-events-auto fixed inset-0 z-40 cursor-pointer bg-white/35 backdrop-blur-xl dark:bg-zinc-950/45"
+            className="pointer-events-auto fixed inset-0 z-40 cursor-pointer bg-white/15 backdrop-blur-sm dark:bg-zinc-950/25"
             onClick={close}
           />
         ) : null}
@@ -283,7 +286,7 @@ export default function AskYago() {
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             exit={{ opacity: 0, y: 12, filter: 'blur(8px)' }}
             transition={{ duration: 0.3 }}
-            className="pointer-events-auto fixed inset-0 z-50 sm:inset-auto sm:bottom-20 sm:left-1/2 sm:h-[min(560px,70vh)] sm:w-[420px] sm:-translate-x-1/2"
+            className="pointer-events-auto fixed inset-0 z-50 sm:inset-auto sm:bottom-16 sm:left-1/2 sm:h-[min(680px,82vh)] sm:w-[420px] sm:-translate-x-1/2"
             data-ask-panel
           >
             <ChatPanel
@@ -319,19 +322,17 @@ export default function AskYago() {
         >
           <form
             className="group relative"
-            onFocus={() => setPillFocused(true)}
-            onBlur={(event) => {
-              const next = event.relatedTarget
-              if (!(next instanceof Node) || !event.currentTarget.contains(next)) {
-                setPillFocused(false)
-              }
-            }}
             onSubmit={(event) => {
               event.preventDefault()
+              if (hasConversation) {
+                setOpen(true)
+                return
+              }
               if (!pillValue.trim()) return
               submitText(pillValue)
             }}
           >
+            {!hasConversation ? (
             <div
               className={cn(
                 'absolute bottom-full left-0 mb-2 flex flex-col items-start gap-1.5 transition-opacity duration-200 delay-0',
@@ -353,24 +354,57 @@ export default function AskYago() {
                 </button>
               ))}
             </div>
-            <label className="relative flex min-w-[200px] w-52 cursor-text items-center overflow-hidden rounded-[24px] bg-gray-200/80 px-4 py-1 shadow-none backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] group-focus-within:w-80 hover:scale-105 hover:-translate-y-0.5 hover:shadow-none group-focus-within:hover:scale-100 group-focus-within:hover:translate-y-0 dark:bg-gray-800/80">
+            ) : null}
+            <div className="relative">
+            <label
+              className={cn(
+                'relative flex min-w-[200px] w-52 items-center overflow-hidden rounded-[24px] bg-gray-200/80 px-4 py-1 shadow-none backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] hover:scale-105 hover:-translate-y-0.5 hover:shadow-none dark:bg-gray-800/80',
+                hasConversation
+                  ? 'cursor-pointer'
+                  : 'cursor-text group-focus-within:w-80 group-focus-within:hover:scale-100 group-focus-within:hover:translate-y-0',
+              )}
+            >
               <input
                 type="text"
                 value={pillValue}
+                readOnly={hasConversation}
+                tabIndex={hasConversation ? -1 : undefined}
                 onChange={(event) => setPillValue(event.target.value)}
+                onFocus={() => {
+                  if (!hasConversation) setPillFocused(true)
+                }}
+                onBlur={(event) => {
+                  const next = event.relatedTarget
+                  if (
+                    !(next instanceof Node) ||
+                    !event.currentTarget.closest('form')?.contains(next)
+                  ) {
+                    setPillFocused(false)
+                  }
+                }}
                 placeholder={copy.placeholder}
                 className="h-9 flex-1 truncate overflow-hidden bg-transparent pr-8 text-base outline-none placeholder:text-gray-600 sm:pr-10 sm:text-sm dark:placeholder:text-gray-400"
-                aria-label={copy.placeholder}
+                aria-label={hasConversation ? copy.title : copy.placeholder}
               />
               <button
                 type="submit"
                 disabled={!pillValue.trim()}
+                tabIndex={hasConversation ? -1 : undefined}
                 className="absolute right-1.5 flex-shrink-0 rounded-full bg-gray-600/80 p-2 text-white transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40 enabled:cursor-pointer"
                 aria-label={copy.send}
               >
                 <SendArrow className="transition-transform duration-200 hover:-translate-y-0.5 sm:h-[20px] sm:w-[20px]" />
               </button>
             </label>
+              {hasConversation ? (
+                <button
+                  type="button"
+                  className="absolute inset-0 z-10 cursor-pointer rounded-[24px]"
+                  aria-label={copy.title}
+                  onClick={() => setOpen(true)}
+                />
+              ) : null}
+            </div>
           </form>
         </motion.div>
       ) : null}
