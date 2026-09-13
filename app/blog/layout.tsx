@@ -30,71 +30,33 @@ function CopyButton() {
   )
 }
 
+const BILINGUAL_POSTS = [
+  'ai-end-of-work',
+  'dead-internet-theory',
+  'how-to-get-paid-for-work',
+] as const
+
 function LanguageToggle() {
   const pathname = usePathname()
   const router = useRouter()
+  const slug = BILINGUAL_POSTS.find((post) => pathname?.includes(post))
+  if (!slug) return null
+
   const isEnglish = pathname?.includes('/eng')
   const isSpanish = pathname?.includes('/es')
-  
-  // Solo mostrar en artículos que tienen versión en ambos idiomas
-  const hasBothLanguages = pathname?.includes('ai-end-of-work') || pathname?.includes('dead-internet-theory')
-  if (!hasBothLanguages) {
-    return null
-  }
+  if (!isEnglish && !isSpanish) return null
 
-  // Determinar las rutas según el artículo
-  const isAiEndOfWork = pathname?.includes('ai-end-of-work')
-  const isDeadInternet = pathname?.includes('dead-internet-theory')
+  const toSpanish = isEnglish
 
-  if (isEnglish && isAiEndOfWork) {
-    return (
-      <button
-        onClick={() => router.push('/blog/ai-end-of-work/es')}
-        className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 p-0"
-        type="button"
-      >
-        Leer en Español 
-      </button>
-    )
-  }
-
-  if (isSpanish && isAiEndOfWork) {
-    return (
-      <button
-        onClick={() => router.push('/blog/ai-end-of-work/eng')}
-        className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 p-0"
-        type="button"
-      >
-        Read in English
-      </button>
-    )
-  }
-
-  if (isEnglish && isDeadInternet) {
-    return (
-      <button
-        onClick={() => router.push('/blog/dead-internet-theory/es')}
-        className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 p-0"
-        type="button"
-      >
-        Leer en Español 
-      </button>
-    )
-  }
-
-  if (isSpanish && isDeadInternet) {
-    return (
-      <button
-        onClick={() => router.push('/blog/dead-internet-theory/eng')}
-        className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 p-0"
-        type="button"
-      >
-        Read in English
-      </button>
-    )
-  }
-
-  return null
+  return (
+    <button
+      onClick={() => router.push(`/blog/${slug}/${toSpanish ? 'es' : 'eng'}`)}
+      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 p-0"
+      type="button"
+    >
+      {toSpanish ? 'Leer en Español' : 'Read in English'}
+    </button>
+  )
 }
 
 export default function LayoutBlogPost({

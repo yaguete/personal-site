@@ -246,9 +246,9 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: 'Cómo cobrar por cosas que tu cliente ya sabe hacer',
-    description: 'Qué venderán las consultoras cuando sus clientes también sepan hacerlo',
-    link: '/blog/how-to-get-paid-for-work/es',
+    title: 'How to Get Paid for Work Your Client Can Already Do',
+    description: 'What will consulting firms sell when their clients can do the work themselves?',
+    link: '/blog/how-to-get-paid-for-work/eng',
     uid: 'blog-3',
   },
   {

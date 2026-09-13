@@ -29,6 +29,20 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     StructuredData: (props: ComponentPropsWithoutRef<typeof StructuredData>) => (
       <StructuredData {...props} />
     ),
+    a: ({ href, children, ...props }: ComponentPropsWithoutRef<'a'>) => {
+      const external = href?.startsWith('http')
+      return (
+        <a
+          href={href}
+          {...(external
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {})}
+          {...props}
+        >
+          {children}
+        </a>
+      )
+    },
     code: ({ children, ...props }: ComponentPropsWithoutRef<'code'>) => {
       return <code {...props}>{children}</code>
     },
