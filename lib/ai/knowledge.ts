@@ -109,7 +109,7 @@ function serializeSiteData() {
 
   const playground = SIDE_PROJECTS.map(
     (project) =>
-      `### ${project.name}\n${project.subtitle}\nURL: ${project.detailUrl}\n\n${project.description}`,
+      `### ${project.name}\n${project.year} · ${project.subtitle}\nURL: ${project.detailUrl}\n\n${project.description}`,
   ).join('\n\n')
 
   const posts = BLOG_POSTS.map(

@@ -555,7 +555,7 @@ export default function Personal() {
               <Info className="h-4 w-4 text-zinc-400 cursor-help" />
             </button>
             <div className="playground-tooltip absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-3 py-2 text-sm text-white bg-zinc-900 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
-              Personal projects and experiments
+              Tests and experiments
               <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-zinc-900"></div>
             </div>
           </div>
@@ -582,7 +582,7 @@ export default function Personal() {
                     {project.name}
                   </h4>
                   <p className="text-zinc-500 dark:text-zinc-400">
-                    {project.subtitle}
+                    {project.year} · {project.subtitle}
                   </p>
                 </div>
               </div>
@@ -634,7 +634,7 @@ export default function Personal() {
                       {openProject.name}
                     </h2>
                     <p className="text-zinc-600 dark:text-zinc-400 mt-1">
-                      {openProject.subtitle}
+                      {openProject.year} · {openProject.subtitle}
                     </p>
                   </div>
                 </div>
