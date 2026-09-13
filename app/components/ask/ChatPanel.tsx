@@ -51,7 +51,7 @@ export function ChatPanel({
       role="dialog"
       aria-modal="true"
       aria-labelledby="ask-yago-title"
-      className="flex h-full min-h-0 flex-col bg-white/90 pt-[env(safe-area-inset-top)] backdrop-blur-xl dark:bg-zinc-900/90 sm:rounded-3xl sm:bg-white/85 sm:pt-0 sm:ring-1 sm:ring-zinc-200/60 sm:dark:bg-zinc-900/85 sm:dark:ring-zinc-800/60"
+      className="flex h-full min-h-0 flex-col overscroll-contain bg-white/90 pt-[env(safe-area-inset-top)] backdrop-blur-xl dark:bg-zinc-900/90 sm:rounded-3xl sm:bg-white/85 sm:pt-0 sm:ring-1 sm:ring-zinc-200/60 sm:dark:bg-zinc-900/85 sm:dark:ring-zinc-800/60"
     >
       <header className="flex items-center justify-between gap-3 px-4 py-3 sm:px-5">
         <div className="flex min-w-0 items-center gap-2">
@@ -92,7 +92,8 @@ export function ChatPanel({
 
       <div
         ref={scrollerRef}
-        className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 pb-3 sm:px-5"
+        data-ask-scroll
+        className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 pb-3 sm:px-5"
       >
         {messages.length === 0 ? (
           <div className="flex h-full flex-col justify-end gap-4 pb-2">

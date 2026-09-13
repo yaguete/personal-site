@@ -182,12 +182,63 @@ export default function AskYago() {
 
   useEffect(() => {
     if (!open) return
-    const mobile = window.matchMedia('(max-width: 639px)').matches
-    if (!mobile) return
-    const previous = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+
+    const html = document.documentElement
+    const body = document.body
+    const scrollY = window.scrollY
+    const scrollbar = window.innerWidth - html.clientWidth
+    const previous = {
+      htmlOverflow: html.style.overflow,
+      htmlOverscroll: html.style.overscrollBehavior,
+      bodyOverflow: body.style.overflow,
+      bodyOverscroll: body.style.overscrollBehavior,
+      bodyPaddingRight: body.style.paddingRight,
+      bodyPosition: body.style.position,
+      bodyTop: body.style.top,
+      bodyLeft: body.style.left,
+      bodyRight: body.style.right,
+      bodyWidth: body.style.width,
+    }
+
+    html.style.overflow = 'hidden'
+    html.style.overscrollBehavior = 'none'
+    body.style.overflow = 'hidden'
+    body.style.overscrollBehavior = 'none'
+    body.style.position = 'fixed'
+    body.style.top = `-${scrollY}px`
+    body.style.left = '0'
+    body.style.right = '0'
+    body.style.width = '100%'
+    if (scrollbar > 0) body.style.paddingRight = `${scrollbar}px`
+
+    const allowInnerScroll = (target: EventTarget | null) => {
+      if (!(target instanceof Node)) return false
+      const panel = wrapperRef.current?.querySelector('[data-ask-panel]')
+      return Boolean(panel?.contains(target))
+    }
+
+    const blockPageScroll = (event: WheelEvent | TouchEvent) => {
+      if (allowInnerScroll(event.target)) return
+      event.preventDefault()
+    }
+
+    window.addEventListener('wheel', blockPageScroll, { passive: false })
+    window.addEventListener('touchmove', blockPageScroll, { passive: false })
+
     return () => {
-      document.body.style.overflow = previous
+      html.style.overflow = previous.htmlOverflow
+      html.style.overscrollBehavior = previous.htmlOverscroll
+      body.style.overflow = previous.bodyOverflow
+      body.style.overscrollBehavior = previous.bodyOverscroll
+      body.style.paddingRight = previous.bodyPaddingRight
+      body.style.position = previous.bodyPosition
+      body.style.top = previous.bodyTop
+      body.style.left = previous.bodyLeft
+      body.style.right = previous.bodyRight
+      body.style.width = previous.bodyWidth
+      window.scrollTo(0, scrollY)
+      window.removeEventListener('wheel', blockPageScroll)
+      window.removeEventListener('touchmove', blockPageScroll)
     }
   }, [open])
 
@@ -212,12 +263,28 @@ export default function AskYago() {
       <AnimatePresence>
         {open ? (
           <motion.div
+            key="backdrop"
+            aria-hidden="true"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-auto fixed inset-0 z-40 cursor-pointer bg-white/35 backdrop-blur-xl dark:bg-zinc-950/45"
+            onClick={close}
+          />
+        ) : null}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {open ? (
+          <motion.div
             key="panel"
             initial={{ opacity: 0, y: 16, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             exit={{ opacity: 0, y: 12, filter: 'blur(8px)' }}
             transition={{ duration: 0.3 }}
             className="pointer-events-auto fixed inset-0 z-50 sm:inset-auto sm:bottom-20 sm:left-1/2 sm:h-[min(560px,70vh)] sm:w-[420px] sm:-translate-x-1/2"
+            data-ask-panel
           >
             <ChatPanel
               locale={locale}
