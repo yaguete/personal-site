@@ -18,6 +18,73 @@ import {
 } from './ask/copy'
 
 const STORAGE_KEY = 'ask-yago-messages'
+const PILL_MOTION = {
+  hidden: { opacity: 0, x: '-50%', y: 16, scale: 0.96 },
+  shown: { opacity: 1, x: '-50%', y: 0, scale: 1 },
+}
+const TOP_REVEAL = 64
+const TOP_HIDE = 20
+const FOOTER_HIDE = 12
+const FOOTER_REVEAL = -16
+
+function usePillVisibility(pathname: string | null, pinned: boolean) {
+  const [visible, setVisible] = useState(false)
+  const pinnedRef = useRef(pinned)
+  pinnedRef.current = pinned
+
+  useEffect(() => {
+    const siteHeader = document.querySelector('body header')
+    const footer = document.querySelector('footer')
+    let shown = false
+
+    const measure = () => {
+      if (pinnedRef.current) {
+        if (!shown) {
+          shown = true
+          setVisible(true)
+        }
+        return
+      }
+
+      const y = window.scrollY || document.documentElement.scrollTop || 0
+      const viewport = window.innerHeight
+      const footerTop = footer?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY
+      const footerOverlap = viewport - footerTop
+      const headerBottom = siteHeader?.getBoundingClientRect().bottom ?? 0
+      const headerLeaving = headerBottom < 72
+
+      const pastTop = y > (shown ? TOP_HIDE : TOP_REVEAL) || headerLeaving
+      const clearOfFooter = footerOverlap < (shown ? FOOTER_HIDE : FOOTER_REVEAL)
+      const next = pastTop && clearOfFooter
+      if (next !== shown) {
+        shown = next
+        setVisible(next)
+      }
+    }
+
+    const observer = new IntersectionObserver(measure, {
+      threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+    })
+    if (siteHeader) observer.observe(siteHeader)
+    if (footer) observer.observe(footer)
+
+    measure()
+    window.addEventListener('scroll', measure, { passive: true })
+    document.addEventListener('scroll', measure, { passive: true, capture: true })
+    window.addEventListener('resize', measure, { passive: true })
+    window.visualViewport?.addEventListener('resize', measure)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', measure)
+      document.removeEventListener('scroll', measure, { capture: true })
+      window.removeEventListener('resize', measure)
+      window.visualViewport?.removeEventListener('resize', measure)
+    }
+  }, [pathname, pinned])
+
+  return visible
+}
 
 function detectLocale(pathname: string | null): AskLocale {
   if (pathname?.includes('/es')) return 'es'
@@ -56,9 +123,11 @@ export default function AskYago() {
   const [pillValue, setPillValue] = useState('')
   const [composerValue, setComposerValue] = useState('')
   const [pageTitle, setPageTitle] = useState<string>()
+  const [pillFocused, setPillFocused] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null!)
   const suggestions = suggestionsForPath(locale, pathname)
   const emptyPill = pillValue.length === 0
+  const pillVisible = usePillVisibility(pathname, pillFocused)
 
   const transport = useMemo(
     () =>
@@ -87,6 +156,7 @@ export default function AskYago() {
 
   useEffect(() => {
     setPageTitle(readPageTitle())
+    setPillFocused(false)
   }, [pathname])
 
   useEffect(() => {
@@ -168,9 +238,27 @@ export default function AskYago() {
       </AnimatePresence>
 
       {!open ? (
-        <div className="pointer-events-auto fixed bottom-4 left-1/2 z-50 -translate-x-1/2 sm:bottom-6">
+        <motion.div
+          initial="hidden"
+          animate={pillVisible ? 'shown' : 'hidden'}
+          variants={PILL_MOTION}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          aria-hidden={!pillVisible}
+          inert={!pillVisible ? true : undefined}
+          className={cn(
+            'fixed bottom-4 left-1/2 z-50 origin-bottom sm:bottom-6',
+            pillVisible ? 'pointer-events-auto' : 'pointer-events-none',
+          )}
+        >
           <form
             className="group relative"
+            onFocus={() => setPillFocused(true)}
+            onBlur={(event) => {
+              const next = event.relatedTarget
+              if (!(next instanceof Node) || !event.currentTarget.contains(next)) {
+                setPillFocused(false)
+              }
+            }}
             onSubmit={(event) => {
               event.preventDefault()
               if (!pillValue.trim()) return
@@ -217,7 +305,7 @@ export default function AskYago() {
               </button>
             </label>
           </form>
-        </div>
+        </motion.div>
       ) : null}
     </div>
   )
