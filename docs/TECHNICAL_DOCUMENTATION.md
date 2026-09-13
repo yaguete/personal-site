@@ -111,6 +111,18 @@ app/playground/my-tool/page.tsx (muestra resultados)
 
 ### API Routes (`app/api/`)
 
+#### Chat personal (`/api/ask`)
+
+- `lib/ai/persona.ts` define la voz en primera persona, las conversaciones profesionales y los límites de privacidad. Si se pregunta expresamente, aclara que es la versión conversacional de Yago; no revela el modelo ni el proveedor.
+- La referencia general a Barcelona desde 2019 está autorizada en el perfil. No permite revelar barrio, dirección, ubicación en tiempo real ni otros detalles de residencia.
+- `lib/ai/recruiter-profile.ts` genera el perfil desde `SITE_BIO`, `EMAIL`, `SOCIAL_LINKS`, `EDUCATION` y `WORK_EXPERIENCE` en `app/data.ts`. No mantiene otra copia del CV, las fechas, los contactos o las herramientas. Solo conserva contexto editorial adicional que no tiene otra fuente en la web.
+- Cada empleo en `WORK_EXPERIENCE` declara en `chat.fields` qué campos puede recibir el chat. Los empleos nuevos incluyen por defecto únicamente empresa, cargo y fechas; el resto requiere selección explícita. `chat.summary` permite un resumen acotado cuando la descripción completa no es adecuada. HP solo incluye ese resumen y las herramientas publicadas, sin sus proyectos, responsabilidades detalladas ni logros. Editar el CV en `app/data.ts` actualiza tanto la web como el perfil del chat en el siguiente despliegue/reinicio.
+- `lib/ai/knowledge.ts` añade el playground y los artículos del índice `BLOG_POSTS` en los idiomas publicados. No recorre borradores ni carga `SITE_ORIGIN`. Las notas personales se consultan únicamente durante la edición: el chat no tiene acceso al vault. No incluir hechos privados ni siquiera como ejemplos de lo que no debe contar.
+- Los resultados se toman del CV publicado, conservando los enlaces, la atribución compartida y las estimaciones. Cualquier ampliación de campos permitidos o nuevo artículo requiere revisar qué información introduce en el chat.
+- `lib/ai/page-context.ts` solo incorpora rutas conocidas al contexto del sistema para que una URL enviada por el visitante no inserte instrucciones.
+- La búsqueda web se reserva para temas externos; las instrucciones prohíben usarla para completar datos personales, internos del trabajo o de la implementación del chat. Estas restricciones de lenguaje no garantizan resistencia absoluta a ataques: la protección principal es no dar al chat datos privados.
+- Verificación local: `npm run test:ai`. Las pruebas comprueban la selección de fuentes y el tratamiento de rutas manipuladas; no sustituyen la evaluación de respuestas del modelo.
+
 #### Rutas disponibles
 
 **`/api/linkedin-recommendation`**

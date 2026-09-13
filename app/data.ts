@@ -20,6 +20,17 @@ type WorkExperience = {
   achievements?: string[]
   technologies?: string[]
   showDetailsLink?: boolean
+  // The chat always receives the role/company/dates. Additional fields need
+  // explicit approval here; new roles default to those basic facts only.
+  chat?: {
+    summary?: string
+    fields?: readonly (
+      | 'description'
+      | 'responsibilities'
+      | 'achievements'
+      | 'technologies'
+    )[]
+  }
 }
 
 type BlogPost = {
@@ -63,9 +74,21 @@ export const PROJECTS: Project[] = [
   },
 ]
 
+const PUBLIC_CAREER_FIELDS = [
+  'description',
+  'responsibilities',
+  'achievements',
+  'technologies',
+] as const
+
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     id: 'work1',
+    chat: {
+      summary:
+        'Leads multidisciplinary design and innovation in Large Format Printing: identifying opportunities, understanding user needs, prototyping concepts and testing their value with a business perspective.',
+      fields: ['technologies'],
+    },
     company: 'HP Inc.',
     title: 'Advanced Design Team Lead',
     start: '2024',
@@ -91,6 +114,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     id: 'work2',
+    chat: { fields: PUBLIC_CAREER_FIELDS },
     company: 'Banc Sabadell',
     title: 'Director of Operational Efficiency',
     start: '2022',
@@ -118,6 +142,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     id: 'work3',
+    chat: { fields: PUBLIC_CAREER_FIELDS },
     company: "Innocells",
     title: 'Business Designer',
     start: '2019',
@@ -142,6 +167,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     id: 'work4',
+    chat: { fields: PUBLIC_CAREER_FIELDS },
     company: 'The Cocktail',
     title: 'Service Designer / Project Lead',
     start: '2015',
@@ -166,6 +192,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     id: 'work5',
+    chat: { fields: PUBLIC_CAREER_FIELDS },
     company: 'Rey Juan Carlos University',
     title: 'PDI - Associate Professor',
     start: '2014',
@@ -190,6 +217,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
   {
     id: 'work6',
+    chat: { fields: PUBLIC_CAREER_FIELDS },
     company: 'Análisis e Investigación',
     title: 'Sr. Research Executive',
     start: '2012',

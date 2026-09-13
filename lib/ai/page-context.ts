@@ -11,8 +11,8 @@ export type VisitorPage = {
 }
 
 function normalizePath(pageUrl?: string, pathname?: string) {
-  let path = pathname?.trim()
-  if (!path && pageUrl) {
+  let path = typeof pathname === 'string' ? pathname.trim() : ''
+  if (!path && typeof pageUrl === 'string') {
     try {
       path = new URL(pageUrl).pathname
     } catch {
@@ -20,7 +20,7 @@ function normalizePath(pageUrl?: string, pathname?: string) {
     }
   }
   if (!path) return '/'
-  const clean = path.replace(/\/+$/, '')
+  const clean = path.split(/[?#]/)[0].replace(/\/+$/, '')
   return clean === '' ? '/' : clean
 }
 
@@ -41,36 +41,41 @@ export function resolveVisitorPage(
     return { kind: 'home', path, language: 'en' }
   }
 
-  if (path.startsWith('/blog/')) {
-    const slug = path.split('/')[2] ?? ''
-    const post = BLOG_POSTS.find((item) => item.link.includes(slug))
-    return {
-      kind: 'blog',
-      path,
-      language,
-      title: post?.title,
-      description: post?.description,
+  const blogMatch = path.match(/^\/blog\/([^/]+)(?:\/(es|eng))?$/)
+  if (blogMatch) {
+    const slug = blogMatch[1]
+    const post = BLOG_POSTS.find((item) => item.link.split('/')[2] === slug)
+    if (post) {
+      return {
+        kind: 'blog',
+        path,
+        language,
+        title: post.title,
+        description: post.description,
+      }
     }
   }
 
   if (path.startsWith('/playground/')) {
-    const project = SIDE_PROJECTS.find((item) =>
-      path.startsWith(item.detailUrl),
-    )
-    return {
-      kind: 'playground',
-      path,
-      language: 'en',
-      title: project?.name,
-      description: project?.subtitle ?? project?.description,
+    const project = SIDE_PROJECTS.find((item) => path === item.detailUrl)
+    if (project) {
+      return {
+        kind: 'playground',
+        path,
+        language: 'en',
+        title: project.name,
+        description: project.subtitle ?? project.description,
+      }
     }
   }
 
-  if (path.startsWith('/privacy')) {
+  if (/^\/privacy(?:\/(es|eng))?$/.test(path)) {
     return { kind: 'privacy', path, language }
   }
 
-  return { kind: 'other', path, language }
+  // Request paths are visitor-controlled. Only recognized site paths may be
+  // interpolated into the system prompt; never echo an arbitrary URL here.
+  return { kind: 'other', path: '(unknown page)', language: 'en' }
 }
 
 export function formatVisitorPage(page: VisitorPage) {
@@ -83,7 +88,9 @@ Default assumption for this turn: a generic question about you — who you are, 
 
   if (page.kind === 'blog') {
     const title = page.title ?? page.path
-    const angle = page.description ? `\n- What it is about: ${page.description}` : ''
+    const angle = page.description
+      ? `\n- What it is about: ${page.description}`
+      : ''
     const lang = page.language === 'es' ? 'Spanish' : 'English'
     return `## Where the visitor is right now
 They are READING this blog post, on this exact URL:

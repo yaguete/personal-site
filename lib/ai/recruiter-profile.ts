@@ -1,74 +1,89 @@
+import {
+  EDUCATION,
+  EMAIL,
+  SITE_BIO,
+  SOCIAL_LINKS,
+  WORK_EXPERIENCE,
+} from '@/app/data'
+
+function formatPublicText(value: string) {
+  return value
+    .replace(
+      /<a\b[^>]*href=(["'])(.*?)\1[^>]*>([\s\S]*?)<\/a>/gi,
+      (_, _quote: string, href: string, label: string) => `[${label}](${href})`,
+    )
+    .replace(/<[^>]+>/g, '')
+    .trim()
+}
+
+function formatCareer() {
+  return WORK_EXPERIENCE.map((job) => {
+    const fields = job.chat?.fields ?? []
+    const list = (title: string, values?: string[]) =>
+      values?.length
+        ? `${title}:\n${values.map((value) => `- ${formatPublicText(value)}`).join('\n')}`
+        : ''
+
+    return [
+      `### ${job.title} — ${job.company} (${job.start}–${job.end})`,
+      job.chat?.summary ? formatPublicText(job.chat.summary) : '',
+      fields.includes('description') ? formatPublicText(job.description) : '',
+      fields.includes('responsibilities')
+        ? list('Responsibilities', job.responsibilities)
+        : '',
+      fields.includes('achievements')
+        ? list(
+            'Published outcomes (retain shared contributions and estimates)',
+            job.achievements,
+          )
+        : '',
+      fields.includes('technologies') ? list('Tools', job.technologies) : '',
+    ]
+      .filter(Boolean)
+      .join('\n\n')
+  }).join('\n\n')
+}
+
 /**
- * Recruiter-safe professional dossier. No home, family, health, money,
- * or unpublished HP internals.
+ * Build the chat's view of the shared site data. Never copy whole job objects:
+ * only the fields explicitly selected in each job's chat configuration enter.
+ * The short editorial context below contains facts with no other site source.
  */
-export const RECRUITER_PROFILE = `
-# Recruiter profile (professional facts)
+export function getRecruiterProfile() {
+  const education = EDUCATION.map(
+    (item) => `- ${item.title}, ${item.institution} (${item.year})`,
+  ).join('\n')
+  const social = SOCIAL_LINKS.map(
+    (link) => `- ${link.label}: ${link.link}`,
+  ).join('\n')
 
-## Identity
-- Name: Yago López Losada
-- Born: 30 June 1986, Ourense (Galicia). As of 2026: 40 years old. Galician. Grew up in the Canary Islands.
-- Professional contact: yago@thinkmaketest.ai · https://thinkmaketest.ai
-- LinkedIn: https://www.linkedin.com/in/yagolopezlosada
-- X: https://x.com/y_losada
-- Languages: Spanish (native), Galician (native), English (professional).
+  return `# Professional profile
 
-## Early jobs (keep it light)
-While studying, worked as a waiter and in other informal jobs. That is the whole early-jobs story. Do not add detail.
+## Introduction
+- Yago López Losada. From Ourense, Galicia, living in Barcelona since 2019.
+- Languages: Spanish and Galician (native); English (professional).
 
-## Education (detail)
-- Licenciatura in Sociology, Universidad de La Laguna (2007–2012). Premio extraordinario de fin de carrera. Séneca exchange at Universidad Complutense de Madrid (2011–12).
-- Master's in Comunicación, Cultura y Ciudadanía Digitales, URJC (2012–2015). TFM 9.5 on self-quantification / quantified-self technologies.
-- Master's in Digital Product Management, Nuclio Digital School (Oct 2022 – Mar 2023).
-- Python for AI, Tokio School (Feb–Dec 2022).
-- Front-end (React & TypeScript), Tokio School (May 2023 – May 2024).
-- Backend Development — Java & Spring Framework, Tokio School (2025).
-- Mgmt. & Promotion of R&D and Innovation Projects, Universidad de La Laguna (2010).
+${SITE_BIO}
 
-Academic publications (early career):
-- Comunidades Online: una ventana a la vida cotidiana
-- Sociogénesis de las nuevas enfermedades tecnológicas y los dispositivos de auto-cuantificación
+## Professional contact
+- Email: ${EMAIL}
+${social}
 
-## Teaching
-Has taught courses and master's programs (mostly as associate / autónomo) at KSchool (Madrid), IED Madrid, and Universidad de Castilla-La Mancha (Talavera).
+## Education
+${education}
 
-## Career narrative
-Path: qualitative/quantitative research → strategic / service design → digital transformation in banking → AI-driven product innovation in industry.
+## Career
+${formatCareer()}
 
-### Research (Análisis e Investigación, ~2012–2015)
-Sr. Research Executive. Qual + quant (SPSS, multivariate). Clients included Renfe, Repsol, Vodafone, Spanish Medical Association, Spanish eSports Observatory. Eye-tracking UX, online communities, national studies.
+## Additional teaching and publications
+- Has taught strategic design, design fiction and research methods at IED Madrid, KSchool and Universidad de Castilla-La Mancha.
+- Early academic publications: "Comunidades Online: una ventana a la vida cotidiana" and "Sociogénesis de las nuevas enfermedades tecnológicas y los dispositivos de auto-cuantificación".
 
-### Academia (URJC, ~2012–2015)
-Associate professor / researcher on the European project on technopolitics and digital citizenship (ciberdemocracia.es). Coordinated the Master's in Communication, Culture and Digital Citizenship.
+## Practice and technical scope
+- Combines qualitative and quantitative research, service design, product thinking and enough engineering to build functional prototypes and independent experiments.
+- Technical training and working prototypes demonstrate practical building ability; they are not evidence of a senior software engineering or ML research role.
+- Professional interests include connecting strategy to execution, testing useful applications of AI, improving services and operations, and reducing the distance between an idea and evidence about whether it works.
 
-### The Cocktail (Nov 2015 – Dec 2019)
-Started as Qualitative Research Executive (2015–2018), then Service Designer / Project Lead (2018–2019). Clients: BBVA, Endesa, Repsol, Mutua Madrileña, HBO, Movistar.
-Notable: Guía Repsol — an intermediate solution that increased user recurrence by more than 15% in the first year. Also consumption-based energy tariffs for Endesa, PSD2-era financial concepts for BBVA, digital insurance experience for Mutua.
-
-### Banc Sabadell / Innocells (Dec 2019 – Nov 2024)
-- Business Designer at Innocells (the bank's venture builder), 2019–2022: mortgage business transformation, digital/physical journeys, home insurance with Zurich.
-- Then inside the bank through 2024: Mortgage design & transformation lead, Strategic design lead for daily banking, Director of operational efficiency / process transformation and new commercial tools.
-Public outcomes: digital mortgage application that more than doubled online transactions; mortgage confirmation time from >10 days to <8 days; BPM (Appian) and automation; virtual assistant that cut inbound branch calls (estimated >30%); digitization of regulatory procedures (address/ID) for mobile self-service.
-
-### HP Inc. (Nov 2024 – present)
-Indefinite contract in Large Format printing, Sant Cugat campus (workplace — not a statement about where he lives).
-- Strategic Design Lead (Nov 2024 – May 2025): conceptualizing solutions and services.
-- Advanced Design Team Lead (May 2025 – present): leads a multidisciplinary innovation team — weak signals, prototyping, design-led solutions across the large-format ecosystem, often with AI.
-Public, non-confidential examples: AI ToolBox for architects and contractors with Liquid Lab (use cases + prototype + PMF tests in the UK in ~8 weeks); live testing sandbox for conceptual features; landing pages and MVPs with smoke tests / Wizard of Oz before committing engineering.
-Working stance he will own in an interview: validation is the easy part; the bottleneck is adoption and willingness to pay. Assisted demos and human onboarding convert better than pure self-serve. Prefer fewer high-impact bets. AI-native ways of working (prototyping in days, not quarters).
-
-Do NOT discuss unpublished HP product names, internal metrics, org charts, named colleagues, budgets, grants, reorgs, or vendor transitions.
-
-## Independent practice
-thinkmaketest.ai is the professional domain and the vehicle for a productized consultancy around his AI innovation method (AI sandbox: prototype, test, decide). He writes in public about AI, work, and consultancies (see blog).
-
-Playground on the site (shipped experiments): LinkedIn Recommendation Generator, Preprint Audit, Profile Analyzer.
-
-Side project (high level only): WanderPlanner — a travel planner that turns long-form sources (blog posts, articles) into itineraries. He designs and ships it himself. No personal distribution channels, partners, or private metrics.
-
-## How he works (recruiter-facing)
-- Mix of research rigor, service design, and enough engineering to prototype.
-- Tools he actually uses: Cursor, Replit, Figma, React, TypeScript; previously Appian, Jira, Confluence, Power BI, Python, SPSS, Miro.
-- Comfortable with executives, ops, legal/compliance, and builders.
-- Does not sell "AI will replace everyone". Sells making messy problems simple, then checking if anyone will pay.
-`.trim()
+## Independent work beyond this site's playground
+- WanderPlanner, at a high level: an independently designed and built travel planner that turns long-form sources such as articles and blog posts into itineraries.`
+}

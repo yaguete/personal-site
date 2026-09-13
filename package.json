@@ -6,7 +6,8 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:ai": "node --test tests/ai/*.test.cjs"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.53",
