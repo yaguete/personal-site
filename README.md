@@ -60,4 +60,28 @@ Design strategist specializing in AI-driven product development. I turn complex 
 
 ---
 
+## Repos independientes del playground
+
+Este monorepo es el hub y la fuente de verdad. Cada herramienta de `app/playground/` tiene además su propio repo público, exportado con `git subtree split` (conserva el historial de su carpeta):
+
+| Herramienta | Repo | Remoto en este repo |
+|---|---|---|
+| Preprint Audit | [yaguete/preprint-audit](https://github.com/yaguete/preprint-audit) | `preprint-audit` |
+| Profile Analyzer | [yaguete/profile-analyzer](https://github.com/yaguete/profile-analyzer) | `profile-analyzer` |
+| LinkedIn Recommendation | [yaguete/linkedin-recommendation](https://github.com/yaguete/linkedin-recommendation) | `linkedin-recommendation` |
+
+**Los repos de las tools NO se actualizan solos.** Para refrescar uno tras tocar la herramienta aquí:
+
+```bash
+git subtree split --prefix=app/playground/<tool> -b export/<tool>
+git push <tool> export/<tool>:main --force-with-lease
+```
+
+Notas:
+- El `--force-with-lease` es necesario porque cada split genera commits sintéticos nuevos; es seguro mientras nadie trabaje directamente sobre el repo de la tool (el flujo de trabajo es siempre monorepo → export, nunca al revés).
+- Si la tool usa rutas fuera de su carpeta (p. ej. una API route en `app/api/<tool>` o un backend en `heroku-deploy/`), hay que copiarlas al export antes de hacer push, como se hizo en la exportación inicial.
+- Este repo es **público**: los `.env*` están en `.gitignore`, pero cualquier cosa commiteada se ve. Regla: si no lo pondrías en LinkedIn, no va al repo.
+
+---
+
 *Desarrollado con ❤️ usando [Nim](https://github.com/ibelick/nim) como base.*
