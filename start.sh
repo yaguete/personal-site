@@ -10,6 +10,9 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Asegurar carpeta de logs
+mkdir -p logs
+
 # Arrancar Backend (Flask)
 echo -e "${BLUE}📦 Arrancando Backend (Flask)...${NC}"
 cd heroku-deploy
