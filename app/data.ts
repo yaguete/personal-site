@@ -279,6 +279,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
     label: 'LinkedIn',
     link: 'https://www.linkedin.com/in/yagolopezlosada',
   },
+  {
+    label: 'GitHub',
+    link: 'https://github.com/yaguete',
+  },
 ]
 
 export const SIDE_PROJECTS: SideProject[] = [
