@@ -28,23 +28,34 @@ const TOP_REVEAL = 64
 const TOP_HIDE = 20
 const FOOTER_HIDE = 12
 const FOOTER_REVEAL = -16
+const EXPANDED_COLLAPSE = 48
+const EXPANDED_RESTORE = 16
 
 function usePillVisibility(pathname: string | null, pinned: boolean) {
-  const [visible, setVisible] = useState(false)
+  const [{ visible, expanded }, setState] = useState({
+    visible: true,
+    expanded: true,
+  })
   const pinnedRef = useRef(pinned)
   pinnedRef.current = pinned
 
   useEffect(() => {
     const siteHeader = document.querySelector('body header')
     const footer = document.querySelector('footer')
-    let shown = false
+    let shown = true
+    let isExpanded = true
+
+    const apply = (nextVisible: boolean, nextExpanded: boolean) => {
+      if (nextVisible !== shown || nextExpanded !== isExpanded) {
+        shown = nextVisible
+        isExpanded = nextExpanded
+        setState({ visible: nextVisible, expanded: nextExpanded })
+      }
+    }
 
     const measure = () => {
       if (pinnedRef.current) {
-        if (!shown) {
-          shown = true
-          setVisible(true)
-        }
+        apply(true, isExpanded)
         return
       }
 
@@ -55,13 +66,15 @@ function usePillVisibility(pathname: string | null, pinned: boolean) {
       const headerBottom = siteHeader?.getBoundingClientRect().bottom ?? 0
       const headerLeaving = headerBottom < 72
 
+      const nextExpanded = isExpanded
+        ? y < EXPANDED_COLLAPSE
+        : y < EXPANDED_RESTORE
       const pastTop = y > (shown ? TOP_HIDE : TOP_REVEAL) || headerLeaving
       const clearOfFooter = footerOverlap < (shown ? FOOTER_HIDE : FOOTER_REVEAL)
-      const next = pastTop && clearOfFooter
-      if (next !== shown) {
-        shown = next
-        setVisible(next)
-      }
+      const next = nextExpanded
+        ? clearOfFooter
+        : (pastTop || y > 0) && clearOfFooter
+      apply(next, nextExpanded)
     }
 
     const observer = new IntersectionObserver(measure, {
@@ -85,7 +98,7 @@ function usePillVisibility(pathname: string | null, pinned: boolean) {
     }
   }, [pathname, pinned])
 
-  return visible
+  return { visible, expanded }
 }
 
 function detectLocale(pathname: string | null): AskLocale {
@@ -151,7 +164,7 @@ export default function AskYago() {
   const hasConversation = messages.some(
     (message) => !isErrorDumpMessage(message),
   )
-  const pillVisible = usePillVisibility(
+  const { visible: pillVisible, expanded: pillExpanded } = usePillVisibility(
     pathname,
     pillFocused && !hasConversation,
   )
@@ -393,10 +406,15 @@ export default function AskYago() {
             >
             <label
               className={cn(
-                'relative flex min-w-[200px] w-52 items-center overflow-hidden rounded-[24px] bg-gray-200/80 px-4 py-1 shadow-none backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] dark:bg-gray-800/80',
-                hasConversation
-                  ? 'cursor-pointer'
-                  : 'cursor-text group-focus-within:w-80',
+                'relative flex min-w-[200px] items-center overflow-hidden rounded-[24px] bg-gray-200/80 px-4 shadow-none backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] dark:bg-gray-800/80',
+                pillExpanded
+                  ? cn(
+                      'w-80 rounded-[16px] py-2 sm:w-96',
+                      hasConversation ? 'cursor-pointer' : 'cursor-text',
+                    )
+                  : hasConversation
+                    ? 'w-52 cursor-pointer py-1'
+                    : 'w-52 cursor-text py-1 group-focus-within:w-80',
               )}
             >
               <input
@@ -418,14 +436,20 @@ export default function AskYago() {
                   }
                 }}
                 placeholder={copy.placeholder}
-                className="h-9 flex-1 truncate overflow-hidden bg-transparent pr-8 text-base outline-none placeholder:text-gray-600 sm:pr-10 sm:text-sm dark:placeholder:text-gray-400"
+                className={cn(
+                  'flex-1 truncate overflow-hidden bg-transparent pr-8 text-base outline-none transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] placeholder:text-gray-600 sm:pr-10 dark:placeholder:text-gray-400',
+                  pillExpanded ? 'h-11 sm:text-base' : 'h-9 sm:text-sm',
+                )}
                 aria-label={hasConversation ? copy.title : copy.placeholder}
               />
               <button
                 type="submit"
                 disabled={!pillValue.trim()}
                 tabIndex={hasConversation ? -1 : undefined}
-                className="absolute right-1.5 flex-shrink-0 rounded-full bg-gray-600/80 p-2 text-white transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40 enabled:cursor-pointer"
+                className={cn(
+                  'absolute right-1.5 flex-shrink-0 rounded-full bg-gray-600/80 text-white transition-all duration-500 hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40 enabled:cursor-pointer',
+                  pillExpanded ? 'p-2.5' : 'p-2',
+                )}
                 aria-label={copy.send}
               >
                 <SendArrow className="transition-transform duration-200 hover:-translate-y-0.5 sm:h-[20px] sm:w-[20px]" />
@@ -434,7 +458,10 @@ export default function AskYago() {
               {hasConversation ? (
                 <button
                   type="button"
-                  className="absolute inset-0 z-10 cursor-pointer rounded-[24px]"
+                  className={cn(
+                    'absolute inset-0 z-10 cursor-pointer transition-all duration-500',
+                    pillExpanded ? 'rounded-[16px]' : 'rounded-[24px]',
+                  )}
                   aria-label={copy.title}
                   onClick={() => openPanel()}
                 />
