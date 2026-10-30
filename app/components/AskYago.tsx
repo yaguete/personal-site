@@ -14,6 +14,7 @@ import {
   type AskLocale,
   emptyForPath,
   isErrorDumpMessage,
+  randomSuggestions,
   suggestionsForPath,
 } from './ask/copy'
 
@@ -140,8 +141,20 @@ export default function AskYago() {
   const [pageTitle, setPageTitle] = useState<string>()
   const [pillFocused, setPillFocused] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null!)
-  const suggestions = suggestionsForPath(locale, pathname)
+  const contextualPath = Boolean(
+    pathname?.includes('/blog/') || pathname?.includes('/playground/'),
+  )
+  const [randomChips, setRandomChips] = useState<string[]>([
+    ...ASK_COPY[locale].suggestions,
+  ])
+  const suggestions = contextualPath
+    ? suggestionsForPath(locale, pathname)
+    : randomChips
   const emptyPill = pillValue.length === 0
+
+  useEffect(() => {
+    if (!contextualPath) setRandomChips(randomSuggestions(locale))
+  }, [locale, pathname, contextualPath])
 
   const transport = useMemo(
     () =>
@@ -338,7 +351,7 @@ export default function AskYago() {
               error={error}
               input={composerValue}
               empty={emptyForPath(locale, pathname, pageTitle)}
-              suggestions={suggestionsForPath(locale, pathname)}
+              suggestions={suggestions}
               onInputChange={setComposerValue}
               onSubmit={() => submitText(composerValue)}
               onClose={close}
@@ -424,7 +437,14 @@ export default function AskYago() {
                 tabIndex={hasConversation ? -1 : undefined}
                 onChange={(event) => setPillValue(event.target.value)}
                 onFocus={() => {
-                  if (!hasConversation) setPillFocused(true)
+                  if (!hasConversation) {
+                    setPillFocused(true)
+                    if (!contextualPath) {
+                      setRandomChips((previous) =>
+                        randomSuggestions(locale, previous),
+                      )
+                    }
+                  }
                 }}
                 onBlur={(event) => {
                   const next = event.relatedTarget

@@ -39,6 +39,72 @@ export const ASK_COPY = {
   },
 } as const
 
+export const SUGGESTION_POOL: Record<AskLocale, readonly string[]> = {
+  en: [
+    // serious
+    'What is your background?',
+    'What are you working on right now?',
+    'What does a design strategist actually do?',
+    'What tools do you actually use?',
+    'How do you use AI in your day-to-day?',
+    'What side projects have you built?',
+    'Tell me about your latest post',
+    'How did you build this site?',
+    // interesting
+    'What is the Dead Internet Theory about?',
+    'What will consulting firms sell in 5 years?',
+    'What did your Roomba teach you?',
+    'Which post of yours should I read first?',
+    'What AI opinion have you changed lately?',
+    // funny
+    'Why is it called Think Make Test?',
+    'What do you have against printers?',
+    'Would you hire an AI agent?',
+    'Tabs or spaces?',
+    'What is the worst tech prediction you have made?',
+  ],
+  es: [
+    // serias
+    '¿Cuál es tu trayectoria?',
+    '¿En qué estás trabajando ahora?',
+    '¿Qué hace un design strategist?',
+    '¿Qué herramientas usas de verdad?',
+    '¿Cómo usas la IA en tu día a día?',
+    '¿Qué side projects has construido?',
+    'Háblame de tu último post',
+    '¿Cómo has construido esta web?',
+    // interesantes
+    '¿Qué es la teoría del internet muerto?',
+    '¿Qué venderán las consultoras en 5 años?',
+    '¿Qué te enseñó tu Roomba?',
+    '¿Qué post tuyo debería leer primero?',
+    '¿Qué opinión sobre IA has cambiado últimamente?',
+    // graciosas
+    '¿Por qué se llama Think Make Test?',
+    '¿Qué tienes contra las impresoras?',
+    '¿Contratarías a un agente de IA?',
+    '¿Tabs o espacios?',
+    '¿Cuál ha sido tu peor predicción tecnológica?',
+  ],
+}
+
+export function randomSuggestions(
+  locale: AskLocale,
+  previous?: readonly string[],
+): string[] {
+  const pool = [...SUGGESTION_POOL[locale]]
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[pool[i], pool[j]] = [pool[j], pool[i]]
+  }
+  let picked = pool.slice(0, 3)
+  if (previous && picked.every((item) => previous.includes(item))) {
+    const fresh = pool.slice(3).find((item) => !previous.includes(item))
+    if (fresh) picked = [fresh, ...picked.slice(1)]
+  }
+  return picked
+}
+
 export function suggestionsForPath(locale: AskLocale, pathname: string | null) {
   const path = pathname ?? '/'
   if (path.includes('/blog/')) {
