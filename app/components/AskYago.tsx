@@ -377,7 +377,7 @@ export default function AskYago() {
             {!hasConversation ? (
             <div
               className={cn(
-                'absolute bottom-full left-0 mb-2 flex flex-col items-start gap-1.5 transition-opacity duration-200 delay-0',
+                'absolute bottom-full left-0 mb-2 flex flex-col items-start gap-2 transition-opacity duration-200 delay-0',
                 emptyPill
                   ? 'pointer-events-none opacity-0 group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-focus-within:delay-500'
                   : 'pointer-events-none opacity-0',
@@ -390,7 +390,7 @@ export default function AskYago() {
                   tabIndex={-1}
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => submitText(suggestion)}
-                  className="cursor-pointer rounded-full bg-zinc-100/90 px-3 py-1.5 text-left text-xs text-zinc-700 shadow-none backdrop-blur-md transition-colors hover:bg-zinc-200 dark:bg-zinc-800/90 dark:text-zinc-200 dark:hover:bg-zinc-700"
+                  className="cursor-pointer rounded-full bg-zinc-100/90 px-4 py-2 text-left text-sm text-zinc-700 shadow-lg shadow-zinc-900/15 ring-1 ring-zinc-900/5 backdrop-blur-md transition-colors hover:bg-zinc-200 dark:bg-gray-800/80 dark:text-zinc-200 dark:shadow-black/70 dark:ring-white/15 dark:hover:bg-zinc-700"
                 >
                   {suggestion}
                 </button>
@@ -409,7 +409,7 @@ export default function AskYago() {
                 'relative flex min-w-[200px] items-center overflow-hidden rounded-[24px] bg-gray-200/80 px-4 shadow-none backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)] dark:bg-gray-800/80',
                 pillExpanded
                   ? cn(
-                      'w-80 rounded-[16px] py-2 sm:w-96',
+                      'w-80 rounded-[16px] py-2 shadow-xl shadow-zinc-900/20 ring-1 ring-zinc-900/5 sm:w-96 dark:shadow-black/80 dark:ring-white/15',
                       hasConversation ? 'cursor-pointer' : 'cursor-text',
                     )
                   : hasConversation
