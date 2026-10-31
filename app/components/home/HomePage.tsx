@@ -448,7 +448,7 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
     })
   }
 
-  const FADE_PX = 28
+  const FADE_PX = 24
   const projectsMask =
     projectsScroll.atStart && projectsScroll.atEnd
       ? undefined
@@ -541,7 +541,7 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 [scrollbar-width:none] sm:gap-6 [&::-webkit-scrollbar]:hidden"
           >
             {content.projects.map((project) => (
-              <div key={project.name} className="w-[85%] shrink-0 snap-start space-y-2 sm:w-[45%]">
+              <div key={project.name} className="w-[85%] shrink-0 snap-start space-y-2 sm:w-[40%]">
                 <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
                   <ProjectVideo src={project.video} />
                 </div>
