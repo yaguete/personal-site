@@ -2,7 +2,9 @@
 import { AnimatedBackground } from '@/app/components/ui/animated-background'
 import { TextLoop } from '@/app/components/ui/text-loop'
 import { MonitorIcon, MoonIcon, SunIcon, SmartphoneIcon } from 'lucide-react'
+import { HOME_UI } from '@/app/i18n/home'
 import { useTheme } from 'next-themes'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const THEMES_OPTIONS = [
@@ -72,29 +74,32 @@ function ThemeSwitch() {
 }
 
 export function Footer() {
+  const pathname = usePathname()
+  const copy = pathname === '/es' ? HOME_UI.es : HOME_UI.en
+
   return (
     <footer className="mt-8 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
       <div className="flex items-center justify-between">
         <div className="flex flex-col">
           <a
-            href="/privacy"
+            href={copy.privacyHref}
             className="mb-1 text-xs text-zinc-500 hover:underline dark:text-zinc-400 dark:hover:text-zinc-100 sm:hidden"
           >
-            Privacy Policy
+            {copy.privacy}
           </a>
           <a href="https://thinkmaketest.ai/" target="_blank">
             <TextLoop className="text-xs text-zinc-500">
               <span>© {new Date().getFullYear()} yaguete.</span>
-              <span>Working systems, not slides.</span>
+              <span>{copy.tagline}</span>
             </TextLoop>
           </a>
         </div>
         <div className="flex flex-col items-end gap-2 text-xs text-zinc-400 sm:flex-row sm:items-center sm:gap-3">
           <a
-            href="/privacy"
+            href={copy.privacyHref}
             className="hidden hover:underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 sm:inline"
           >
-            Privacy Policy
+            {copy.privacy}
           </a>
           <div className="inline-flex items-center gap-1 whitespace-nowrap">
             <ThemeSwitch />
