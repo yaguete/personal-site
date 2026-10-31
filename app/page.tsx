@@ -487,31 +487,10 @@ export default function Personal() {
           variants={VARIANTS_SECTION}
           transition={TRANSITION_SECTION}
         >
-          <h3 className="mb-0 text-lg font-medium">Selected Projects</h3>
-          <div className="flex flex-col space-y-0">
-            <AnimatedBackground
-              enableHover
-              className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
-              transition={{
-                type: 'spring',
-                bounce: 0,
-                duration: 0.2,
-              }}
-            >
-              <div className="-mx-3 rounded-xl px-3 py-3">
-                <div className="flex items-center gap-2">
-                  <Construction className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
-                  <span className="font-normal dark:text-zinc-100">Coming soon</span>
-                </div>
-              </div>
-            </AnimatedBackground>
-          </div>
-          
-          {/* Código original de proyectos - comentado para recuperar después */}
-          {/*
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <h3 className="mb-5 text-lg font-medium">Selected Projects</h3>
+          <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
             {PROJECTS.map((project) => (
-              <div key={project.name} className="space-y-2">
+              <div key={project.name} className="w-[85%] shrink-0 snap-start space-y-2 sm:w-auto sm:shrink">
                 <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
                   <ProjectVideo src={project.video} />
                 </div>
@@ -531,7 +510,6 @@ export default function Personal() {
               </div>
             ))}
           </div>
-          */}
         </motion.section>
       )}
 

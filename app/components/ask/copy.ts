@@ -52,6 +52,8 @@ export const SUGGESTION_POOL: Record<AskLocale, readonly string[]> = {
     'How did you build this site?',
     // interesting
     'What is the Dead Internet Theory about?',
+    'What is WanderPlanner?',
+    'What is DrawingHub?',
     'What will consulting firms sell in 5 years?',
     'What did your Roomba teach you?',
     'Which post of yours should I read first?',
@@ -75,6 +77,8 @@ export const SUGGESTION_POOL: Record<AskLocale, readonly string[]> = {
     '¿Cómo has construido esta web?',
     // interesantes
     '¿Qué es la teoría del internet muerto?',
+    '¿Qué es WanderPlanner?',
+    '¿Qué es DrawingHub?',
     '¿Qué venderán las consultoras en 5 años?',
     '¿Qué te enseñó tu Roomba?',
     '¿Qué post tuyo debería leer primero?',

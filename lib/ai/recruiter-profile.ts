@@ -84,6 +84,6 @@ ${formatCareer()}
 - Technical training and working prototypes demonstrate practical building ability; they are not evidence of a senior software engineering or ML research role.
 - Professional interests include connecting strategy to execution, testing useful applications of AI, improving services and operations, and reducing the distance between an idea and evidence about whether it works.
 
-## Independent work beyond this site's playground
-- WanderPlanner, at a high level: an independently designed and built travel planner that turns long-form sources such as articles and blog posts into itineraries.`
+## Independent product work
+- Detailed product dossiers for WanderPlanner and DrawingHub are provided in the "Selected projects" section of the knowledge base.`
 }

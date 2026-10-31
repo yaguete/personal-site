@@ -56,20 +56,19 @@ type SideProject = {
 
 export const PROJECTS: Project[] = [
   {
-    name: 'Motion Primitives Pro',
+    name: 'WanderPlanner.ai',
     description:
-      'Advanced components and templates to craft beautiful websites.',
-    link: 'https://pro.motion-primitives.com/',
-    video:
-      'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/newProfileItem/d898be8a-7037-4c71-af0c-8997239b050d.mp4?_a=DATAdtAAZAA0',
+      'AI-powered travel planning: from messy wishes to a real, bookable itinerary.',
+    link: 'https://wanderplanner.ai',
+    video: '/videos/wanderplanner_demo_720p.mp4',
     id: 'project1',
   },
   {
-    name: 'Motion Primitives',
-    description: 'UI kit to make beautiful, animated interfaces.',
-    link: 'https://motion-primitives.com/',
-    video:
-      'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/XSfIvT7BUWbPRXhrbLed/ee6871c9-8400-49d2-8be9-e32675eabf7e.mp4?_a=DATAdtAAZAA0',
+    name: 'DrawingHub.build',
+    description:
+      'Turns hard-to-find engineering drawings into structured, searchable data-AI extraction with human verification.',
+    link: 'https://drawinghub.build',
+    video: '/videos/drawinghub_demo_720p.mp4',
     id: 'project2',
   },
 ]
@@ -268,7 +267,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    label: 'X / Twitter',
+    label: 'X',
     link: 'https://x.com/y_losada',
   },
   {

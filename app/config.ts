@@ -6,4 +6,4 @@ export const MAINTENANCE_MODE = false // true = construcción, false = normal
 // export const MAINTENANCE_MODE = false 
 
 // 👇 Mostrar/ocultar la sección de "Selected Projects"
-export const SHOW_SELECTED_PROJECTS = false
+export const SHOW_SELECTED_PROJECTS = true

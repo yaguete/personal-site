@@ -3,6 +3,7 @@ import { readFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { BLOG_POSTS, SIDE_PROJECTS } from '@/app/data'
 import { getRecruiterProfile } from '@/lib/ai/recruiter-profile'
+import { getProjectDossiers } from '@/lib/ai/project-dossiers'
 
 const BLOG_ROOT = join(process.cwd(), 'app/blog')
 
@@ -89,6 +90,7 @@ export function getSiteKnowledge() {
   // notes and unselected employer details never enter the generated profile.
   cachedKnowledge = [
     getRecruiterProfile(),
+    getProjectDossiers(),
     serializeSiteData(),
     blog ? `# Full blog posts\n\n${blog}` : '',
   ]
