@@ -411,6 +411,52 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
   const [showTooltip, setShowTooltip] = useState(false)
   const [activeTab, setActiveTab] = useState<'work' | 'education'>('work')
   const modalRef = useRef<HTMLDivElement>(null!)
+  const projectsRef = useRef<HTMLDivElement>(null)
+  const [projectsScroll, setProjectsScroll] = useState({
+    atStart: true,
+    atEnd: false,
+    index: 0,
+  })
+
+  const updateProjectsScroll = () => {
+    const el = projectsRef.current
+    if (!el) return
+    const max = el.scrollWidth - el.clientWidth
+    const x = el.scrollLeft
+    const last = content.projects.length - 1
+    setProjectsScroll({
+      atStart: x <= 1,
+      atEnd: x >= max - 1,
+      index: max > 0 && last > 0 ? Math.round((x / max) * last) : 0,
+    })
+  }
+
+  useEffect(() => {
+    updateProjectsScroll()
+    window.addEventListener('resize', updateProjectsScroll)
+    return () => window.removeEventListener('resize', updateProjectsScroll)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const scrollToProject = (i: number) => {
+    const el = projectsRef.current
+    if (!el) return
+    const max = el.scrollWidth - el.clientWidth
+    el.scrollTo({
+      left: (max * i) / (content.projects.length - 1),
+      behavior: 'smooth',
+    })
+  }
+
+  const FADE_PX = 28
+  const projectsMask =
+    projectsScroll.atStart && projectsScroll.atEnd
+      ? undefined
+      : projectsScroll.atStart
+        ? `linear-gradient(to right, black calc(100% - ${FADE_PX}px), transparent)`
+        : projectsScroll.atEnd
+          ? `linear-gradient(to right, transparent, black ${FADE_PX}px)`
+          : `linear-gradient(to right, transparent, black ${FADE_PX}px, black calc(100% - ${FADE_PX}px), transparent)`
 
   // Bloquear scroll cuando hay una modal abierta
   useEffect(() => {
@@ -485,9 +531,17 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
           transition={TRANSITION_SECTION}
         >
           <h3 className="mb-5 text-lg font-medium">{t.selectedProjects}</h3>
-          <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
+          <div
+            ref={projectsRef}
+            onScroll={updateProjectsScroll}
+            style={{
+              maskImage: projectsMask,
+              WebkitMaskImage: projectsMask,
+            }}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 [scrollbar-width:none] sm:gap-6 [&::-webkit-scrollbar]:hidden"
+          >
             {content.projects.map((project) => (
-              <div key={project.name} className="w-[85%] shrink-0 snap-start space-y-2 sm:w-auto sm:shrink">
+              <div key={project.name} className="w-[85%] shrink-0 snap-start space-y-2 sm:w-[45%]">
                 <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
                   <ProjectVideo src={project.video} />
                 </div>
@@ -507,6 +561,24 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
               </div>
             ))}
           </div>
+          {content.projects.length > 1 &&
+            !(projectsScroll.atStart && projectsScroll.atEnd) && (
+              <div className="mt-3 flex justify-center gap-1.5">
+                {[0, content.projects.length - 1].map((target) => (
+                  <button
+                    key={target}
+                    type="button"
+                    aria-label={`Go to ${content.projects[target].name}`}
+                    onClick={() => scrollToProject(target)}
+                    className={`h-1 rounded-full transition-all duration-300 ${
+                      (target === 0) === (projectsScroll.index === 0)
+                        ? 'w-5 bg-zinc-400 dark:bg-zinc-500'
+                        : 'w-2 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-700 dark:hover:bg-zinc-600'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
         </motion.section>
       )}
 
@@ -819,19 +891,19 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
         transition={TRANSITION_SECTION}
       >
         <h3 className="mb-5 text-lg font-medium">{t.connect}</h3>
-        <p className="mb-5 text-zinc-600 dark:text-zinc-400">
-          {t.contact}{' '}
-          <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
-            {EMAIL}
-          </a>
-        </p>
-        <div className="flex items-center justify-start space-x-3">
+        <div className="mb-5 flex items-center justify-start space-x-3">
           {SOCIAL_LINKS.map((link) => (
             <MagneticSocialLink key={link.label} link={link.link}>
               {link.label}
             </MagneticSocialLink>
           ))}
         </div>
+        <p className="text-zinc-600 dark:text-zinc-400">
+          {t.contact}{' '}
+          <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
+            {EMAIL}
+          </a>
+        </p>
       </motion.section>
 
 

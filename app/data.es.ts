@@ -20,6 +20,10 @@ const PROJECTS_ES: Record<string, { description: string }> = {
     description:
       'Convierte planos de ingeniería difíciles de encontrar en datos estructurados y buscables: extracción con IA y verificación humana.',
   },
+  project3: {
+    description:
+      'Presupuestos, clientes y pedidos para imprentas pequeñas: de una petición desordenada a una propuesta clara y con precio.',
+  },
 }
 
 const WORK_ES: Record<

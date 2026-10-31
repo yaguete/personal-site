@@ -62,10 +62,35 @@ const DRAWINGHUB_DOSSIER = `## DrawingHub (drawinghub.build)
 
 **Yago's role:** Leads product and design — from the original concept and user research with architecture and construction professionals to the shipped product.`
 
+const SMARTQUOTATION_DOSSIER = `## SmartQuotation (smartquotation.io)
+
+**What it is:** A commercial-management tool for small print shops (PSPs — print service providers, typically ≤10 people, focused on large format). It brings together quotations, a product & client catalogue, an order pipeline and basic business analytics in one place, with AI assistance. Yago leads it on the product and design side with a small team. Live at smartquotation.io.
+
+**One-liner:** From a messy client request to a clear, priced proposal.
+
+**The problem it solves:** In a small print shop, quoting lives in fragile spreadsheets, catalogues, email and WhatsApp threads, and usually depends on one experienced person who knows the prices by heart. There is no single place to see clients, opportunities or order history, so follow-up is lost and quoting is slow and error-prone. The real bottleneck is not the arithmetic of the quote — it is the back-and-forth of understanding what the client wants and translating it into a concrete, priced offer.
+
+**What it does:**
+- **Assisted quotation flow** over a catalogue of products and clients, with a Kanban pipeline for orders (review → answer → start → production → done) and quote versioning.
+- **Catalogue & history:** import clients and products from past invoices (AI extracts client/product data from the documents), and suggest prices based on that history. The value is not that the AI sets the price — it is that it surfaces the *right previous price* for that kind of job; the shop always keeps the final decision.
+- **Client request link:** a shareable link that centralizes incoming requests from clients instead of scattered emails and chats.
+- **AI assistant (front-desk):** a chatbot with full business context (products, clients, invoices). A real use case discovered with PSPs: a client calls about an event, and while on the phone the shop asks the assistant for options and a rough price range on the spot.
+- **Quote → work order:** an approved quote can be turned into a work order, sent as a PDF or through the platform's inbox.
+- **Billing integrations:** connects to the shop's invoicing system (e.g. Holded) so quotes and invoices live side by side.
+
+**Design principle:** "make complexity available, not mandatory." The interface stays simple enough for anyone to quote; the underlying depth (materials, processes, expenses) is there for those who need it, without forcing it on everyone.
+
+**Who it's for:** small print shops and copy shops with a closed, repeatable catalogue — not large commercial printers with custom ERPs already in place. The product focuses on solving standard, simple products well (cards, flyers, banners) rather than replicating a full print-house costing system.
+
+**Positioning:** Free while in validation, with close, hands-on onboarding for the first shops (the team helps structure their catalogue and migrate it in). It is a real, working product with active users, not a mockup.
+
+**Yago's role:** Leads product and design — from the original concept and the pilot research with print shops to the shipped product and its go-to-market.`
+
 export function getProjectDossiers() {
   return [
     '# Selected projects (product dossiers)',
     WANDERPLANNER_DOSSIER,
     DRAWINGHUB_DOSSIER,
+    SMARTQUOTATION_DOSSIER,
   ].join('\n\n')
 }

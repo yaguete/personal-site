@@ -23,19 +23,19 @@ export function ContactSection() {
       whileInView="visible"
       viewport={{ once: true }}
     >
-      <p className="mb-5 text-zinc-600 dark:text-zinc-400">
-        {' '}
-        <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
-          {EMAIL}
-        </a>
-      </p>
-      <div className="flex items-center justify-start space-x-3">
+      <div className="mb-5 flex items-center justify-start space-x-3">
         {SOCIAL_LINKS.map((link) => (
           <MagneticSocialLink key={link.label} link={link.link}>
             {link.label}
           </MagneticSocialLink>
         ))}
       </div>
+      <p className="text-zinc-600 dark:text-zinc-400">
+        {' '}
+        <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
+          {EMAIL}
+        </a>
+      </p>
     </motion.section>
   )
 }

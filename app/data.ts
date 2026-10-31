@@ -71,6 +71,14 @@ export const PROJECTS: Project[] = [
     video: '/videos/drawinghub_demo_720p.mp4',
     id: 'project2',
   },
+  {
+    name: 'SmartQuotation.io',
+    description:
+      'Quotations, clients and orders for small print shops: from a messy request to a clear, priced proposal.',
+    link: 'https://smartquotation.io',
+    video: '/videos/smartquotation_demo_720p.mp4',
+    id: 'project3',
+  },
 ]
 
 const PUBLIC_CAREER_FIELDS = [
