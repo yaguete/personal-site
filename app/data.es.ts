@@ -9,20 +9,20 @@ import {
 import { HOME_UI, type HomeLocale } from '@/app/i18n/home'
 
 const BIO_ES = `Trabajo en la intersección de la IA, la estrategia y la ejecución.
-Más de 12 años convirtiendo problemas enredados en soluciones simples y útiles, a base de prototipar, validar e iterar rápido.`
+Más de 12 años convirtiendo problemas complejos en soluciones simples y útiles a base de prototipar, validar con usuarios e iterar rápido.`
 
 const PROJECTS_ES: Record<string, { description: string }> = {
   project1: {
     description:
-      'Planificación de viajes con IA: de un deseo desordenado a un itinerario real y reservable.',
+      'Transforma los consejos y recomendaciones de tus blogueros/as e instagramers en los que confías en tu plan de viaje, día a día.',
   },
   project2: {
     description:
-      'Convierte planos de ingeniería difíciles de encontrar en datos estructurados y buscables: extracción con IA y verificación humana.',
+      'Plataforma de IA para AEC: conecta planos, equipos y flujos de trabajo para hacer avanzar los proyectos, sin cambiar de herramienta.',
   },
   project3: {
     description:
-      'Presupuestos, clientes y pedidos para imprentas pequeñas: de una petición desordenada a una propuesta clara y con precio.',
+      'Generación de presupuestos, clientes y pedidos asistida por IA: de una petición desordenada a una propuesta clara y con precio.',
   },
 }
 

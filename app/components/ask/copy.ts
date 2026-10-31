@@ -21,7 +21,7 @@ export const ASK_COPY = {
     ],
   },
   es: {
-    placeholder: 'Pregunta lo que quieras',
+    placeholder: 'Pregúntame',
     title: 'Pregúntame',
     close: 'Cerrar chat',
     send: 'Enviar',

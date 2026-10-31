@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'WanderPlanner.ai',
     description:
-      'AI-powered travel planning: from messy wishes to a real, bookable itinerary.',
+      'Turns the tips and recommendations from the travel bloggers and Instagrammers you trust into your day-by-day trip plan.',
     link: 'https://wanderplanner.ai',
     video: '/videos/wanderplanner_demo_720p.mp4',
     id: 'project1',
@@ -66,7 +66,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'DrawingHub.build',
     description:
-      'Turns hard-to-find engineering drawings into structured, searchable data-AI extraction with human verification.',
+      'AI platform for AEC: connects drawings, teams and workflows to move projects forward — without switching tools.',
     link: 'https://drawinghub.build',
     video: '/videos/drawinghub_demo_720p.mp4',
     id: 'project2',
@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'SmartQuotation.io',
     description:
-      'Quotations, clients and orders for small print shops: from a messy request to a clear, priced proposal.',
+      'AI-assisted quoting, clients and orders: from a messy request to a clear, priced proposal.',
     link: 'https://smartquotation.io',
     video: '/videos/smartquotation_demo_720p.mp4',
     id: 'project3',
