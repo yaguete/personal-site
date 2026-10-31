@@ -563,21 +563,40 @@ export function HomePage({ locale }: { locale: HomeLocale }) {
           </div>
           {content.projects.length > 1 &&
             !(projectsScroll.atStart && projectsScroll.atEnd) && (
-              <div className="mt-3 flex justify-center gap-1.5">
-                {[0, content.projects.length - 1].map((target) => (
-                  <button
-                    key={target}
-                    type="button"
-                    aria-label={`Go to ${content.projects[target].name}`}
-                    onClick={() => scrollToProject(target)}
-                    className={`h-1 rounded-full transition-all duration-300 ${
-                      (target === 0) === (projectsScroll.index === 0)
-                        ? 'w-5 bg-zinc-400 dark:bg-zinc-500'
-                        : 'w-2 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-700 dark:hover:bg-zinc-600'
-                    }`}
-                  />
-                ))}
-              </div>
+              <>
+                {/* Mobile: one dot per project */}
+                <div className="mt-3 flex justify-center gap-1.5 sm:hidden">
+                  {content.projects.map((project, i) => (
+                    <button
+                      key={project.id}
+                      type="button"
+                      aria-label={`Go to ${project.name}`}
+                      onClick={() => scrollToProject(i)}
+                      className={`h-1 rounded-full transition-all duration-300 ${
+                        i === projectsScroll.index
+                          ? 'w-5 bg-zinc-400 dark:bg-zinc-500'
+                          : 'w-2 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-700 dark:hover:bg-zinc-600'
+                      }`}
+                    />
+                  ))}
+                </div>
+                {/* Desktop: only the two ends */}
+                <div className="mt-3 hidden justify-center gap-1.5 sm:flex">
+                  {[0, content.projects.length - 1].map((target) => (
+                    <button
+                      key={target}
+                      type="button"
+                      aria-label={`Go to ${content.projects[target].name}`}
+                      onClick={() => scrollToProject(target)}
+                      className={`h-1 rounded-full transition-all duration-300 ${
+                        (target === 0) === (projectsScroll.index === 0)
+                          ? 'w-5 bg-zinc-400 dark:bg-zinc-500'
+                          : 'w-2 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-700 dark:hover:bg-zinc-600'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </>
             )}
         </motion.section>
       )}
